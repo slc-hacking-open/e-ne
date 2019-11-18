@@ -1,7 +1,7 @@
-export const GOOD = "GOOD";
+export const EMPATHY = "EMPATHY";
 
-export const good = () => ({
-  type: GOOD as typeof GOOD,
+export const empathy = () => ({
+  type: EMPATHY as typeof EMPATHY,
 });
 
-export type PostAction = ReturnType<typeof good>;
+export type PostAction = ReturnType<typeof empathy>;

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
-import { good } from "../actions/post";
+import { empathy } from "../actions/post";
 import Post from "../components/post";
 import { PostState } from "../reducer";
 
@@ -12,7 +12,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  good: () => void;
+  empathy: () => void;
 }
 
 const mapStateToProps = (state: PostState): StateProps => ({
@@ -22,7 +22,7 @@ const mapStateToProps = (state: PostState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  good: () => dispatch(good()),
+  empathy: () => dispatch(empathy()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

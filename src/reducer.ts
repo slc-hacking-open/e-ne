@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { PostAction, GOOD } from "./actions/post";
+import { PostAction, EMPATHY } from "./actions/post";
 
 export interface PostState {
   contents: string;
@@ -18,7 +18,7 @@ const postReducer: Reducer<PostState> = (
   action: PostAction,
 ): PostState => {
   switch (action.type) {
-    case GOOD:
+    case EMPATHY:
       return {
         ...state,
         contents: "goodが押されたよ！",

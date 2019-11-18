@@ -4,14 +4,14 @@ export interface PostProps {
   contents?: string;
   from?: string;
   to?: string;
-  good?: () => void;
+  empathy?: () => void;
 }
 
 const Post: FC<PostProps> = ({
   contents = "",
   from = "",
   to = "",
-  good = () => {},
+  empathy = () => {},
 }) => (
   <>
     <ul>
@@ -25,8 +25,8 @@ const Post: FC<PostProps> = ({
         <p>TO:{to}</p>
       </li>
     </ul>
-    <button type="button" onClick={good}>
-      eね！
+    <button type="button" onClick={empathy}>
+      共感
     </button>
   </>
 );
