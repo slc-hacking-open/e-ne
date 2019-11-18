@@ -5,6 +5,7 @@ export interface PostProps {
   from?: string;
   to?: string;
   empathy?: () => void;
+  send?: (contents: string, from: string, to: string) => void;
 }
 
 const Post: FC<PostProps> = ({
@@ -12,6 +13,7 @@ const Post: FC<PostProps> = ({
   from = "",
   to = "",
   empathy = () => {},
+  send = () => {},
 }) => (
   <>
     <ul>
@@ -27,6 +29,12 @@ const Post: FC<PostProps> = ({
     </ul>
     <button type="button" onClick={empathy}>
       共感
+    </button>
+    <button
+      type="button"
+      onClick={() => send("新しい投稿ですよ", "Aさん", "Bさん")}
+    >
+      新規投稿
     </button>
   </>
 );
