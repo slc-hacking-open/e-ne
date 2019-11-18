@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 
 import { empathy } from "../actions/post";
 import Post from "../components/post";
-import { PostState } from "../reducer";
+import { AppState } from "../reducer";
 
 interface StateProps {
   contents: string;
@@ -15,10 +15,10 @@ interface DispatchProps {
   empathy: () => void;
 }
 
-const mapStateToProps = (state: PostState): StateProps => ({
-  contents: state.contents,
-  from: state.from,
-  to: state.to,
+const mapStateToProps = (state: AppState): StateProps => ({
+  contents: state.post.contents,
+  from: state.post.from,
+  to: state.post.to,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

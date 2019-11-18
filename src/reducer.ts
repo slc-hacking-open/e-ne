@@ -1,34 +1,6 @@
-import { Reducer } from "redux";
-import { PostAction, EMPATHY } from "./actions/post";
+import { Reducer, combineReducers } from "redux";
 
-export interface PostState {
-  contents: string;
-  from: string;
-  to: string;
-}
+import postReducer from "./reducers/post-reducer";
 
-export const initialState: PostState = {
-  contents: "",
-  from: "",
-  to: "",
-};
-
-const postReducer: Reducer<PostState> = (
-  state: PostState = initialState,
-  action: PostAction,
-): PostState => {
-  switch (action.type) {
-    case EMPATHY:
-      return {
-        ...state,
-        contents: "goodが押されたよ！",
-      };
-    default: {
-      // const _: never = action;
-
-      return state;
-    }
-  }
-};
-
-export default postReducer;
+export const rootReducer: Reducer = combineReducers({ post: postReducer });
+export type AppState = ReturnType<typeof rootReducer>;
