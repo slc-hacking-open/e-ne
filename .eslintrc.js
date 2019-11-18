@@ -107,7 +107,7 @@ module.exports = {
         printWidth: 80,
         semi: true,
         doubleQuote: true,
-        trailingComma: "all",
+        trailingComma: "none",
         useTabs: false
       }
     ]
