@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { PostAction, EMPATHY, SEND } from "../actions/post";
+import { PostAction, EMPATHY } from "../actions/post";
 
 export interface PostState {
   contents: string;
@@ -10,29 +10,21 @@ export interface PostState {
 export const initialState: PostState = {
   contents: "",
   from: "",
-  to: "",
+  to: ""
 };
 
 const postReducer: Reducer<PostState> = (
   state: PostState = initialState,
-  action: PostAction,
+  action: PostAction
 ): PostState => {
   switch (action.type) {
     case EMPATHY:
       return {
         ...state,
-        contents: "goodが押されたよ！",
-      };
-    case SEND:
-      return {
-        ...state,
-        contents: action.payload.contents,
-        from: action.payload.from,
-        to: action.payload.to,
+        contents: "goodが押されたよ！"
       };
     default: {
       // const _: never = action;
-
       return state;
     }
   }
