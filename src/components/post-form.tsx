@@ -5,7 +5,7 @@ export interface PostFormProps {
   to?: string;
   changeContents?: (contents: string) => void;
   changeTo?: (to: string) => void;
-  send?: () => void;
+  send?: (contents: string, from: string, to: string) => void;
 }
 
 const PostForm: FC<PostFormProps> = ({
@@ -33,7 +33,12 @@ const PostForm: FC<PostFormProps> = ({
         changeContents(e.target.value);
       }}
     />
-    <button type="button" onClick={send}>
+    <button
+      type="button"
+      onClick={e => {
+        send(contents, "miyagon", to);
+      }}
+    >
       いいね！
     </button>
   </div>

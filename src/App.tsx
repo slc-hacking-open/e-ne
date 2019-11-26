@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-import Post from "./containers/post";
+import Posts from "./containers/posts";
 import PostForm from "./containers/post-form";
 
 const App: React.FC = () => {
@@ -9,7 +9,7 @@ const App: React.FC = () => {
     <div className="App">
       <h1>Sample Application</h1>
       <div className="posts">
-        <Post />
+        <Posts />
       </div>
       <PostForm />
     </div>
