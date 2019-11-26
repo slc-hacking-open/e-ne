@@ -7,11 +7,15 @@ import PostForm from "./containers/post-form";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <h1>Sample Application</h1>
-      <div className="posts">
-        <Posts />
+      <header>
+        <h1>デモアプリ</h1>
+      </header>
+      <div id="main">
+        <div id="posts">
+          <Posts />
+        </div>
+        <PostForm />
       </div>
-      <PostForm />
     </div>
   );
 };

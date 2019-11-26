@@ -1,4 +1,6 @@
 import React, { FC } from "react";
+import "./post-form.css";
+import { NONAME } from "dns";
 
 export interface PostFormProps {
   contents?: string;
@@ -16,8 +18,8 @@ const PostForm: FC<PostFormProps> = ({
   send = () => {}
 }) => (
   <div id="post-form">
-    <h1>Post Form</h1>
     <input
+      className="post-form-to"
       name="to"
       value={to}
       placeholder="宛先"
@@ -25,7 +27,8 @@ const PostForm: FC<PostFormProps> = ({
         changeTo(e.target.value);
       }}
     />
-    <input
+    <textarea
+      className="post-form-contents"
       name="contents"
       value={contents}
       placeholder="内容"
@@ -36,7 +39,7 @@ const PostForm: FC<PostFormProps> = ({
     <button
       type="button"
       onClick={e => {
-        send(contents, "miyagon", to);
+        if (contents !== "" && to !== "") send(contents, "私", to);
       }}
     >
       いいね！

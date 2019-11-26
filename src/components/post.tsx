@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import "./post.css";
 
 export interface PostProps {
   contents?: string;
@@ -13,22 +14,21 @@ const Post: FC<PostProps> = ({
   to = "",
   empathy = () => {}
 }) => (
-  <>
-    <ul className="post">
-      <li>
+  <div className="post">
+    <ul>
+      <li className="post-contents">
         <p>{contents}</p>
       </li>
-      <li>
-        <p>FROM:{from}</p>
-      </li>
-      <li>
-        <p>TO:{to}</p>
+      <li className="post-fromto">
+        <p>
+          {from} -> {to}
+        </p>
       </li>
     </ul>
     <button type="button" onClick={empathy}>
       共感
     </button>
-  </>
+  </div>
 );
 
 export default Post;

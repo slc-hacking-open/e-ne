@@ -22,7 +22,11 @@ const postFormReducer: Reducer<PostFormState, PostFormAction> = (
 ): PostFormState => {
   switch (action.type) {
     case SEND:
-      return state;
+      return {
+        ...state,
+        contents: "",
+        to: ""
+      };
     case CHANGE_CONTENTS:
       return {
         ...state,

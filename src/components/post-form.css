@@ -1,0 +1,15 @@
+.post-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-form-to {
+  margin-bottom: 0.5em;
+  width: 100%;
+}
+
+.post-form-contents {
+  height: 5em;
+  margin-bottom: 0.5em;
+  width: 100%;
+}
