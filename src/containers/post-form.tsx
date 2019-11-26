@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
-import { send, changeContents, changeTo } from "../actions/post-form";
+import { add } from "../actions/posts";
+import { changeContents, changeTo, clear } from "../actions/post-form";
 import PostForm from "../components/post-form";
 import { AppState } from "../reducer";
 
@@ -11,9 +12,10 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  send: (contents: string, from: string, to: string) => void;
   changeContents: (contents: string) => void;
   changeTo: (contents: string) => void;
+  clear: () => void;
+  add: (contents: string, from: string, to: string) => void;
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
@@ -22,10 +24,11 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  send: (contents: string, from: string, to: string) =>
-    dispatch(send(contents, from, to)),
   changeContents: (contents: string) => dispatch(changeContents(contents)),
-  changeTo: (to: string) => dispatch(changeTo(to))
+  changeTo: (to: string) => dispatch(changeTo(to)),
+  clear: () => dispatch(clear()),
+  add: (contents: string, from: string, to: string) =>
+    dispatch(add(contents, from, to))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostForm);

@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 import "./post-form.css";
-import { NONAME } from "dns";
 
 export interface PostFormProps {
   contents?: string;
   to?: string;
   changeContents?: (contents: string) => void;
   changeTo?: (to: string) => void;
-  send?: (contents: string, from: string, to: string) => void;
+  clear?: () => void;
+  add?: (contents: string, from: string, to: string) => void;
 }
 
 const PostForm: FC<PostFormProps> = ({
@@ -15,7 +15,8 @@ const PostForm: FC<PostFormProps> = ({
   to = "",
   changeContents = () => {},
   changeTo = () => {},
-  send = () => {}
+  clear = () => {},
+  add = () => {}
 }) => (
   <div id="post-form">
     <input
@@ -39,7 +40,10 @@ const PostForm: FC<PostFormProps> = ({
     <button
       type="button"
       onClick={e => {
-        if (contents !== "" && to !== "") send(contents, "私", to);
+        if (contents !== "" && to !== "") {
+          clear();
+          add(contents, "私", to);
+        }
       }}
     >
       いいね！

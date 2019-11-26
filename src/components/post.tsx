@@ -21,7 +21,7 @@ const Post: FC<PostProps> = ({
       </li>
       <li className="post-fromto">
         <p>
-          {from} -> {to}
+          {from} -&gt; {to}
         </p>
       </li>
     </ul>

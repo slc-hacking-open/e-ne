@@ -1,9 +1,9 @@
 import { Reducer } from "redux";
 import {
   PostFormAction,
-  SEND,
   CHANGE_CONTENTS,
-  CHANGE_TO
+  CHANGE_TO,
+  CLEAR
 } from "../actions/post-form";
 
 export interface PostFormState {
@@ -21,12 +21,6 @@ const postFormReducer: Reducer<PostFormState, PostFormAction> = (
   action: PostFormAction
 ): PostFormState => {
   switch (action.type) {
-    case SEND:
-      return {
-        ...state,
-        contents: "",
-        to: ""
-      };
     case CHANGE_CONTENTS:
       return {
         ...state,
@@ -37,8 +31,16 @@ const postFormReducer: Reducer<PostFormState, PostFormAction> = (
         ...state,
         to: action.payload.to
       };
+    case CLEAR:
+      return {
+        ...state,
+        contents: "",
+        to: ""
+      };
     default: {
-      // const _: never = action;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const check: never = action;
+
       return state;
     }
   }

@@ -1,15 +1,6 @@
-export const SEND = "SEND";
 export const CHANGE_CONTENTS = "CHANGE_CONTENTS";
 export const CHANGE_TO = "CHANGE_TO";
-
-export const send = (contents: string, from: string, to: string) => ({
-  type: SEND as typeof SEND,
-  payload: {
-    contents,
-    from,
-    to
-  }
-});
+export const CLEAR = "CLEAR";
 
 export const changeContents = (contents: string) => ({
   type: CHANGE_CONTENTS as typeof CHANGE_CONTENTS,
@@ -25,7 +16,11 @@ export const changeTo = (to: string) => ({
   }
 });
 
+export const clear = () => ({
+  type: CLEAR as typeof CLEAR
+});
+
 export type PostFormAction =
-  | ReturnType<typeof send>
   | ReturnType<typeof changeContents>
-  | ReturnType<typeof changeTo>;
+  | ReturnType<typeof changeTo>
+  | ReturnType<typeof clear>;

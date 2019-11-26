@@ -17,7 +17,6 @@ const mapStateToProps = (state: AppState): StateProps => ({
 
 /*
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  add: () => dispatch(add())
 });
 */
 

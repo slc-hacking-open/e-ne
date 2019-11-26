@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
 
 import { PostProps } from "../components/post";
-import { PostFormAction, SEND } from "../actions/post-form";
+import { PostsAction, ADD } from "../actions/posts";
 
 export interface PostsState {
   posts: Array<PostProps>;
@@ -11,12 +11,12 @@ export const initialState: PostsState = {
   posts: []
 };
 
-const postsReducer: Reducer<PostsState, PostFormAction> = (
+const postsReducer: Reducer<PostsState, PostsAction> = (
   state: PostsState = initialState,
-  action: PostFormAction
+  action: PostsAction
 ): PostsState => {
   switch (action.type) {
-    case SEND:
+    case ADD:
       return {
         ...state,
         posts: [
@@ -29,7 +29,9 @@ const postsReducer: Reducer<PostsState, PostFormAction> = (
         ]
       };
     default: {
-      // const _: never = action;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const check: never = action.type;
+
       return state;
     }
   }
