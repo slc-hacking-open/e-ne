@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 
 // import { UndoProps } from "../components/undo";
 import Undo from "../components/undo";
-import { AppState } from "../reducer"
+import { AppState } from "../reducer";
 import { undo } from "../actions/undo";
 
 interface StateProps {
