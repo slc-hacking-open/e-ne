@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 
-import Post, { PostProps } from "./post";
+import { PostProps } from "./post";
+import Post from "../containers/post";
 
 export interface PostsProps {
   posts: Array<PostProps>;

@@ -2,30 +2,16 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 import { empathy } from "../actions/post";
-import Posts from "../components/posts";
-import { AppState } from "../reducer";
-
-export interface PostState {
-  id: number;
-  contents: string;
-  from: string;
-  to: string;
-}
-
-interface StateProps {
-  posts: Array<PostState>;
-}
+import Post from "../components/post";
 
 interface DispatchProps {
-  empathy: () => void;
+  empathy: (id: number) => void;
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
-  posts: state.posts.posts
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  empathy: () => dispatch(empathy())
+  empathy: (id: number) => dispatch(empathy(id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Posts);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

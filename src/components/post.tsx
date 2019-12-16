@@ -6,7 +6,7 @@ export interface PostProps {
   contents?: string;
   from?: string;
   to?: string;
-  empathy?: () => void;
+  empathy?: (id: number) => void;
 }
 
 const Post: FC<PostProps> = ({
@@ -33,7 +33,13 @@ const Post: FC<PostProps> = ({
       <p>{to}</p>
     </div>
     <div className="post-empathy">
-      <button type="button" className="post-empathy-button" onClick={empathy}>
+      <button
+        type="button"
+        className="post-empathy-button"
+        onClick={e => {
+          empathy(id);
+        }}
+      >
         共感
       </button>
     </div>
