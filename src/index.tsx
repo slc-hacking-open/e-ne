@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 
 import App from "./App";
 import { rootReducer } from "./reducer";
@@ -9,7 +10,7 @@ import * as serviceWorker from "./serviceWorker";
 
 import "./index.css";
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 // console.log(store.getState());
 
