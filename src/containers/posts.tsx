@@ -1,11 +1,15 @@
 import { connect } from "react-redux";
 
-import { PostState } from "./post";
 import Posts from "../components/posts";
 import { AppState } from "../reducer";
 
 interface StateProps {
-  posts: Array<PostState>;
+  posts: Array<{
+    id: number;
+    contents: string;
+    from: string;
+    to: string;
+  }>;
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
