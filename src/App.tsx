@@ -1,8 +1,10 @@
 import React from "react";
 import "./App.css";
 
-import Posts from "./containers/posts";
-import PostForm from "./containers/post-form";
+import Post from "./components/post";
+import Posts from "./components/posts";
+// import Posts from "./containers/posts";
+// import PostForm from "./containers/post-form";
 
 import Undo from "./containers/undo";
 
@@ -14,10 +16,7 @@ const App: React.FC = () => {
       </header>
       <Undo />
       <div id="main">
-        <div id="posts">
-          <Posts />
-        </div>
-        <PostForm />
+        <Post from="宮田" contents="こんにちは改行はどうなるかな？" to="清水" />
       </div>
     </div>
   );
