@@ -16,7 +16,12 @@ const App: React.FC = () => {
       </header>
       <Undo />
       <div id="main">
-        <Post from="宮田" contents="こんにちは改行はどうなるかな？" to="清水" />
+        <Posts
+          posts={[
+            { id: 0, from: "宮田", contents: "こんにちは", to: "清水" },
+            { id: 1, from: "宮田", contents: "こんばんは", to: "田中" }
+          ]}
+        />
       </div>
     </div>
   );

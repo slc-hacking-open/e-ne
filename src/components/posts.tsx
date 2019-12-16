@@ -7,9 +7,17 @@ export interface PostsProps {
 }
 
 const Posts: FC<PostsProps> = ({ posts = [] }) => (
-  <div id="posts">
+  <div className="posts">
     {posts.map((post: PostProps) => {
-      return <Post contents={post.contents} from={post.from} to={post.to} />;
+      return (
+        <Post
+          key={post.id}
+          id={post.id}
+          contents={post.contents}
+          from={post.from}
+          to={post.to}
+        />
+      );
     })}
   </div>
 );

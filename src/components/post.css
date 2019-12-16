@@ -1,18 +1,14 @@
 .post {
   border-bottom: 1px solid #ccc;
+  display: flex;
   margin-bottom: 1em;
+  width: 100%;
 }
 
-.post li,
-.post button {
-  list-style: none;
+.post-thumbnail {
   margin-bottom: 1em;
 }
 
 .post-contents {
   font-size: 1.3em;
-}
-
-.post-fromto {
-  font-size: 0.5em;
 }

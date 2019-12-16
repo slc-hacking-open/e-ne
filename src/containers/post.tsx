@@ -28,4 +28,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   empathy: () => dispatch(empathy())
 });
 
-export default connect(mapStateToProps)(Posts);
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);
