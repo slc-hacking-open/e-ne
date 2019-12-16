@@ -1,35 +1,50 @@
 import React, { FC } from "react";
-import "./post-form.css";
+import "./sender.css";
 
-export interface PostFormProps {
+export interface SenderProps {
   contents?: string;
   to?: string;
+  coin?: string;
   changeContents?: (contents: string) => void;
   changeTo?: (to: string) => void;
+  changeCoin?: (coin: string) => void;
   clear?: () => void;
-  add?: (contents: string, from: string, to: string) => void;
+  add?: (contents: string, from: string, to: string, coin: string) => void;
 }
 
-const PostForm: FC<PostFormProps> = ({
+const Sender: FC<SenderProps> = ({
   contents = "",
   to = "",
+  coin = "",
   changeContents = () => {},
   changeTo = () => {},
+  changeCoin = () => {},
   clear = () => {},
   add = () => {}
 }) => (
-  <div id="post-form">
+  <div id="sender">
     <input
-      className="post-form-to"
+      className="sender-to"
       name="to"
       value={to}
       placeholder="宛先"
       onChange={e => {
+        console.log("to");
         changeTo(e.target.value);
       }}
     />
+    <input
+      className="sender-coin"
+      name="coin"
+      value={coin}
+      placeholder="コイン"
+      onChange={e => {
+        console.log("coin");
+        changeCoin(e.target.value);
+      }}
+    />
     <textarea
-      className="post-form-contents"
+      className="sender-contents"
       name="contents"
       value={contents}
       placeholder="内容"
@@ -42,7 +57,7 @@ const PostForm: FC<PostFormProps> = ({
       onClick={e => {
         if (contents !== "" && to !== "") {
           clear();
-          add(contents, "私", to);
+          add(contents, "私", to, coin);
         }
       }}
     >
@@ -51,4 +66,4 @@ const PostForm: FC<PostFormProps> = ({
   </div>
 );
 
-export default PostForm;
+export default Sender;

@@ -1,25 +1,28 @@
 import { Reducer } from "redux";
 import {
-  PostFormAction,
+  SenderAction,
   CHANGE_CONTENTS,
   CHANGE_TO,
+  CHANGE_COIN,
   CLEAR
-} from "../actions/post-form";
+} from "../actions/sender";
 
-export interface PostFormState {
+export interface SenderState {
   contents: string;
   to: string;
+  coin: string;
 }
 
-export const initialState: PostFormState = {
+export const initialState: SenderState = {
   contents: "",
-  to: ""
+  to: "",
+  coin: ""
 };
 
-const postFormReducer: Reducer<PostFormState, PostFormAction> = (
-  state: PostFormState = initialState,
-  action: PostFormAction
-): PostFormState => {
+const SenderReducer: Reducer<SenderState, SenderAction> = (
+  state: SenderState = initialState,
+  action: SenderAction
+): SenderState => {
   switch (action.type) {
     case CHANGE_CONTENTS:
       return {
@@ -30,6 +33,11 @@ const postFormReducer: Reducer<PostFormState, PostFormAction> = (
       return {
         ...state,
         to: action.payload.to
+      };
+    case CHANGE_COIN:
+      return {
+        ...state,
+        coin: action.payload.coin
       };
     case CLEAR:
       return {
@@ -46,4 +54,4 @@ const postFormReducer: Reducer<PostFormState, PostFormAction> = (
   }
 };
 
-export default postFormReducer;
+export default SenderReducer;

@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 
 import Posts from "./containers/posts";
-import PostForm from "./containers/post-form";
+import Sender from "./containers/sender";
 
 import Undo from "./containers/undo";
 
@@ -17,7 +17,7 @@ const App: React.FC = () => {
         <div id="posts">
           <Posts />
         </div>
-        <PostForm />
+        <Sender />
       </div>
     </div>
   );
