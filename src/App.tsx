@@ -1,10 +1,12 @@
 import React from "react";
 import "./App.css";
 
+import { Route } from "react-router";
 import Posts from "./containers/posts";
 import PostForm from "./containers/post-form";
 
 import Undo from "./containers/undo";
+import DispProfile from "./containers/profile";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +19,7 @@ const App: React.FC = () => {
         <div id="posts">
           <Posts />
         </div>
+        <Route path="/" component={DispProfile} />
         <PostForm />
       </div>
     </div>
