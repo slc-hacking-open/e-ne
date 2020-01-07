@@ -5,7 +5,7 @@ import { RouteComponentProps, withRouter } from "react-router";
 
 import DispProfile, { ProfileProps } from "../components/profile";
 import { User } from "../services/models";
-import { ProfileState } from "../reducers/profile-reducer";
+import { AppState } from "../reducer";
 import { getProfile } from "../actions/profile";
 
 interface StateProps {
@@ -22,9 +22,9 @@ type EnhancedProfileProps = ProfileProps &
   DispatchProps &
   RouteComponentProps<{ userid: string }>;
 
-const mapStateToProps = (state: ProfileState): StateProps => ({
-  user: state.user,
-  isLoading: state.isLoading
+const mapStateToProps = (state: AppState): StateProps => ({
+  user: state.profile.user,
+  isLoading: state.profile.isLoading
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
@@ -44,7 +44,7 @@ const ProfileContainer: FC<EnhancedProfileProps> = ({
 
   useEffect(() => {
     getProfileStart(userid);
-  });
+  }, []);
 
   return <DispProfile user={user} isLoading={isLoading} />;
 };
