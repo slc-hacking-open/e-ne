@@ -6,7 +6,8 @@ import Posts from "./containers/posts";
 import PostForm from "./containers/post-form";
 
 import Undo from "./containers/undo";
-import DispProfile from "./containers/profile";
+// import DispProfile from "./containers/profile";
+import DispProfile from "./containers/profile-thunk";
 
 const App: React.FC = () => {
   return (
