@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
 
 import Posts from "../components/posts";
+import { getPosts } from "../actions/posts";
 import { AppState } from "../reducer";
 
 interface StateProps {
@@ -12,8 +14,19 @@ interface StateProps {
   }>;
 }
 
+interface DispatchProps {
+  getPosts: (userId: number) => void;
+}
+
 const mapStateToProps = (state: AppState): StateProps => ({
   posts: state.posts.posts
 });
 
-export default connect(mapStateToProps)(Posts);
+const mapDispatchToProps = (
+  // eslint-disable-next-line
+  dispatch: ThunkDispatch<any, any, any>
+): DispatchProps => ({
+  getPosts: userId => dispatch(getPosts(userId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);

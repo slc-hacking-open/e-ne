@@ -9,6 +9,12 @@
   margin-bottom: 1em;
 }
 
+.post-thumbnail-img {
+  height: 32px;
+  width: 32px;
+}
+
 .post-contents {
-  font-size: 1.3em;
+  font-size: 1.2em;
+  margin: 0 1em;
 }
