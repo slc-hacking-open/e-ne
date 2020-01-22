@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 
 import Posts from "./containers/posts";
+import Loading from "./containers/loading";
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
       <div id="main">
         <Posts />
       </div>
+      <Loading />
     </div>
   );
 };
