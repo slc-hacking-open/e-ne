@@ -110,6 +110,8 @@ module.exports = {
         trailingComma: "none",
         useTabs: false
       }
-    ]
+    ],
+
+    "@typescript-eslint/no-empty-function": "off"
   }
 };
