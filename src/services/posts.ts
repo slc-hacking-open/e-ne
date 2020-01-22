@@ -16,8 +16,6 @@ export const getTimeline = async (
 
   if (response.status === 200) {
     const posts: Post[] = [...response.data.posts];
-    console.log("status 200");
-    console.log(posts);
 
     return posts;
   }
