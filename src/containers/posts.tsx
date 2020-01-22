@@ -15,7 +15,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  getPosts: (userId: number) => void;
+  getPosts: (userId: string) => void;
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({

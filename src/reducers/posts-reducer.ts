@@ -1,10 +1,10 @@
 import { Reducer } from "redux";
 
-import { PostProps } from "../components/post";
+import { Post } from "../models";
 import { PostsAction, SUCCEED_POSTS } from "../actions/posts";
 
 export interface PostsState {
-  posts: Array<PostProps>;
+  posts: Post[];
 }
 
 export const initialState: PostsState = {

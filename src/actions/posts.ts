@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
-import { fetchPosts } from "../services/api";
+import { Post } from "../models";
+import { getTimeline } from "../services/posts";
 
 // async actions
 export const FETCHING_POSTS = "FETCHING_POSTS";
@@ -10,7 +11,7 @@ export const fetchingPosts = () => ({
   type: FETCHING_POSTS as typeof FETCHING_POSTS
 });
 
-export const succeedPosts = (result: any) => ({
+export const succeedPosts = (result: Post[]) => ({
   type: SUCCEED_POSTS as typeof SUCCEED_POSTS,
   payload: {
     posts: result
@@ -25,12 +26,11 @@ export const failedPosts = (error: Error) => ({
   error: true
 });
 
-export const getPosts = (userId: number) => {
+export const getPosts = (userId: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(fetchingPosts());
-      const result = await fetchPosts(userId);
-      console.log(result);
+      const result = await getTimeline(userId, 1);
       dispatch(succeedPosts(result));
     } catch (error) {
       dispatch(failedPosts(error));

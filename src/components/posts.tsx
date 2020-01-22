@@ -1,30 +1,21 @@
 import React, { FC, useEffect } from "react";
 
-import { PostProps } from "./post";
-import Post from "../containers/post";
+import Post, { PostProps } from "./post";
 
 export interface PostsProps {
-  posts?: Array<PostProps>;
-  getPosts?: (userId: number) => void;
+  posts?: PostProps[];
+  getPosts?: (userId: string) => void;
 }
 
 const Posts: FC<PostsProps> = ({ posts = [], getPosts = () => {} }) => {
   useEffect(() => {
-    getPosts(0);
+    getPosts("0001");
   }, []);
 
   return (
     <div className="posts">
       {posts.map((post: PostProps) => {
-        return (
-          <Post
-            key={post.id}
-            id={post.id}
-            contents={post.contents}
-            from={post.from}
-            to={post.to}
-          />
-        );
+        return <Post key={post.id} id={post.id} contents={post.contents} />;
       })}
     </div>
   );
