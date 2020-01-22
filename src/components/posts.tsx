@@ -15,7 +15,17 @@ const Posts: FC<PostsProps> = ({ posts = [], getPosts = () => {} }) => {
   return (
     <div className="posts">
       {posts.map((post: PostProps) => {
-        return <Post key={post.id} id={post.id} contents={post.contents} />;
+        return (
+          <Post
+            key={post.id}
+            id={post.id}
+            sender={post.sender}
+            receiver={post.receiver}
+            contents={post.contents}
+            datetime={post.datetime}
+            empathyCount={post.empathyCount}
+          />
+        );
       })}
     </div>
   );

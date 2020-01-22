@@ -3,21 +3,35 @@ import "./post.css";
 
 export interface PostProps {
   id?: number;
+  sender?: {
+    id?: string;
+    name?: string;
+    department?: string;
+    photoURL?: string;
+  };
+  receiver?: {
+    id?: string;
+    name?: string;
+    department?: string;
+    photoURL?: string;
+  };
   contents?: string;
-  from?: string;
-  to?: string;
+  datetime?: string;
+  empathyCount?: number;
 }
 
-const debugNow = (): string => {
-  const d = new Date();
-  return ("" +  (d.getMonth() + 1) + "月" + d.getDate() + "日 " + d.getHours() + ":" + d.getMinutes());
-}
-
-const Post: FC<PostProps> = ({ id = 0, contents = "", from = "", to = "" }) => (
+const Post: FC<PostProps> = ({
+  id = 0,
+  sender = { name: "" },
+  receiver = { name: "" },
+  contents = "",
+  datetime = "",
+  empathyCount = 0
+}) => (
   <div className="post">
     <div className="post-thumbnail">
       <img className="post-thumbnail-img" src="/human.png" alt="いいねした人" />
-      <p>{from}</p>
+      <p>{sender.name}</p>
     </div>
     <div className="post-contents">
       <p className="post-contents-p">{contents}</p>
@@ -28,10 +42,13 @@ const Post: FC<PostProps> = ({ id = 0, contents = "", from = "", to = "" }) => (
         src="/human.png"
         alt="いいねされた人"
       />
-      <p>{to}</p>
+      <p>{receiver.name}</p>
     </div>
     <div className="post-time">
-      <p>{debugNow()}</p>
+      <p>{datetime}</p>
+    </div>
+    <div className="post-empathy">
+      <p>いいね数: {empathyCount}</p>
     </div>
   </div>
 );

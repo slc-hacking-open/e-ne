@@ -10,5 +10,5 @@ export interface Post {
   receiver: User;
   contents: string;
   datetime: string;
-  empathy: number;
+  empathyCount: number;
 }
