@@ -11,14 +11,6 @@ const App: React.FC = () => {
       </header>
       <div id="main">
         <Posts />
-        {/*
-        <Posts
-          posts={[
-            { id: 0, from: "宮田", contents: "こんにちは", to: "清水" },
-            { id: 1, from: "宮田", contents: "こんばんは", to: "田中" }
-          ]}
-        />
-        */}
       </div>
     </div>
   );
