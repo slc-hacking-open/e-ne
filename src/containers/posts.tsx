@@ -2,16 +2,12 @@ import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 
 import Posts from "../components/posts";
+import { PostProps } from "../components/post";
 import { getPosts } from "../actions/posts";
 import { AppState } from "../reducer";
 
 interface StateProps {
-  posts: Array<{
-    id: number;
-    contents: string;
-    from: string;
-    to: string;
-  }>;
+  posts: PostProps[];
 }
 
 interface DispatchProps {

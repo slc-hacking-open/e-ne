@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import "./post.css";
 
 export interface PostProps {
-  id?: number;
+  id?: string;
   sender?: {
     id?: string;
     name?: string;
@@ -21,7 +21,7 @@ export interface PostProps {
 }
 
 const Post: FC<PostProps> = ({
-  id = 0,
+  id = "0",
   sender = { name: "" },
   receiver = { name: "" },
   contents = "",
