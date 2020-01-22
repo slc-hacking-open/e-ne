@@ -1,0 +1,21 @@
+.message {
+  align-items: center;
+  background: #1abc9c;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: top 0.5s ease-out;
+}
+
+.message-error {
+  background: #e74c3c;
+}
+
+.message-none {
+  top: -50px;
+}
