@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 
-import { Post } from "../models";
+import { Post } from "../services/models";
 import { PostsAction, SUCCEED_POSTS } from "../actions/posts";
 
 export interface PostsState {

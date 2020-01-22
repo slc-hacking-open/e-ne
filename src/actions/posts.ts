@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { Post } from "../models";
+import { Post } from "../services/models";
 import { getTimeline } from "../services/posts";
 
 // async actions

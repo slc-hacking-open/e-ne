@@ -1,6 +1,6 @@
 import axios from "axios";
 import { BASE_URL, TIMEOUT } from "./config";
-import { Post } from "../models";
+import { Post } from "./models";
 
 const postsConfig = {
   baseURL: `${BASE_URL}/posts`,
