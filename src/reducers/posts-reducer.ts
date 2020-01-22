@@ -23,9 +23,6 @@ const postsReducer: Reducer<PostsState, PostsAction> = (
         posts: action.payload.posts
       };
     default: {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      // const check: never = action.type;
-
       return state;
     }
   }
