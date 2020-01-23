@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { Post } from "../services/models";
+import { Timeline } from "../services/models";
 import { getTimeline } from "../services/posts";
 
 // async actions
@@ -11,10 +11,10 @@ export const fetchingPosts = () => ({
   type: FETCHING_POSTS as typeof FETCHING_POSTS
 });
 
-export const succeedPosts = (result: Post[]) => ({
+export const succeedPosts = (result: Timeline) => ({
   type: SUCCEED_POSTS as typeof SUCCEED_POSTS,
   payload: {
-    posts: result
+    timeline: result
   }
 });
 

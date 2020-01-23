@@ -12,3 +12,9 @@ export interface Post {
   datetime: string;
   empathyCount: number;
 }
+
+export interface Timeline {
+  pageNumber: number;
+  pageSize: number;
+  posts: Post[];
+}
