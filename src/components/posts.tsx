@@ -17,6 +17,7 @@ const Posts: FC<PostsProps> = ({
   getPosts = () => {}
 }) => {
   useEffect(() => {
+    // TODO: userId
     getPosts("0001");
   }, []);
 
