@@ -1,27 +1,37 @@
-import { Dispatch, Action } from "redux";
-import { ThunkAction } from "redux-thunk";
-import { AppState } from "../reducer";
+import { Dispatch } from "redux";
+import { pushEmpathy } from "../services/posts";
 
-export const EMPATHY = "EMPATHY";
+export const CLICK_EMPATHY = "CLICK_EMPATHY";
 
-export const empathy = (response: any) => ({
-  type: EMPATHY as typeof EMPATHY,
+// asnync acitons
+// note: 共感ボタン押した時にローディングやエラーメッセージ出すのは
+//       UX悪い気がするので、一旦succeedアクションしか作ってない
+export const SUCCEED_EMPATHY = "SUCCEED_EMPATHY";
+
+export const clickEmpathy = () => ({
+  type: CLICK_EMPATHY as typeof CLICK_EMPATHY
+});
+
+export const succeedEmpathy = (result: boolean) => ({
+  type: SUCCEED_EMPATHY as typeof SUCCEED_EMPATHY,
   payload: {
-    response
+    result
   }
 });
 
-export const pushEmpathy = (
-  id: number
-): ThunkAction<void, AppState, undefined, PostAction> => (
-  dispatch: Dispatch<Action>
-) => {
-  fetch("localhost:3030/empathy")
-    .then(res => {
-      console.log(res);
-      dispatch(empathy(res));
-    })
-    .catch(reason => {});
+export const empathy = (userId: string, postId: string) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      const result = await pushEmpathy(userId, postId);
+      dispatch(succeedEmpathy(result));
+      console.log(result);
+    } catch (error) {
+      console.log("Server Error");
+      console.log(error);
+    }
+  };
 };
 
-export type PostAction = ReturnType<typeof empathy>;
+export type PostAction =
+  | ReturnType<typeof clickEmpathy>
+  | ReturnType<typeof succeedEmpathy>;

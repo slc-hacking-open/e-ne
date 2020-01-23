@@ -1,21 +1,24 @@
 import { Reducer } from "redux";
+import { PostAction, SUCCEED_EMPATHY } from "../actions/post";
 
-import { PostAction, EMPATHY } from "../actions/post";
+export interface PostState {
+  empathyCount: number;
+}
 
-const postsReducer: Reducer<{}, PostAction> = (
-  state = {},
+const initialState: PostState = {
+  empathyCount: 0
+};
+
+const postReducer: Reducer<PostState, PostAction> = (
+  state: PostState = initialState,
   action: PostAction
-): {} => {
+): PostState => {
   switch (action.type) {
-    case EMPATHY:
+    case SUCCEED_EMPATHY:
       return state;
-    default: {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const check: never = action.type;
-
+    default:
       return state;
-    }
   }
 };
 
-export default postsReducer;
+export default postReducer;

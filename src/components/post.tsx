@@ -18,6 +18,7 @@ export interface PostProps {
   contents?: string;
   datetime?: string;
   empathyCount?: number;
+  empathy?: (userId: string, postId: string) => void;
 }
 
 const Post: FC<PostProps> = ({
@@ -26,7 +27,8 @@ const Post: FC<PostProps> = ({
   receiver = { name: "" },
   contents = "",
   datetime = "",
-  empathyCount = 0
+  empathyCount = 0,
+  empathy = () => {}
 }) => (
   <div className="post">
     <div className="post-thumbnail">
@@ -48,7 +50,17 @@ const Post: FC<PostProps> = ({
       <p>{datetime}</p>
     </div>
     <div className="post-empathy">
-      <p>いいね数: {empathyCount}</p>
+      <button
+        type="button"
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        onClick={e => {
+          // TODO: userId
+          empathy("0001", id);
+        }}
+      >
+        共感
+      </button>
+      <span>{empathyCount}</span>
     </div>
   </div>
 );

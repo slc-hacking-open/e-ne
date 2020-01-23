@@ -1,23 +1,26 @@
 import { connect } from "react-redux";
-import { Dispatch } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 
-import { PostAction, empathy, pushEmpathy } from "../actions/post";
-import { AppState } from "../reducer";
 import Post from "../components/post";
+import { PostAction, empathy } from "../actions/post";
+import { AppState } from "../reducer";
 
-interface DispatchProps {
-  empathy: (id: number) => void;
-  pushEmpathy: (id: number) => void;
+interface StateProps {
+  empathyCount: number;
 }
 
-const mapStateToProps = () => ({});
+interface DispatchProps {
+  empathy: (userId: string, postId: string) => void;
+}
+
+const mapStateToProps = (state: AppState): StateProps => ({
+  empathyCount: 0
+});
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<AppState, undefined, PostAction>
 ): DispatchProps => ({
-  empathy: (id: number) => dispatch(empathy(id)),
-  pushEmpathy: (id: number) => dispatch(pushEmpathy(id))
+  empathy: (userId, postId) => dispatch(empathy(userId, postId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

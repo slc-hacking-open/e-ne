@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from "react";
 
-import Post, { PostProps } from "./post";
+import Post from "../containers/post";
+import { PostProps } from "./post";
 
 export interface PostsProps {
   pageNumber?: number;
@@ -31,7 +32,6 @@ const Posts: FC<PostsProps> = ({
               receiver={post.receiver}
               contents={post.contents}
               datetime={post.datetime}
-              empathyCount={post.empathyCount}
             />
           );
         })}
