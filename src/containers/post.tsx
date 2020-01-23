@@ -13,9 +13,7 @@ interface DispatchProps {
   empathy: (userId: string, postId: string) => void;
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
-  empathyCount: 0
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<AppState, undefined, PostAction>

@@ -2,11 +2,11 @@ import { Reducer } from "redux";
 import { PostAction, SUCCEED_EMPATHY } from "../actions/post";
 
 export interface PostState {
-  empathyCount: number;
+  noStateNow: number;
 }
 
 const initialState: PostState = {
-  empathyCount: 0
+  noStateNow: 0
 };
 
 const postReducer: Reducer<PostState, PostAction> = (
