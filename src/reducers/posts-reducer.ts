@@ -1,46 +1,32 @@
 import { Reducer } from "redux";
 
-import { PostProps } from "../components/post";
-import { PostsAction, ADD } from "../actions/posts";
-import { UndoAction, UNDO } from "../actions/undo";
+import { Post } from "../services/models";
+import { PostsAction, SUCCEED_POSTS } from "../actions/posts";
 
 export interface PostsState {
-  posts: Array<PostProps>;
+  pageNumber: number;
+  pageSize: number;
+  posts: Post[];
 }
 
 export const initialState: PostsState = {
+  pageNumber: 1,
+  pageSize: 1,
   posts: []
 };
 
-const postsReducer: Reducer<PostsState, PostsAction | UndoAction> = (
+const postsReducer: Reducer<PostsState, PostsAction> = (
   state: PostsState = initialState,
-  action: PostsAction | UndoAction
+  action: PostsAction
 ): PostsState => {
   switch (action.type) {
-    case ADD:
+    case SUCCEED_POSTS:
       return {
         ...state,
-        posts: [
-          {
-            contents: action.payload.contents,
-            from: action.payload.from,
-            to: action.payload.to
-          },
-          ...state.posts
-        ]
+        ...action.payload.timeline
       };
-    case UNDO:
-      return {
-        posts: state.posts.filter((item, index) => {
-          return index !== 0;
-        })
-      };
-    default: {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      // const check: never = action.type;
-
+    default:
       return state;
-    }
   }
 };
 
