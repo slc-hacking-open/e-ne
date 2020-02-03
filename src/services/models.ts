@@ -5,7 +5,8 @@ export interface User {
   department: string;
   // ユーザ名
   name: string;
-  // TODO: photoURL
+  profile: string;
+  imageurl: string;
 }
 
 // TODO: UserかPostに「誰がどのいいねに共感したか」を持たせないと連打できちゃう
