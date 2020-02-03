@@ -6,6 +6,7 @@ import { getTimeline } from "../services/posts";
 export const FETCHING_POSTS = "FETCHING_POSTS";
 export const SUCCEED_POSTS = "SUCCEED_POSTS";
 export const FAILED_POSTS = "FAILED_POSTS";
+export const ADD = "ADD";
 
 export const fetchingPosts = () => ({
   type: FETCHING_POSTS as typeof FETCHING_POSTS
@@ -37,6 +38,15 @@ export const getPosts = (userId: string) => {
     }
   };
 };
+
+export const add = (contents: string, from: string, to: string) => ({
+  type: ADD as typeof ADD,
+  payload: {
+    contents,
+    from,
+    to
+  }
+});
 
 export type PostsAction =
   | ReturnType<typeof fetchingPosts>

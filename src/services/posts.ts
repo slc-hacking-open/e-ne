@@ -52,3 +52,32 @@ export const pushEmpathy = async (
 
   return true;
 };
+
+// いいねボタン押下時
+export const pushNice = async (
+  senderId: string,
+  receiverId: string,
+  contents: string
+): Promise<boolean> => {
+  // TODO: booleanでいいのか？？？
+  const body = {
+    senderId,
+    receiverId,
+    contents
+  };
+  const instance = axios.create(postsConfig);
+  const response = await instance.post(``, body);
+  console.log(response);
+
+  if (response.status !== 200) {
+    switch (response.status) {
+      case 400:
+      case 405:
+        throw new Error("いいねの投稿が完了していません");
+      default:
+        throw new Error("サーバーエラーです");
+    }
+  }
+
+  return true;
+};

@@ -7,6 +7,7 @@ import DispProfile from "./containers/profile";
 import Loading from "./containers/loading";
 import Message from "./containers/message";
 import { ReactComponent as Ene } from "./ene.svg";
+import Sender from "./containers/sender";
 
 const App: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ const App: React.FC = () => {
         </div>
         <div className="main-sidemenu">
           <DispProfile />
+          <Sender />
         </div>
       </div>
       <Loading />

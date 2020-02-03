@@ -17,6 +17,8 @@ export interface PostProps {
     photoURL?: string;
   };
   contents?: string;
+  from?: string;
+  to?: string;
   datetime?: string;
   empathyCount?: number;
   empathy?: (userId: string, postId: string) => void;

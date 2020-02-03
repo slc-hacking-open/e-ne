@@ -1,12 +1,15 @@
 import { Reducer } from "redux";
-import { PostAction, SUCCEED_EMPATHY } from "../actions/post";
+import { PostAction, SUCCEED_EMPATHY, ADD } from "../actions/post";
+import { PostProps } from "../components/post";
 
 export interface PostState {
   noStateNow: number;
+  posts: Array<PostProps>;
 }
 
 const initialState: PostState = {
-  noStateNow: 0
+  noStateNow: 0,
+  posts: []
 };
 
 const postReducer: Reducer<PostState, PostAction> = (
@@ -16,6 +19,18 @@ const postReducer: Reducer<PostState, PostAction> = (
   switch (action.type) {
     case SUCCEED_EMPATHY:
       return state;
+    case ADD:
+      return {
+        ...state,
+        posts: [
+          {
+            contents: action.payload.contents,
+            from: action.payload.from,
+            to: action.payload.to
+          },
+          ...state.posts
+        ]
+      };
     default:
       return state;
   }
