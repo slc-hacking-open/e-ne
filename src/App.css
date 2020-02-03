@@ -31,14 +31,12 @@ li {
 .header > svg {
   height: 25px;
   margin-left: 1rem;
-  margin-top: 7px;
   width: 25px;
 }
 
 .header > h1 {
   font-size: 1.6rem;
   margin-left: 0.5rem;
-  margin-top: 0.3rem;
 }
 
 .main {
@@ -60,4 +58,10 @@ li {
   flex-direction: column;
   margin-left: 25px;
   width: 200px;
+}
+
+@media screen and (max-width: 900px) {
+  .main-sidemenu {
+    display: none;
+  }
 }
