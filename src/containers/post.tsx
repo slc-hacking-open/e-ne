@@ -3,6 +3,7 @@ import { ThunkDispatch } from "redux-thunk";
 
 import Post from "../components/post";
 import { PostAction, empathy } from "../actions/post";
+
 import { AppState } from "../reducer";
 
 interface StateProps {
