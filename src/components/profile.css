@@ -1,0 +1,26 @@
+.profile {
+  align-items: center;
+  border: 2px solid #001858;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.4rem;
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.profile-image {
+  margin-bottom: 0.5rem;
+  width: 100px;
+}
+
+.profile-name {
+  margin-bottom: 0.5rem;
+}
+
+.profile-department {
+  margin-bottom: 0.5rem;
+}
+
+.profile-profile {
+}

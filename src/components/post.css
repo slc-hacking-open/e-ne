@@ -1,12 +1,29 @@
 .post {
-  border-bottom: 1px solid #ccc;
+  background-color: #fef6e4;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  padding: 16px 16px 0 16px;
+  width: 100%;
+}
+
+.post-main {
   display: flex;
-  margin-bottom: 1em;
+  justify-content: center;
+  width: 100%;
+}
+
+.post-footer {
+  align-items: center;
+  display: flex;
+  height: 30px;
+  justify-content: space-between;
+  margin-top: 5px;
   width: 100%;
 }
 
 .post-thumbnail {
-  margin-bottom: 1em;
+  flex-grow: 0;
+  width: 32px;
 }
 
 .post-thumbnail-img {
@@ -14,37 +31,65 @@
   width: 32px;
 }
 
+.post-thumbnail-name {
+  font-size: 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 30px;
+}
+
 .post-contents {
-  font-size: 1.2em;
-  margin: 0 1em;
+  flex-grow: 1;
+  font-size: 0.9rem;
+  padding: 0 1rem;
+}
+
+.post-empathy {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.post-empathyCount {
+  width: 20px;
 }
 
 .post-empathyButton {
   background: transparent;
   border: none;
   padding: 0;
+  position: relative;
   width: 2rem;
+}
+
+.post-empathyButton > svg {
+  height: 16px;
+  width: 16px;
+}
+
+.st0 {
+  fill: #f3d2c1;
+}
+
+.post-icon-clicked .st0,
+.post-icon-boo1 .st0,
+.post-icon-boo2 .st0 {
+  fill: #f582ae;
 }
 
 .post-empathyButton:focus {
   outline: none;
 }
 
-.post-thumb-clicked {
+.post-icon-clicked {
   animation: empathy ease-out 0.5s;
 }
 
-.post-thumb-clicked g,
-.post-thumb-boo1 g,
-.post-thumb-boo2 g {
-  fill: #0984e3;
-}
-
-.post-thumb-boo1 {
+.post-icon-boo1 {
   animation: boo1 ease-out 0.5s 1;
 }
 
-.post-thumb-boo2 {
+.post-icon-boo2 {
   animation: boo2 ease-out 0.5s 1;
 }
 
@@ -55,18 +100,22 @@
 
   40% {
     transform: scale(1.2, 1.2);
+    transform: translateY(-10%);
   }
 
   60% {
     transform: scale(1, 1);
+    transform: translateY(0);
   }
 
   80% {
     transform: scale(1.1, 1.1);
+    transform: translateY(-5%);
   }
 
   100% {
     transform: scale(1, 1);
+    transform: translateY(0);
   }
 }
 
