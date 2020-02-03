@@ -16,6 +16,8 @@ export interface PostProps {
     photoURL?: string;
   };
   contents?: string;
+  from?: string;
+  to?: string;
   datetime?: string;
   empathyCount?: number;
   empathy?: (userId: string, postId: string) => void;
@@ -26,6 +28,8 @@ const Post: FC<PostProps> = ({
   sender = { name: "" },
   receiver = { name: "" },
   contents = "",
+  from = "",
+  to = "",
   datetime = "",
   empathyCount = 0,
   empathy = () => {}
@@ -37,6 +41,11 @@ const Post: FC<PostProps> = ({
     </div>
     <div className="post-contents">
       <p className="post-contents-p">{contents}</p>
+    </div>
+    <div className="post-fromto">
+      <p>
+        {from} -&gt; {to}{" "}
+      </p>
     </div>
     <div className="post-thumbnail">
       <img

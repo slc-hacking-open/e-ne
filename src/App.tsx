@@ -5,6 +5,7 @@ import Posts from "./containers/posts";
 import DispProfile from "./containers/profile";
 import Loading from "./containers/loading";
 import Message from "./containers/message";
+import Sender from "./containers/sender";
 
 const App: React.FC = () => {
   return (
@@ -14,7 +15,10 @@ const App: React.FC = () => {
         <h1>デモアプリ</h1>
       </header>
       <div id="main">
-        <Posts />
+        <div id="posts">
+          <Posts />
+        </div>
+        <Sender />
       </div>
       <div id="profile">
         <DispProfile />
