@@ -5,7 +5,9 @@ export interface User {
   department: string;
   // ユーザ名
   name: string;
+  // プロフィール
   profile: string;
+  // プロフィール画像URL
   imageurl: string;
 }
 
