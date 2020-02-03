@@ -1,20 +1,56 @@
 .sender {
+  align-items: center;
+  border: 2px solid #8bd3dd;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
+  font-size: 0.4rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+.sender input,
+.sender textarea {
+  background-color: #f3d2c1;
+  border: none;
+  box-shadow: none;
+  padding: 0.5rem;
 }
 
 .sender-to {
-  margin-bottom: 0.5em;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
   width: 100%;
 }
 
 .sender-coin {
-  margin-bottom: 0.5em;
-  width: 50%;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
 }
 
 .sender-contents {
-  height: 5em;
-  margin-bottom: 0.5em;
+  font-size: 0.8rem;
+  height: 5rem;
+  margin-bottom: 0.5rem;
+  resize: none;
   width: 100%;
+}
+
+.sender-button {
+  background-color: #f582ae;
+  border: none;
+  border-radius: 3px;
+  color: #001858;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  width: 100%;
+}
+
+.sender-button:hover {
+  box-shadow: 1px 1px 1px 0 rgba(0, 24, 88, 0.8);
+}
+
+.sender-button .st0 {
+  fill: #001858;
 }

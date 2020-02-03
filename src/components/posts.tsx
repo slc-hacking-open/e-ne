@@ -39,9 +39,9 @@ const Posts: FC<PostsProps> = ({
         })}
       </div>
       <div className="posts-pagenation">
-        <p>
+        <p>{/*
           {pageNumber}/{pageSize}
-        </p>
+          */}</p>
       </div>
     </div>
   );

@@ -30,6 +30,7 @@ export const empathy = (userId: string, postId: string) => {
   };
 };
 
+// TODO: このアクションいらんと思う！
 export const add = (contents: string, from: string, to: string) => ({
   type: ADD as typeof ADD,
   payload: {
