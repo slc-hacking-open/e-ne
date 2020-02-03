@@ -170,13 +170,3 @@
     transform: translateX(0);
   }
 }
-
-.post li,
-.post button {
-  list-style: none;
-  margin-bottom: 1em;
-}
-
-.post-fromto {
-  font-size: 0.5em;
-}
