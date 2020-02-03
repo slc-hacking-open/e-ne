@@ -14,14 +14,14 @@ export const getTimeline = async (
   const instance = axios.create(postsConfig);
   const response = await instance.get(`/${userId}/${pageNumber}`);
 
-  if (response.status !== 200) {
-    switch (response.status) {
-      case 400:
-      case 404:
-        throw new Error("タイムラインが取得できませんでした");
-      default:
-        throw new Error("サーバーエラーです");
-    }
+  switch (response.status) {
+    case 200:
+      break;
+    case 400:
+    case 404:
+      throw new Error("タイムラインが取得できませんでした");
+    default:
+      throw new Error("サーバーエラーです");
   }
 
   const timeline: Timeline = response.data;

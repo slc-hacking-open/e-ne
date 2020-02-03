@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import "./sender.css";
+import { ReactComponent as Heart } from "./heart.svg";
 
 export interface SenderProps {
   contents?: string;
@@ -24,14 +25,13 @@ const Sender: FC<SenderProps> = ({
   add = () => {},
   nice = () => {}
 }) => (
-  <div id="sender">
+  <div className="sender">
     <input
       className="sender-to"
       name="to"
       value={to}
       placeholder="宛先"
       onChange={e => {
-        console.log("to");
         changeTo(e.target.value);
       }}
     />
@@ -41,7 +41,6 @@ const Sender: FC<SenderProps> = ({
       value={coin}
       placeholder="コイン"
       onChange={e => {
-        console.log("coin");
         changeCoin(e.target.value);
       }}
     />
@@ -55,6 +54,7 @@ const Sender: FC<SenderProps> = ({
       }}
     />
     <button
+      className="sender-button"
       type="button"
       onClick={e => {
         if (contents !== "" && to !== "") {
@@ -64,7 +64,7 @@ const Sender: FC<SenderProps> = ({
         }
       }}
     >
-      いいね！
+      <Heart width="20px" height="20px" />
     </button>
   </div>
 );
