@@ -31,7 +31,7 @@ export const getPosts = (userId: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(fetchingPosts());
-      const result = await getTimeline(userId, 1);
+      const result = await getTimeline("SLC／生保ソリューション第２部");
       dispatch(succeedPosts(result));
     } catch (error) {
       dispatch(failedPosts(error));

@@ -36,3 +36,20 @@ export interface Timeline {
   // 投稿リスト
   posts: Post[];
 }
+
+// APIが返してくるデータ
+export interface APIPost {
+  id: string;
+  sender: {
+    name: { S: string };
+    imageurl: { S: string };
+  };
+  reciever: {
+    name: { S: string };
+    imageurl: { S: string };
+  };
+  department: string;
+  datetime: string;
+  contents: string;
+  empathyCount: 0;
+}

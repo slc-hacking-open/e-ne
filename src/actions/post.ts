@@ -1,5 +1,4 @@
 import { Dispatch } from "redux";
-import { pushEmpathy } from "../services/posts";
 
 export const CLICK_EMPATHY = "CLICK_EMPATHY";
 export const ADD = "ADD";
@@ -20,7 +19,8 @@ export const empathy = (userId: string, postId: string) => {
   return async (dispatch: Dispatch) => {
     try {
       console.log("empathy");
-      const result = await pushEmpathy(userId, postId);
+      // const result = await pushEmpathy(userId, postId);
+      const result = true;
       dispatch(succeedEmpathy(result));
       console.log(result);
     } catch (error) {
