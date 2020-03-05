@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { Timeline } from "../services/models";
-import { getTimeline } from "../services/posts";
+import { getTimeline, postPost } from "../services/posts";
 
 // async actions
 export const FETCHING_POSTS = "FETCHING_POSTS";
@@ -32,6 +32,7 @@ export const getPosts = (userId: string) => {
     try {
       dispatch(fetchingPosts());
       const result = await getTimeline("SLC／生保ソリューション第２部");
+      console.log(await postPost("新しい投稿"));
       dispatch(succeedPosts(result));
     } catch (error) {
       dispatch(failedPosts(error));

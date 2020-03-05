@@ -8,6 +8,7 @@ const postsConfig = {
   timeout: TIMEOUT
 };
 
+// タイムライン取得
 export const getTimeline = async (department: string): Promise<Timeline> => {
   const instance = axios.create(postsConfig);
   const response = await instance.get(``, {
@@ -26,10 +27,33 @@ export const getTimeline = async (department: string): Promise<Timeline> => {
       throw new Error("サーバーエラーです");
   }
 
-  console.log(response.data);
   const timeline: Timeline = apiPosts2Timeline(response.data.data);
 
   return timeline;
+};
+
+// いいね投稿
+export const postPost = async (contents: string): Promise<boolean> => {
+  const instance = axios.create(postsConfig);
+  const response = await instance.post(``, {
+    data: {
+      department: "SLC／生保ソリューション第２部",
+      sender: "111111",
+      reciever: "222222",
+      contents: "hello"
+    }
+  });
+  console.log(response);
+
+  switch (response.status) {
+    case 200:
+      return true;
+    case 400:
+    case 404:
+      throw new Error("タイムラインが取得できませんでした");
+    default:
+      throw new Error("サーバーエラーです");
+  }
 };
 
 // いいねボタン押下時
