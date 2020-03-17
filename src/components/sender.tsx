@@ -10,8 +10,7 @@ export interface SenderProps {
   changeTo?: (to: string) => void;
   changeCoin?: (coin: string) => void;
   clear?: () => void;
-  add?: (contents: string, from: string, to: string, coin: string) => void;
-  nice?: (senderId: string, receiverId: string, contents: string) => void;
+  sendPost?: (constents: string) => void;
 }
 
 const Sender: FC<SenderProps> = ({
@@ -22,8 +21,7 @@ const Sender: FC<SenderProps> = ({
   changeTo = () => {},
   changeCoin = () => {},
   clear = () => {},
-  add = () => {},
-  nice = () => {}
+  sendPost = () => {}
 }) => (
   <div className="sender">
     <input
@@ -59,8 +57,7 @@ const Sender: FC<SenderProps> = ({
       onClick={e => {
         if (contents !== "" && to !== "") {
           clear();
-          add(contents, "私", to, coin);
-          nice("0001", "0002", "aaa");
+          sendPost(contents);
         }
       }}
     >

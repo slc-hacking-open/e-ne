@@ -1,15 +1,8 @@
 import { connect } from "react-redux";
-import { Dispatch } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 
-import { add } from "../actions/posts";
-import {
-  changeContents,
-  changeTo,
-  changeCoin,
-  nice,
-  clear
-} from "../actions/sender";
+import { sendPost } from "../actions/posts";
+import { changeContents, changeTo, changeCoin, clear } from "../actions/sender";
 import Sender from "../components/sender";
 import { AppState } from "../reducer";
 
@@ -21,11 +14,10 @@ interface StateProps {
 
 interface DispatchProps {
   changeContents: (contents: string) => void;
-  changeTo: (contents: string) => void;
-  changeCoin: (contents: string) => void;
+  changeTo: (to: string) => void;
+  changeCoin: (coin: string) => void;
   clear: () => void;
-  add: (contents: string, from: string, to: string, coin: string) => void;
-  nice: (senderId: string, receiverId: string, contents: string) => void;
+  sendPost: (contents: string) => void;
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
@@ -41,10 +33,7 @@ const mapDispatchToProps = (
   changeTo: (to: string) => dispatch(changeTo(to)),
   changeCoin: (coin: string) => dispatch(changeCoin(coin)),
   clear: () => dispatch(clear()),
-  add: (contents: string, from: string, to: string) =>
-    dispatch(add(contents, from, to)),
-  nice: (senderId, receiverId, contents) =>
-    dispatch(nice(senderId, receiverId, contents))
+  sendPost: (contents: string) => dispatch(sendPost(contents))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sender);

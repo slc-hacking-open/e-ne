@@ -35,14 +35,17 @@ export const getTimeline = async (department: string): Promise<Timeline> => {
 // いいね投稿
 export const postPost = async (contents: string): Promise<boolean> => {
   const instance = axios.create(postsConfig);
-  const response = await instance.post(``, {
-    data: {
-      department: "SLC／生保ソリューション第２部",
-      sender: "111111",
-      reciever: "222222",
-      contents: "hello"
+  const response = await instance.post(
+    ``,
+    `{
+    "data": {
+      "department": "SLC／生保ソリューション第２部",
+      "sender": "111111",
+      "reciever": "222222",
+      "contents": "${contents}"
     }
-  });
+  }`
+  );
   console.log(response);
 
   switch (response.status) {

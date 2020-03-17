@@ -32,7 +32,6 @@ export const getPosts = (userId: string) => {
     try {
       dispatch(fetchingPosts());
       const result = await getTimeline("SLC／生保ソリューション第２部");
-      console.log(await postPost("新しい投稿"));
       dispatch(succeedPosts(result));
     } catch (error) {
       dispatch(failedPosts(error));
@@ -40,14 +39,18 @@ export const getPosts = (userId: string) => {
   };
 };
 
-export const add = (contents: string, from: string, to: string) => ({
-  type: ADD as typeof ADD,
-  payload: {
-    contents,
-    from,
-    to
-  }
-});
+export const sendPost = (contents: string) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(fetchingPosts());
+      console.log(await postPost(contents));
+      const result = await getTimeline("SLC／生保ソリューション第２部");
+      dispatch(succeedPosts(result));
+    } catch (error) {
+      dispatch(failedPosts(error));
+    }
+  };
+};
 
 export type PostsAction =
   | ReturnType<typeof fetchingPosts>
