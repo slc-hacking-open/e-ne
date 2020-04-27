@@ -2,7 +2,13 @@ import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 
 import { sendPost } from "../actions/posts";
-import { changeContents, changeTo, changeCoin, clear } from "../actions/sender";
+import {
+  changeContents,
+  changeTo,
+  changeCoin,
+  clear,
+  getUsers
+} from "../actions/sender";
 import Sender from "../components/sender";
 import { AppState } from "../reducer";
 
@@ -10,6 +16,7 @@ interface StateProps {
   contents: string;
   to: string;
   coin: string;
+  users: [];
 }
 
 interface DispatchProps {
@@ -18,12 +25,14 @@ interface DispatchProps {
   changeCoin: (coin: string) => void;
   clear: () => void;
   sendPost: (contents: string) => void;
+  getUserList: () => void;
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
   contents: state.sender.contents,
   to: state.sender.to,
-  coin: state.sender.coin
+  coin: state.sender.coin,
+  users: state.sender.users
 });
 
 const mapDispatchToProps = (
@@ -33,7 +42,8 @@ const mapDispatchToProps = (
   changeTo: (to: string) => dispatch(changeTo(to)),
   changeCoin: (coin: string) => dispatch(changeCoin(coin)),
   clear: () => dispatch(clear()),
-  sendPost: (contents: string) => dispatch(sendPost(contents))
+  sendPost: (contents: string) => dispatch(sendPost(contents)),
+  getUserList: () => dispatch(getUsers())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sender);

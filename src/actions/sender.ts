@@ -1,13 +1,15 @@
 import { Dispatch } from "redux";
 import { pushNice } from "../services/posts";
+import { getUserList } from "../services/users";
 
 export const CHANGE_CONTENTS = "CHANGE_CONTENTS";
 export const CHANGE_TO = "CHANGE_TO";
 export const CHANGE_COIN = "CHANGE_COIN";
 export const CLEAR = "CLEAR";
 export const CLICK_NICE = "CLICK_NICE";
-
 export const SUCCEED_NICE = "SUCCEED_NICE";
+export const GET_USERLIST = "GET_USERLIST";
+export const SUCCEED_USERLIST = "SUCCEED_USERLIST";
 
 export const clickNice = () => ({
   type: CLICK_NICE as typeof CLICK_NICE
@@ -62,10 +64,36 @@ export const nice = (
   };
 };
 
+export const UserList = {
+  start: () => ({
+    type: GET_USERLIST as typeof GET_USERLIST
+  }),
+
+  succeed: (result: []) => ({
+    type: SUCCEED_USERLIST as typeof SUCCEED_USERLIST,
+    payload: result
+  })
+};
+
+export const getUsers = () => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(UserList.start());
+      const users = await getUserList();
+      const result: [] = users;
+      dispatch(UserList.succeed(result));
+    } catch (error) {
+      console.log("Server Error.");
+    }
+  };
+};
+
 export type SenderAction =
   | ReturnType<typeof changeContents>
   | ReturnType<typeof changeTo>
   | ReturnType<typeof changeCoin>
   | ReturnType<typeof clickNice>
   | ReturnType<typeof succeedNice>
-  | ReturnType<typeof clear>;
+  | ReturnType<typeof clear>
+  | ReturnType<typeof UserList.start>
+  | ReturnType<typeof UserList.succeed>;
