@@ -1,26 +1,16 @@
 import { Dispatch } from "redux";
-import { pushNice } from "../services/posts";
+import { postPost } from "../services/posts";
 import { getUserList } from "../services/users";
+import { MyOption } from "../services/models";
 
 export const CHANGE_CONTENTS = "CHANGE_CONTENTS";
 export const CHANGE_TO = "CHANGE_TO";
 export const CHANGE_COIN = "CHANGE_COIN";
 export const CLEAR = "CLEAR";
-export const CLICK_NICE = "CLICK_NICE";
-export const SUCCEED_NICE = "SUCCEED_NICE";
+export const POST_ENE = "POST_ENE";
+export const SUCCEED_POST = "SUCCEED_POST";
 export const GET_USERLIST = "GET_USERLIST";
 export const SUCCEED_USERLIST = "SUCCEED_USERLIST";
-
-export const clickNice = () => ({
-  type: CLICK_NICE as typeof CLICK_NICE
-});
-
-export const succeedNice = (result: boolean) => ({
-  type: SUCCEED_NICE as typeof SUCCEED_NICE,
-  payload: {
-    result
-  }
-});
 
 export const changeContents = (contents: string) => ({
   type: CHANGE_CONTENTS as typeof CHANGE_CONTENTS,
@@ -47,19 +37,29 @@ export const clear = () => ({
   type: CLEAR as typeof CLEAR
 });
 
-export const nice = (
+export const Ene = {
+  start: () => ({
+    type: POST_ENE as typeof POST_ENE
+  }),
+
+  succeed: (result: boolean) => ({
+    type: SUCCEED_POST as typeof SUCCEED_POST,
+    payload: result
+  })
+};
+
+export const sendEne = (
   senderId: string,
   receiverId: string,
   contents: string
 ) => {
   return async (dispatch: Dispatch) => {
     try {
-      const result = await pushNice(senderId, receiverId, contents);
-      dispatch(succeedNice(result));
-      console.log(result);
+      dispatch(Ene.start());
+      const result = await postPost(senderId, receiverId, contents);
+      dispatch(Ene.succeed(result));
     } catch (error) {
-      console.log("Server Error");
-      console.log(error);
+      console.log("Server Error.");
     }
   };
 };
@@ -69,7 +69,7 @@ export const UserList = {
     type: GET_USERLIST as typeof GET_USERLIST
   }),
 
-  succeed: (result: []) => ({
+  succeed: (result: MyOption[]) => ({
     type: SUCCEED_USERLIST as typeof SUCCEED_USERLIST,
     payload: result
   })
@@ -80,7 +80,7 @@ export const getUsers = () => {
     try {
       dispatch(UserList.start());
       const users = await getUserList();
-      const result: [] = users;
+      const result: MyOption[] = users;
       dispatch(UserList.succeed(result));
     } catch (error) {
       console.log("Server Error.");
@@ -92,8 +92,8 @@ export type SenderAction =
   | ReturnType<typeof changeContents>
   | ReturnType<typeof changeTo>
   | ReturnType<typeof changeCoin>
-  | ReturnType<typeof clickNice>
-  | ReturnType<typeof succeedNice>
+  | ReturnType<typeof Ene.start>
+  | ReturnType<typeof Ene.succeed>
   | ReturnType<typeof clear>
   | ReturnType<typeof UserList.start>
   | ReturnType<typeof UserList.succeed>;

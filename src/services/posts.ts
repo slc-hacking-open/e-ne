@@ -33,7 +33,11 @@ export const getTimeline = async (department: string): Promise<Timeline> => {
 };
 
 // いいね投稿
-export const postPost = async (contents: string): Promise<boolean> => {
+export const postPost = async (
+  senderId: string,
+  receiverId: string,
+  contents: string
+): Promise<boolean> => {
   const instance = axios.create(postsConfig);
   const response = await instance.post(
     ``,
@@ -41,19 +45,18 @@ export const postPost = async (contents: string): Promise<boolean> => {
     "data": {
       "department": "SLC／生保ソリューション第２部",
       "sender": "111111",
-      "reciever": "222222",
+      "reciever": "${receiverId}",
       "contents": "${contents}"
     }
   }`
   );
-  console.log(response);
 
   switch (response.status) {
     case 200:
       return true;
     case 400:
     case 404:
-      throw new Error("タイムラインが取得できませんでした");
+      throw new Error("いいねの投稿が失敗しました");
     default:
       throw new Error("サーバーエラーです");
   }

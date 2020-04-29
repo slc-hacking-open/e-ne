@@ -1,4 +1,4 @@
-import { Timeline, APIPost, User } from "./models";
+import { Timeline, APIPost, User, MyOption } from "./models";
 
 export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
   return {
@@ -8,14 +8,14 @@ export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
       return {
         id: apiPost.id,
         sender: {
-          id: "",
+          userid: "",
           department: "",
           name: apiPost.sender.name.S,
           profile: "",
           imageurl: apiPost.sender.imageurl.S
         },
         receiver: {
-          id: "",
+          userid: "",
           department: "",
           name: apiPost.reciever.name.S,
           profile: "",
@@ -29,11 +29,11 @@ export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
   };
 };
 
-export const apiUsers2SelectUser = (apiUsers: User[]): [] => {
-  const array: any = [];
+export const apiUsers2SelectUser = (apiUsers: User[]): MyOption[] => {
+  const array: any = [{ value: "", label: "" }];
 
   apiUsers.map(apiUser =>
-    array.push({ value: apiUser.id, label: apiUser.name })
+    array.push({ value: apiUser.userid, label: apiUser.name })
   );
 
   return array;

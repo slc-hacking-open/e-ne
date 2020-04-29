@@ -1,12 +1,11 @@
 import { Dispatch } from "redux";
 import { Timeline } from "../services/models";
-import { getTimeline, postPost } from "../services/posts";
+import { getTimeline } from "../services/posts";
 
 // async actions
 export const FETCHING_POSTS = "FETCHING_POSTS";
 export const SUCCEED_POSTS = "SUCCEED_POSTS";
 export const FAILED_POSTS = "FAILED_POSTS";
-export const ADD = "ADD";
 
 export const fetchingPosts = () => ({
   type: FETCHING_POSTS as typeof FETCHING_POSTS
@@ -27,23 +26,10 @@ export const failedPosts = (error: Error) => ({
   error: true
 });
 
-export const getPosts = (userId: string) => {
+export const getPosts = () => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(fetchingPosts());
-      const result = await getTimeline("SLC／生保ソリューション第２部");
-      dispatch(succeedPosts(result));
-    } catch (error) {
-      dispatch(failedPosts(error));
-    }
-  };
-};
-
-export const sendPost = (contents: string) => {
-  return async (dispatch: Dispatch) => {
-    try {
-      dispatch(fetchingPosts());
-      console.log(await postPost(contents));
       const result = await getTimeline("SLC／生保ソリューション第２部");
       dispatch(succeedPosts(result));
     } catch (error) {

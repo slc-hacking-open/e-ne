@@ -1,7 +1,6 @@
 import { Dispatch } from "redux";
 
 export const CLICK_EMPATHY = "CLICK_EMPATHY";
-export const ADD = "ADD";
 
 // async acitons
 // note: 共感ボタン押した時にローディングやエラーメッセージ出すのは
@@ -30,16 +29,4 @@ export const empathy = (userId: string, postId: string) => {
   };
 };
 
-// TODO: このアクションいらんと思う！
-export const add = (contents: string, from: string, to: string) => ({
-  type: ADD as typeof ADD,
-  payload: {
-    contents,
-    from,
-    to
-  }
-});
-
-export type PostAction =
-  | ReturnType<typeof succeedEmpathy>
-  | ReturnType<typeof add>;
+export type PostAction = ReturnType<typeof succeedEmpathy>;

@@ -1,11 +1,13 @@
 import { Reducer } from "redux";
+import { MyOption } from "../services/models";
 import {
   SenderAction,
-  SUCCEED_NICE,
   CHANGE_CONTENTS,
   CHANGE_TO,
   CHANGE_COIN,
   CLEAR,
+  POST_ENE,
+  SUCCEED_POST,
   GET_USERLIST,
   SUCCEED_USERLIST
 } from "../actions/sender";
@@ -14,7 +16,7 @@ export interface SenderState {
   contents: string;
   to: string;
   coin: string;
-  users: [];
+  users: MyOption[];
 }
 
 export const initialState: SenderState = {
@@ -29,8 +31,6 @@ const SenderReducer: Reducer<SenderState, SenderAction> = (
   action: SenderAction
 ): SenderState => {
   switch (action.type) {
-    case SUCCEED_NICE:
-      return state;
     case CHANGE_CONTENTS:
       return {
         ...state,
@@ -52,6 +52,14 @@ const SenderReducer: Reducer<SenderState, SenderAction> = (
         contents: "",
         to: "",
         coin: ""
+      };
+    case POST_ENE:
+      return {
+        ...state
+      };
+    case SUCCEED_POST:
+      return {
+        ...state
       };
     case GET_USERLIST:
       return {

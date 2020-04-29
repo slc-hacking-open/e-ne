@@ -1,6 +1,6 @@
 export interface User {
   // ユーザID
-  id: string;
+  userid: string;
   // 所属部署
   department: string;
   // ユーザ名
@@ -52,4 +52,9 @@ export interface APIPost {
   datetime: string;
   contents: string;
   empathyCount: 0;
+}
+
+export interface MyOption {
+  label: string;
+  value: string;
 }

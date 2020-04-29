@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 import "./sender.css";
-import Select from "react-select";
 import { ReactComponent as Heart } from "./heart.svg";
+import { MyOption } from "../services/models";
 
 export interface SenderProps {
   contents?: string;
@@ -11,9 +11,9 @@ export interface SenderProps {
   changeTo?: (to: string) => void;
   changeCoin?: (coin: string) => void;
   clear?: () => void;
-  sendPost?: (constents: string) => void;
+  sendEne?: (senderId: string, receiverId: string, contents: string) => void;
   getUserList?: () => void;
-  users?: [];
+  users?: MyOption[];
 }
 
 const Sender: FC<SenderProps> = ({
@@ -24,7 +24,7 @@ const Sender: FC<SenderProps> = ({
   changeTo = () => {},
   changeCoin = () => {},
   clear = () => {},
-  sendPost = () => {},
+  sendEne = () => {},
   getUserList = () => {},
   users = []
 }) => {
@@ -33,14 +33,24 @@ const Sender: FC<SenderProps> = ({
     // eslint-disable-next-line
   }, []);
 
+  const options = users.map(user => (
+    <option key={user.value} value={user.value}>
+      {user.label}
+    </option>
+  ));
+
   return (
     <div className="sender">
-      <Select
+      <select
         className="sender-to"
         name="to"
-        placeholder="宛先"
-        options={users}
-      />
+        value={to}
+        onChange={e => {
+          changeTo(e.target.value);
+        }}
+      >
+        {options}
+      </select>
       <input
         className="sender-coin"
         name="coin"
@@ -63,9 +73,10 @@ const Sender: FC<SenderProps> = ({
         className="sender-button"
         type="button"
         onClick={e => {
+          console.log(to);
           if (contents !== "" && to !== "") {
             clear();
-            sendPost(contents);
+            sendEne("111111", to, contents);
           }
         }}
       >

@@ -1,6 +1,6 @@
 {
   "css.validate": true,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "eslint.enable": true,
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
@@ -10,6 +10,6 @@
     "files.trimTrailingWhitespace": false
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": false
   }
 }

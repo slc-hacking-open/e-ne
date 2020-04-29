@@ -33,7 +33,7 @@ const mapDispatchToProps = (
   // eslint-disable-next-line
   dispatch: ThunkDispatch<any, any, any>
 ): DispatchProps => ({
-  getPosts: userId => dispatch(getPosts(userId))
+  getPosts: () => dispatch(getPosts())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
