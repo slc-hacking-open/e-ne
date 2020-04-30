@@ -1,7 +1,12 @@
 import { Reducer } from "redux";
 
 import { Post } from "../services/models";
-import { PostsAction, SUCCEED_POSTS } from "../actions/posts";
+import {
+  PostsAction,
+  SUCCEED_POSTS,
+  POST_ENE,
+  SUCCEED_POST
+} from "../actions/posts";
 
 export interface PostsState {
   pageNumber: number;
@@ -24,6 +29,15 @@ const postsReducer: Reducer<PostsState, PostsAction> = (
       return {
         ...state,
         ...action.payload.timeline
+      };
+    case POST_ENE:
+      return {
+        ...state
+      };
+    case SUCCEED_POST:
+      return {
+        ...state,
+        posts: [action.payload, ...state.posts]
       };
     default:
       return state;

@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 import "./sender.css";
 import { ReactComponent as Heart } from "./heart.svg";
-import { MyOption } from "../services/models";
+import { User } from "../services/models";
 
 export interface SenderProps {
   contents?: string;
@@ -13,7 +13,7 @@ export interface SenderProps {
   clear?: () => void;
   sendEne?: (senderId: string, receiverId: string, contents: string) => void;
   getUserList?: () => void;
-  users?: MyOption[];
+  users?: User[];
 }
 
 const Sender: FC<SenderProps> = ({
@@ -33,11 +33,19 @@ const Sender: FC<SenderProps> = ({
     // eslint-disable-next-line
   }, []);
 
-  const options = users.map(user => (
-    <option key={user.value} value={user.value}>
-      {user.label}
+  const op = [
+    <option key="" value="">
+      宛先
     </option>
-  ));
+  ];
+
+  const options = op.concat(
+    users.map(user => (
+      <option key={user.userid} value={user.userid}>
+        {user.name}
+      </option>
+    ))
+  );
 
   return (
     <div className="sender">
@@ -73,7 +81,6 @@ const Sender: FC<SenderProps> = ({
         className="sender-button"
         type="button"
         onClick={e => {
-          console.log(to);
           if (contents !== "" && to !== "") {
             clear();
             sendEne("111111", to, contents);

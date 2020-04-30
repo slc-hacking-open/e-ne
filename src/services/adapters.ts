@@ -1,4 +1,4 @@
-import { Timeline, APIPost, User, MyOption } from "./models";
+import { Timeline, APIPost, Post } from "./models";
 
 export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
   return {
@@ -6,7 +6,8 @@ export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
     pageSize: 1,
     posts: apiPosts.map(apiPost => {
       return {
-        id: apiPost.id,
+        department: apiPost.department.S,
+        id: apiPost.id.N,
         sender: {
           userid: "",
           department: "",
@@ -21,20 +22,36 @@ export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
           profile: "",
           imageurl: apiPost.reciever.imageurl.S
         },
-        contents: apiPost.contents,
-        datetime: apiPost.datetime,
-        empathyCount: apiPost.empathyCount
+        contents: apiPost.contents.S,
+        datetime: apiPost.datetime.S,
+        empathyCount: apiPost.empathyCount.N,
+        empathyUsers: apiPost.empathyUsers.L
       };
     })
   };
 };
 
-export const apiUsers2SelectUser = (apiUsers: User[]): MyOption[] => {
-  const array: any = [{ value: "", label: "" }];
-
-  apiUsers.map(apiUser =>
-    array.push({ value: apiUser.userid, label: apiUser.name })
-  );
-
-  return array;
+export const apiPost2Post = (apiPost: APIPost): Post => {
+  return {
+    department: apiPost.department.S,
+    id: apiPost.id.N,
+    sender: {
+      userid: "",
+      department: "",
+      name: apiPost.sender.name.S,
+      profile: "",
+      imageurl: apiPost.sender.imageurl.S
+    },
+    receiver: {
+      userid: "",
+      department: "",
+      name: apiPost.reciever.name.S,
+      profile: "",
+      imageurl: apiPost.reciever.imageurl.S
+    },
+    contents: apiPost.contents.S,
+    datetime: apiPost.datetime.S,
+    empathyCount: apiPost.empathyCount.N,
+    empathyUsers: apiPost.empathyUsers.L
+  };
 };

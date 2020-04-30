@@ -1,15 +1,15 @@
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
-import { MyOption } from "../services/models";
+import { User } from "../services/models";
 
 import {
   changeContents,
   changeTo,
   changeCoin,
   clear,
-  sendEne,
   getUsers
 } from "../actions/sender";
+import { sendEne } from "../actions/posts";
 import Sender from "../components/sender";
 import { AppState } from "../reducer";
 
@@ -17,7 +17,7 @@ interface StateProps {
   contents: string;
   to: string;
   coin: string;
-  users: MyOption[];
+  users: User[];
 }
 
 interface DispatchProps {

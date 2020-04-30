@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL_POSTS, TIMEOUT } from "./config";
-import { Timeline } from "./models";
-import { apiPosts2Timeline } from "./adapters";
+import { Timeline, Post } from "./models";
+import { apiPosts2Timeline, apiPost2Post } from "./adapters";
 
 const postsConfig = {
   baseURL: `${BASE_URL_POSTS}`,
@@ -37,7 +37,7 @@ export const postPost = async (
   senderId: string,
   receiverId: string,
   contents: string
-): Promise<boolean> => {
+): Promise<Post> => {
   const instance = axios.create(postsConfig);
   const response = await instance.post(
     ``,
@@ -53,13 +53,18 @@ export const postPost = async (
 
   switch (response.status) {
     case 200:
-      return true;
+      break;
     case 400:
     case 404:
       throw new Error("いいねの投稿が失敗しました");
     default:
       throw new Error("サーバーエラーです");
   }
+
+  const newPost: Post = apiPost2Post(response.data.data);
+  console.log(newPost);
+
+  return newPost;
 };
 
 // いいねボタン押下時

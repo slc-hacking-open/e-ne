@@ -1,7 +1,6 @@
 import axios from "axios";
 import { BASE_URL_USER, TIMEOUT } from "./config";
-import { User, MyOption } from "./models";
-import { apiUsers2SelectUser } from "./adapters";
+import { User } from "./models";
 
 const usersConfig = {
   baseURL: `${BASE_URL_USER}`,
@@ -27,7 +26,7 @@ export const getUserProfile = async (userId: string): Promise<User> => {
   return user;
 };
 
-export const getUserList = async (): Promise<MyOption[]> => {
+export const getUserList = async (): Promise<User[]> => {
   const instance = axios.create(usersConfig);
   const response = await instance.get(``);
 
@@ -41,7 +40,7 @@ export const getUserList = async (): Promise<MyOption[]> => {
       throw new Error("サーバーエラーです");
   }
 
-  const users: MyOption[] = apiUsers2SelectUser(response.data.data);
+  const users: User[] = response.data.data;
 
   return users;
 };
