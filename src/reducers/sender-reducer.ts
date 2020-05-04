@@ -5,7 +5,6 @@ import {
   CHANGE_CONTENTS,
   CHANGE_TO,
   CHANGE_COIN,
-  CLEAR,
   GET_USERLIST,
   SUCCEED_USERLIST
 } from "../actions/sender";
@@ -43,13 +42,6 @@ const SenderReducer: Reducer<SenderState, SenderAction> = (
       return {
         ...state,
         coin: action.payload.coin
-      };
-    case CLEAR:
-      return {
-        ...state,
-        contents: "",
-        to: "",
-        coin: ""
       };
     case GET_USERLIST:
       return {

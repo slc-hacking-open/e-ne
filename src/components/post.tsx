@@ -8,13 +8,13 @@ export interface PostProps {
     id?: string;
     name?: string;
     department?: string;
-    photoURL?: string;
+    imageurl?: string;
   };
   receiver?: {
     id?: string;
     name?: string;
     department?: string;
-    photoURL?: string;
+    imageurl?: string;
   };
   contents?: string;
   from?: string;
@@ -22,6 +22,7 @@ export interface PostProps {
   datetime?: string;
   empathyCount?: number;
   empathy?: (userId: string, postId: string) => void;
+  hasEmpathized?: boolean;
 }
 
 const Post: FC<PostProps> = ({
@@ -31,10 +32,13 @@ const Post: FC<PostProps> = ({
   contents = "",
   datetime = "",
   empathyCount = 0,
-  empathy = () => {}
+  empathy = () => {},
+  hasEmpathized = false
 }) => {
+  // 共感数はサーバーど非同期
+  // 画面上はローカルステートの数字を表示
   const [localEmpathyCount, setlocalEmpathyCount] = useState(empathyCount);
-  const [clickCount, setClickCount] = useState(0);
+  const [localEmpathized, setlocalEmpathized] = useState(hasEmpathized);
 
   return (
     <div className="post">
@@ -42,7 +46,7 @@ const Post: FC<PostProps> = ({
         <div className="post-thumbnail">
           <img
             className="post-thumbnail-img"
-            src="/human.png"
+            src={sender.imageurl}
             alt="いいねした人"
           />
           <p className="post-thumbnail-name">{sender.name}</p>
@@ -53,7 +57,7 @@ const Post: FC<PostProps> = ({
         <div className="post-thumbnail">
           <img
             className="post-thumbnail-img"
-            src="/human.png"
+            src={receiver.imageurl}
             alt="いいねされた人"
           />
           <p className="post-thumbnail-name">{receiver.name}</p>
@@ -68,34 +72,28 @@ const Post: FC<PostProps> = ({
             className="post-empathyButton"
             type="button"
             onClick={() => {
-              if (clickCount === 0) {
-                // １回だけクリック可能にする
-                // 共感数が即時同期的である必要はないので、ローカルステートを使う
-                // TODO: サーバから自分が対象に共感したことあるかをもらう
-                empathy("0001", id); // TODO: userId
-                setlocalEmpathyCount(localEmpathyCount + 1);
-                setClickCount(clickCount + 1);
+              empathy(id, "111111");
+              if (localEmpathized) {
+                setlocalEmpathyCount(localEmpathyCount - 1);
+                setlocalEmpathized(false);
               } else {
-                setClickCount(clickCount + 1);
+                setlocalEmpathyCount(localEmpathyCount + 1);
+                setlocalEmpathized(true);
               }
             }}
           >
             <Heart
               className={(() => {
-                if (clickCount === 0) {
-                  return "post-icon";
-                  // eslint-disable-next-line
-                } else if (clickCount === 1) {
+                if (localEmpathized) {
                   return "post-icon post-icon-clicked";
-                } else if (clickCount % 2 === 0) {
-                  return "post-icon post-icon-boo1";
+                  // eslint-disable-next-line
                 } else {
-                  return "post-icon post-icon-boo2";
+                  return "post-icon";
                 }
               })()}
             />
           </button>
-          <p className="post-empathyCount">{localEmpathyCount}</p>
+          <p className="post-empathyCount">{Number(localEmpathyCount)}</p>
         </div>
       </div>
     </div>

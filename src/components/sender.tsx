@@ -33,14 +33,15 @@ const Sender: FC<SenderProps> = ({
     // eslint-disable-next-line
   }, []);
 
+  // 宛先セレクトボックスの作成
   const op = [
     <option key="" value="">
       宛先
     </option>
   ];
-
+  const userlist = users.filter(u => u.userid !== "111111");
   const options = op.concat(
-    users.map(user => (
+    userlist.map(user => (
       <option key={user.userid} value={user.userid}>
         {user.name}
       </option>

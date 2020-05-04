@@ -7,7 +7,7 @@ export interface PostsProps {
   pageNumber?: number;
   pageSize?: number;
   posts?: PostProps[];
-  getPosts?: (userId: string) => void;
+  getPosts?: (department: string, userId: string) => void;
 }
 
 const Posts: FC<PostsProps> = ({
@@ -18,7 +18,8 @@ const Posts: FC<PostsProps> = ({
 }) => {
   useEffect(() => {
     // TODO: userId
-    getPosts("0001");
+    getPosts("SLC／生保ソリューション第２部", "111111");
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -34,6 +35,7 @@ const Posts: FC<PostsProps> = ({
               contents={post.contents}
               datetime={post.datetime}
               empathyCount={post.empathyCount}
+              hasEmpathized={post.hasEmpathized}
             />
           );
         })}

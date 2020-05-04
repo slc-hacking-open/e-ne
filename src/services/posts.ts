@@ -9,11 +9,15 @@ const postsConfig = {
 };
 
 // タイムライン取得
-export const getTimeline = async (department: string): Promise<Timeline> => {
+export const getTimeline = async (
+  department: string,
+  userid: string
+): Promise<Timeline> => {
   const instance = axios.create(postsConfig);
   const response = await instance.get(``, {
     params: {
-      department
+      department,
+      userid
     }
   });
 
@@ -62,36 +66,37 @@ export const postPost = async (
   }
 
   const newPost: Post = apiPost2Post(response.data.data);
-  console.log(newPost);
 
   return newPost;
 };
 
-// いいねボタン押下時
-export const pushNice = async (
-  senderId: string,
-  receiverId: string,
-  contents: string
+// 共感ボタン押下時
+export const pushEmpathy = async (
+  eneid: string,
+  eneuserid: string
 ): Promise<boolean> => {
-  // TODO: booleanでいいのか？？？
-  const body = {
-    senderId,
-    receiverId,
-    contents
-  };
   const instance = axios.create(postsConfig);
-  const response = await instance.post(``, body);
-  console.log(response);
+  const response = await instance.post(
+    ``,
+    `{
+    "data":{
+      "department":"SLC／生保ソリューション第２部",
+      "id":"${eneid}",
+      "userid":"${eneuserid}",
+      "empathy":"1"
+    }
+  }`
+  );
 
   if (response.status !== 200) {
     switch (response.status) {
       case 400:
       case 405:
-        throw new Error("いいねの投稿が完了していません");
+        throw new Error("共感に失敗しました");
       default:
         throw new Error("サーバーエラーです");
     }
   }
 
-  return true;
+  return response.data.data;
 };

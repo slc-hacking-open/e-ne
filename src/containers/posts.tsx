@@ -13,7 +13,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  getPosts: (userId: string) => void;
+  getPosts: (department: string, userId: string) => void;
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
@@ -24,7 +24,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
 
     return {
       ...post,
-      datetime: `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
+      datetime: `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`,
+      hasEmpathized: post.hasEmpathized
     };
   })
 });
@@ -33,7 +34,7 @@ const mapDispatchToProps = (
   // eslint-disable-next-line
   dispatch: ThunkDispatch<any, any, any>
 ): DispatchProps => ({
-  getPosts: () => dispatch(getPosts())
+  getPosts: (department, userId) => dispatch(getPosts(department, userId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

@@ -25,7 +25,7 @@ export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
         contents: apiPost.contents.S,
         datetime: apiPost.datetime.S,
         empathyCount: apiPost.empathyCount.N,
-        empathyUsers: apiPost.empathyUsers.L
+        hasEmpathized: apiPost.hasEmpathized
       };
     })
   };
@@ -52,6 +52,6 @@ export const apiPost2Post = (apiPost: APIPost): Post => {
     contents: apiPost.contents.S,
     datetime: apiPost.datetime.S,
     empathyCount: apiPost.empathyCount.N,
-    empathyUsers: apiPost.empathyUsers.L
+    hasEmpathized: apiPost.hasEmpathized
   };
 };

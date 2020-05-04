@@ -6,7 +6,6 @@ import {
   changeContents,
   changeTo,
   changeCoin,
-  clear,
   getUsers
 } from "../actions/sender";
 import { sendEne } from "../actions/posts";
@@ -24,7 +23,6 @@ interface DispatchProps {
   changeContents: (contents: string) => void;
   changeTo: (to: string) => void;
   changeCoin: (coin: string) => void;
-  clear: () => void;
   sendEne: (senderId: string, receiverId: string, contents: string) => void;
   getUserList: () => void;
 }
@@ -42,7 +40,6 @@ const mapDispatchToProps = (
   changeContents: (contents: string) => dispatch(changeContents(contents)),
   changeTo: (to: string) => dispatch(changeTo(to)),
   changeCoin: (coin: string) => dispatch(changeCoin(coin)),
-  clear: () => dispatch(clear()),
   sendEne: (senderId: string, receiverId: string, contents: string) =>
     dispatch(sendEne(senderId, receiverId, contents)),
   getUserList: () => dispatch(getUsers())

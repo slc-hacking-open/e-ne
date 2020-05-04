@@ -2,12 +2,10 @@ import { Dispatch } from "redux";
 import { Timeline, Post } from "../services/models";
 import { postPost, getTimeline } from "../services/posts";
 
-// async actions
+// タイムライン取得
 export const FETCHING_POSTS = "FETCHING_POSTS";
 export const SUCCEED_POSTS = "SUCCEED_POSTS";
 export const FAILED_POSTS = "FAILED_POSTS";
-export const POST_ENE = "POST_ENE";
-export const SUCCEED_POST = "SUCCEED_POST";
 
 export const fetchingPosts = () => ({
   type: FETCHING_POSTS as typeof FETCHING_POSTS
@@ -28,17 +26,21 @@ export const failedPosts = (error: Error) => ({
   error: true
 });
 
-export const getPosts = () => {
+export const getPosts = (department: string, userid: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(fetchingPosts());
-      const result = await getTimeline("SLC／生保ソリューション第２部");
+      const result = await getTimeline(department, userid);
       dispatch(succeedPosts(result));
     } catch (error) {
       dispatch(failedPosts(error));
     }
   };
 };
+
+// いいね投稿
+export const POST_ENE = "POST_ENE";
+export const SUCCEED_POST = "SUCCEED_POST";
 
 export const Ene = {
   start: () => ({

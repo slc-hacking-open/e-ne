@@ -18,7 +18,9 @@ const postReducer: Reducer<PostState, PostAction> = (
 ): PostState => {
   switch (action.type) {
     case SUCCEED_EMPATHY:
-      return state;
+      return {
+        ...state
+      };
     default:
       return state;
   }
