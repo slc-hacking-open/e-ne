@@ -16,7 +16,7 @@ export interface ProfileState {
 }
 
 export const initialState: ProfileState = {
-  user: { imageurl: "", name: "", profile: "", id: "", department: "" },
+  user: { imageurl: "", name: "", profile: "", userid: "", department: "" },
   isLoading: false
 };
 
@@ -28,7 +28,13 @@ const thunkProfileReducer: Reducer<ProfileState, ProfileAction> = (
     case PROFILE_START:
       return {
         ...state,
-        user: { imageurl: "", name: "", profile: "", id: "", department: "" },
+        user: {
+          imageurl: "",
+          name: "",
+          profile: "",
+          userid: "",
+          department: ""
+        },
         isLoading: true
       };
     case PROFILE_SUCCEED:

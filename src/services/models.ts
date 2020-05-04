@@ -1,6 +1,6 @@
 export interface User {
   // ユーザID
-  id: string;
+  userid: string;
   // 所属部署
   department: string;
   // ユーザ名
@@ -11,9 +11,9 @@ export interface User {
   imageurl: string;
 }
 
-// TODO: UserかPostに「誰がどのいいねに共感したか」を持たせないと連打できちゃう
-
 export interface Post {
+  // 所属部署
+  department: string;
   // いいねID
   id: string;
   // 送信者
@@ -26,6 +26,8 @@ export interface Post {
   datetime: string;
   // 共感された数
   empathyCount: number;
+  // ログインユーザーが共感してるか
+  hasEmpathized: boolean;
 }
 
 export interface Timeline {
@@ -35,4 +37,22 @@ export interface Timeline {
   pageSize: number;
   // 投稿リスト
   posts: Post[];
+}
+
+// APIが返してくるデータ
+export interface APIPost {
+  id: { N: string };
+  sender: {
+    name: { S: string };
+    imageurl: { S: string };
+  };
+  reciever: {
+    name: { S: string };
+    imageurl: { S: string };
+  };
+  department: { S: string };
+  datetime: { S: string };
+  contents: { S: string };
+  empathyCount: { N: number };
+  hasEmpathized: boolean;
 }

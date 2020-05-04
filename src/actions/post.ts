@@ -1,10 +1,7 @@
 import { Dispatch } from "redux";
 import { pushEmpathy } from "../services/posts";
 
-export const CLICK_EMPATHY = "CLICK_EMPATHY";
-export const ADD = "ADD";
-
-// async acitons
+// 共感
 // note: 共感ボタン押した時にローディングやエラーメッセージ出すのは
 // UX悪い気がするので、一旦succeedアクションしか作ってない
 export const SUCCEED_EMPATHY = "SUCCEED_EMPATHY";
@@ -19,10 +16,8 @@ export const succeedEmpathy = (result: boolean) => ({
 export const empathy = (userId: string, postId: string) => {
   return async (dispatch: Dispatch) => {
     try {
-      console.log("empathy");
       const result = await pushEmpathy(userId, postId);
       dispatch(succeedEmpathy(result));
-      console.log(result);
     } catch (error) {
       console.log("Server Error");
       console.log(error);
@@ -30,16 +25,4 @@ export const empathy = (userId: string, postId: string) => {
   };
 };
 
-// TODO: このアクションいらんと思う！
-export const add = (contents: string, from: string, to: string) => ({
-  type: ADD as typeof ADD,
-  payload: {
-    contents,
-    from,
-    to
-  }
-});
-
-export type PostAction =
-  | ReturnType<typeof succeedEmpathy>
-  | ReturnType<typeof add>;
+export type PostAction = ReturnType<typeof succeedEmpathy>;

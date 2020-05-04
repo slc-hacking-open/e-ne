@@ -25,3 +25,22 @@ export const getUserProfile = async (userId: string): Promise<User> => {
 
   return user;
 };
+
+export const getUserList = async (): Promise<User[]> => {
+  const instance = axios.create(usersConfig);
+  const response = await instance.get(``);
+
+  switch (response.status) {
+    case 200:
+      break;
+    case 400:
+    case 404:
+      throw new Error("ユーザ情報が取得できませんでした");
+    default:
+      throw new Error("サーバーエラーです");
+  }
+
+  const users: User[] = response.data.data;
+
+  return users;
+};

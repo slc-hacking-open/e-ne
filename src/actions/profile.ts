@@ -10,6 +10,7 @@ interface GetProfileResult {
   user: User;
 }
 
+// プロフィール取得
 export const PROFILE_START = "PROFILE_START";
 export const PROFILE_SUCCEED = "PROFILE_SUCCEED";
 export const PROFILE_FAILURE = "PROFILE_FAILURE";
