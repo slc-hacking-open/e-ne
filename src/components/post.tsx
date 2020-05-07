@@ -74,10 +74,10 @@ const Post: FC<PostProps> = ({
             onClick={() => {
               empathy(id, "111111");
               if (localEmpathized) {
-                setlocalEmpathyCount(localEmpathyCount - 1);
+                setlocalEmpathyCount(Number(localEmpathyCount) - 1);
                 setlocalEmpathized(false);
               } else {
-                setlocalEmpathyCount(localEmpathyCount + 1);
+                setlocalEmpathyCount(Number(localEmpathyCount) + 1);
                 setlocalEmpathized(true);
               }
             }}
