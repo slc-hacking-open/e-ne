@@ -83,8 +83,8 @@ const Sender: FC<SenderProps> = ({
         type="button"
         onClick={e => {
           if (contents !== "" && to !== "") {
-            clear();
             sendEne("111111", to, contents);
+            clear();
           }
         }}
       >

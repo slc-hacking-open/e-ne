@@ -5,6 +5,7 @@ import { User } from "../services/models";
 export const CHANGE_CONTENTS = "CHANGE_CONTENTS";
 export const CHANGE_TO = "CHANGE_TO";
 export const CHANGE_COIN = "CHANGE_COIN";
+export const CLEAR = "CLEAR";
 export const GET_USERLIST = "GET_USERLIST";
 export const SUCCEED_USERLIST = "SUCCEED_USERLIST";
 
@@ -27,6 +28,10 @@ export const changeCoin = (coin: string) => ({
   payload: {
     coin
   }
+});
+
+export const clear = () => ({
+  type: CLEAR as typeof CLEAR
 });
 
 export const UserList = {
@@ -57,5 +62,6 @@ export type SenderAction =
   | ReturnType<typeof changeContents>
   | ReturnType<typeof changeTo>
   | ReturnType<typeof changeCoin>
+  | ReturnType<typeof clear>
   | ReturnType<typeof UserList.start>
   | ReturnType<typeof UserList.succeed>;

@@ -1,0 +1,238 @@
+swagger: '2.0'
+info:
+  description: |
+    eねカードアプリのAPIドキュメント
+  version: 1.0.0
+  title: e-ne API
+# termsOfService: http://swagger.io/terms/
+# host: petstore.swagger.io
+# basePath: /v2
+externalDocs:
+  description: GitHub
+  url: https://github.com/slc-hacking-open/e-ne
+tags:
+- name: users
+  description: ユーザの登録と取得
+- name: posts
+  description: eねの投稿と取得
+# schemes:
+# - http
+paths:
+  /enedbfunc/{userId}:
+    get:
+      tags:
+      - users
+      summary: 取得
+      description: IDに紐づくユーザ情報を取得。ID省略時は全データ取得。
+      operationId: getUser
+      parameters:
+      - name: userId
+        in: path
+        description: 取得したいユーザID
+        required: true
+        type: string
+      responses:
+        200:
+          description: 成功
+          schema:
+            $ref: '#/definitions/User'
+        400:
+          description: IDの形式異常
+        404:
+          description: 該当ユーザなし
+
+  /posts:
+    post:
+      tags:
+      - posts
+      summary: 投稿
+      description: 新規投稿
+      operationId: newPost
+      parameters:
+      - in: body
+        name: body
+        description: 投稿内容。共感ボタン押下時はempathyに1をセットする。
+        required: true
+        schema:
+          $ref: '#/definitions/NewPost'
+      responses:
+        200:
+          description: 登録された投稿
+          schema:
+            $ref: '#/definitions/Post'
+        405:
+          description: パラメータ不正
+  /posts/{postId}/empathy:
+    post:
+      tags:
+      - posts
+      summary: 共感
+      description: IDで指定した投稿の`empathy`を1加算する
+      operationId: postEmpathy
+      parameters:
+      - name: postId
+        in: path
+        description: 共感したい投稿ID
+        required: true
+        type: string
+      - name: body
+        in: body
+        description: 共感した人
+        required: true
+        schema:
+          type: object
+          properties:
+            senderId:
+              type: string
+              example: "0003"
+      responses:
+        200:
+          description: 成功
+        400:
+          description: IDの形式異常
+        404:
+          description: 該当投稿なし
+  /posts/{userId}/{pageNumber}:
+    get:
+      tags:
+      - posts
+      summary: タイムライン取得
+      description: タイムラインを新規投稿された20件ごとに取得
+      operationId: getPosts
+      parameters:
+      - name: userId
+        in: path
+        description: 取得したいユーザID
+        required: true
+        type: string
+      - name: pageNumber
+        in: path
+        description: ページネーションのページ番号
+        required: true
+        type: integer
+        format: int32
+        minimum: 1
+      responses:
+        200:
+          description: 成功
+          schema:
+            type: object
+            properties:
+              pageNumber:
+                type: integer
+                format: int32
+                minimum: 1
+                example: 9
+              pageSize:
+                type: integer
+                format: int32
+                minimum: 1
+                example: 100
+              posts:
+                type: array
+                items:
+                  $ref: '#/definitions/Post'
+        400:
+          description: パラメータの異常
+        404:
+          description: 該当ユーザあるいは該当ページなし
+
+definitions:
+  User:
+    type: object
+    required:
+      - userid
+      - department
+      - name
+      - profile
+      - imageurl
+    properties:
+      userid:
+        type: string
+        example: "111111"
+      department:
+        type: string
+        example: "所属部署"
+      name:
+        type: string
+        example: "ユーザ名"
+      profile:
+        type: string
+        example: "プロフィール文"
+      imageurl:
+        type: string
+        example: "https://*/*.png"
+  Post:
+    type: object
+    required:
+      - id
+      - sender
+      - receiver
+      - department
+      - datetime
+      - contents
+      - empathyCount
+      - hasEmpathized
+    properties:
+      id:
+        type: string
+        example: "111111"
+      sender:
+        $ref: '#/definitions/User'
+      receiver:
+        $ref: '#/definitions/User'
+      department:
+        type: string
+        example: "所属部署"
+      datetime:
+        type: string
+        format: date-time
+      contents:
+        type: string
+        example: "いいね！"
+      empathyCount:
+        type: integer
+        format: int32
+        minimum: 0
+        example: 9
+      hasEmpathized:
+        type: boolean
+        example: true
+  NewPost:
+    type: object
+    required:
+      - department
+      - sender
+      - receiver
+      - contents
+      - empathy
+    properties:
+      department:
+        type: string
+        example: "所属部署"
+      sender:
+        type: string
+        example: "111111"
+      receiver:
+        type: string
+        example: "222222"
+      contents:
+        type: string
+        example: "いいねぇ"
+      empathy:
+        type: string
+        example: "1"
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /shu000/e-ne/1.0.0
+schemes:
+  - https
+  - http
+
+
+
+
+
+
+
+
