@@ -1,8 +1,8 @@
-import React, { FC } from "react";
-import "./loading.css";
+import React, { FC } from 'react'
+import './loading.css'
 
 export interface LoadingProps {
-  isLoading?: boolean;
+  isLoading?: boolean
 }
 
 const Loading: FC<LoadingProps> = ({ isLoading = false }) => (
@@ -13,6 +13,6 @@ const Loading: FC<LoadingProps> = ({ isLoading = false }) => (
       <span />
     )}
   </div>
-);
+)
 
-export default Loading;
+export default Loading

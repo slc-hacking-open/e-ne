@@ -1,40 +1,40 @@
-import { connect } from "react-redux";
-import { ThunkDispatch } from "redux-thunk";
+import { connect } from 'react-redux'
+import { ThunkDispatch } from 'redux-thunk'
 
-import Posts from "../components/posts";
-import { PostProps } from "../components/post";
-import { getPosts } from "../actions/posts";
-import { AppState } from "../reducer";
+import Posts from '../components/posts'
+import { PostProps } from '../components/post'
+import { getPosts } from '../actions/posts'
+import { AppState } from '../reducer'
 
 interface StateProps {
-  pageNumber: number;
-  pageSize: number;
-  posts: PostProps[];
+  pageNumber: number
+  pageSize: number
+  posts: PostProps[]
 }
 
 interface DispatchProps {
-  getPosts: (department: string, userId: string) => void;
+  getPosts: (department: string, userId: string) => void
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
   ...state.posts,
-  posts: state.posts.posts.map(post => {
+  posts: state.posts.posts.map((post) => {
     // ISO 8601形式の日付を`年月日`に変換する
-    const d = new Date(post.datetime);
+    const d = new Date(post.datetime)
 
     return {
       ...post,
       datetime: `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`,
-      hasEmpathized: post.hasEmpathized
-    };
-  })
-});
+      hasEmpathized: post.hasEmpathized,
+    }
+  }),
+})
 
 const mapDispatchToProps = (
   // eslint-disable-next-line
   dispatch: ThunkDispatch<any, any, any>
 ): DispatchProps => ({
-  getPosts: (department, userId) => dispatch(getPosts(department, userId))
-});
+  getPosts: (department, userId) => dispatch(getPosts(department, userId)),
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Posts);
+export default connect(mapStateToProps, mapDispatchToProps)(Posts)

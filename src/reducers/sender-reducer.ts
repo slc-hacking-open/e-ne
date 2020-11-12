@@ -1,5 +1,5 @@
-import { Reducer } from "redux";
-import { User } from "../services/models";
+import { Reducer } from 'redux'
+import { User } from '../services/models'
 import {
   SenderAction,
   CHANGE_CONTENTS,
@@ -7,22 +7,22 @@ import {
   CHANGE_COIN,
   CLEAR,
   GET_USERLIST,
-  SUCCEED_USERLIST
-} from "../actions/sender";
+  SUCCEED_USERLIST,
+} from '../actions/sender'
 
 export interface SenderState {
-  contents: string;
-  to: string;
-  coin: string;
-  users: User[];
+  contents: string
+  to: string
+  coin: string
+  users: User[]
 }
 
 export const initialState: SenderState = {
-  contents: "",
-  to: "",
-  coin: "",
-  users: []
-};
+  contents: '',
+  to: '',
+  coin: '',
+  users: [],
+}
 
 const SenderReducer: Reducer<SenderState, SenderAction> = (
   state: SenderState = initialState,
@@ -32,39 +32,39 @@ const SenderReducer: Reducer<SenderState, SenderAction> = (
     case CHANGE_CONTENTS:
       return {
         ...state,
-        contents: action.payload.contents
-      };
+        contents: action.payload.contents,
+      }
     case CHANGE_TO:
       return {
         ...state,
-        to: action.payload.to
-      };
+        to: action.payload.to,
+      }
     case CHANGE_COIN:
       return {
         ...state,
-        coin: action.payload.coin
-      };
+        coin: action.payload.coin,
+      }
     case CLEAR:
       return {
         ...state,
-        contents: "",
-        to: "",
-        coin: ""
-      };
+        contents: '',
+        to: '',
+        coin: '',
+      }
     case GET_USERLIST:
       return {
         ...state,
-        users: []
-      };
+        users: [],
+      }
     case SUCCEED_USERLIST:
       return {
         ...state,
-        users: action.payload
-      };
+        users: action.payload,
+      }
     default: {
-      return state;
+      return state
     }
   }
-};
+}
 
-export default SenderReducer;
+export default SenderReducer

@@ -1,12 +1,12 @@
-import React, { FC } from "react";
+import React, { FC } from 'react'
 
-import { User } from "../services/models";
-import "./profile.css";
+import { User } from '../services/models'
+import './profile.css'
 
 export interface ProfileProps {
-  user: User;
-  isLoading?: boolean;
-  upload?: () => void;
+  user: User
+  isLoading?: boolean
+  upload?: () => void
 }
 
 const DispProfile: FC<ProfileProps> = ({ user = {} }) => (
@@ -22,6 +22,6 @@ const DispProfile: FC<ProfileProps> = ({ user = {} }) => (
     <p className="profile-department">{user.department}</p>
     <p className="profile-profile">{user.profile}</p>
   </div>
-);
+)
 
-export default DispProfile;
+export default DispProfile

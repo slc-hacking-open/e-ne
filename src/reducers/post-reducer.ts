@@ -1,16 +1,16 @@
-import { Reducer } from "redux";
-import { PostAction, SUCCEED_EMPATHY } from "../actions/post";
-import { PostProps } from "../components/post";
+import { Reducer } from 'redux'
+import { PostAction, SUCCEED_EMPATHY } from '../actions/post'
+import { PostProps } from '../components/post'
 
 export interface PostState {
-  noStateNow: number;
-  posts: Array<PostProps>;
+  noStateNow: number
+  posts: Array<PostProps>
 }
 
 const initialState: PostState = {
   noStateNow: 0,
-  posts: []
-};
+  posts: [],
+}
 
 const postReducer: Reducer<PostState, PostAction> = (
   state: PostState = initialState,
@@ -19,11 +19,11 @@ const postReducer: Reducer<PostState, PostAction> = (
   switch (action.type) {
     case SUCCEED_EMPATHY:
       return {
-        ...state
-      };
+        ...state,
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default postReducer;
+export default postReducer

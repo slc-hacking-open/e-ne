@@ -1,18 +1,18 @@
-import { Reducer } from "redux";
+import { Reducer } from 'redux'
 import {
   PostsAction,
   FETCHING_POSTS,
   SUCCEED_POSTS,
-  FAILED_POSTS
-} from "../actions/posts";
+  FAILED_POSTS,
+} from '../actions/posts'
 
 export interface LoadingState {
-  loadingCount: number;
+  loadingCount: number
 }
 
 export const initialState: LoadingState = {
-  loadingCount: 0
-};
+  loadingCount: 0,
+}
 
 const LoadingReducer: Reducer<LoadingState, PostsAction> = (
   state: LoadingState = initialState,
@@ -22,19 +22,19 @@ const LoadingReducer: Reducer<LoadingState, PostsAction> = (
     case FETCHING_POSTS:
       return {
         ...state,
-        loadingCount: state.loadingCount + 1
-      };
+        loadingCount: state.loadingCount + 1,
+      }
     case SUCCEED_POSTS:
     case FAILED_POSTS:
       return {
         ...state,
         loadingCount:
-          state.loadingCount > 0 ? state.loadingCount - 1 : state.loadingCount
-      };
+          state.loadingCount > 0 ? state.loadingCount - 1 : state.loadingCount,
+      }
     default: {
-      return state;
+      return state
     }
   }
-};
+}
 
-export default LoadingReducer;
+export default LoadingReducer

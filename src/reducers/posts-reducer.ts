@@ -1,24 +1,24 @@
-import { Reducer } from "redux";
+import { Reducer } from 'redux'
 
-import { Post } from "../services/models";
+import { Post } from '../services/models'
 import {
   PostsAction,
   SUCCEED_POSTS,
   POST_ENE,
-  SUCCEED_POST
-} from "../actions/posts";
+  SUCCEED_POST,
+} from '../actions/posts'
 
 export interface PostsState {
-  pageNumber: number;
-  pageSize: number;
-  posts: Post[];
+  pageNumber: number
+  pageSize: number
+  posts: Post[]
 }
 
 export const initialState: PostsState = {
   pageNumber: 1,
   pageSize: 1,
-  posts: []
-};
+  posts: [],
+}
 
 const postsReducer: Reducer<PostsState, PostsAction> = (
   state: PostsState = initialState,
@@ -28,20 +28,20 @@ const postsReducer: Reducer<PostsState, PostsAction> = (
     case SUCCEED_POSTS:
       return {
         ...state,
-        ...action.payload.timeline
-      };
+        ...action.payload.timeline,
+      }
     case POST_ENE:
       return {
-        ...state
-      };
+        ...state,
+      }
     case SUCCEED_POST:
       return {
         ...state,
-        posts: [action.payload, ...state.posts]
-      };
+        posts: [action.payload, ...state.posts],
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default postsReducer;
+export default postsReducer

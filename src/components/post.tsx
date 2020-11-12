@@ -1,44 +1,44 @@
-import React, { FC, useState } from "react";
-import "./post.css";
-import { ReactComponent as Heart } from "./heart.svg";
+import React, { FC, useState } from 'react'
+import './post.css'
+import { ReactComponent as Heart } from './heart.svg'
 
 export interface PostProps {
-  id?: string;
+  id?: string
   sender?: {
-    id?: string;
-    name?: string;
-    department?: string;
-    imageurl?: string;
-  };
+    id?: string
+    name?: string
+    department?: string
+    imageurl?: string
+  }
   receiver?: {
-    id?: string;
-    name?: string;
-    department?: string;
-    imageurl?: string;
-  };
-  contents?: string;
-  from?: string;
-  to?: string;
-  datetime?: string;
-  empathyCount?: number;
-  empathy?: (userId: string, postId: string) => void;
-  hasEmpathized?: boolean;
+    id?: string
+    name?: string
+    department?: string
+    imageurl?: string
+  }
+  contents?: string
+  from?: string
+  to?: string
+  datetime?: string
+  empathyCount?: number
+  empathy?: (userId: string, postId: string) => void
+  hasEmpathized?: boolean
 }
 
 const Post: FC<PostProps> = ({
-  id = "0",
-  sender = { name: "" },
-  receiver = { name: "" },
-  contents = "",
-  datetime = "",
+  id = '0',
+  sender = { name: '' },
+  receiver = { name: '' },
+  contents = '',
+  datetime = '',
   empathyCount = 0,
   empathy = () => {},
-  hasEmpathized = false
+  hasEmpathized = false,
 }) => {
   // 共感数はサーバーど非同期
   // 画面上はローカルステートの数字を表示
-  const [localEmpathyCount, setlocalEmpathyCount] = useState(empathyCount);
-  const [localEmpathized, setlocalEmpathized] = useState(hasEmpathized);
+  const [localEmpathyCount, setlocalEmpathyCount] = useState(empathyCount)
+  const [localEmpathized, setlocalEmpathized] = useState(hasEmpathized)
 
   return (
     <div className="post">
@@ -72,23 +72,23 @@ const Post: FC<PostProps> = ({
             className="post-empathyButton"
             type="button"
             onClick={() => {
-              empathy(id, "111111");
+              empathy(id, '111111')
               if (localEmpathized) {
-                setlocalEmpathyCount(Number(localEmpathyCount) - 1);
-                setlocalEmpathized(false);
+                setlocalEmpathyCount(Number(localEmpathyCount) - 1)
+                setlocalEmpathized(false)
               } else {
-                setlocalEmpathyCount(Number(localEmpathyCount) + 1);
-                setlocalEmpathized(true);
+                setlocalEmpathyCount(Number(localEmpathyCount) + 1)
+                setlocalEmpathized(true)
               }
             }}
           >
             <Heart
               className={(() => {
                 if (localEmpathized) {
-                  return "post-icon post-icon-clicked";
+                  return 'post-icon post-icon-clicked'
                   // eslint-disable-next-line
                 } else {
-                  return "post-icon";
+                  return 'post-icon'
                 }
               })()}
             />
@@ -97,7 +97,7 @@ const Post: FC<PostProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Post;
+export default Post
