@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux'
-import { pushEmpathy } from '../services/posts'
+import { pushEmpathy } from '../../services/posts'
 
 // 共感
 // note: 共感ボタン押した時にローディングやエラーメッセージ出すのは

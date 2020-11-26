@@ -6,10 +6,9 @@ import './profile.css'
 export interface ProfileProps {
   user: User
   isLoading?: boolean
-  upload?: () => void
 }
 
-const DispProfile: FC<ProfileProps> = ({ user = {} }) => (
+const DispProfile: FC<ProfileProps> = ({ user }) => (
   <div className="profile">
     <div className="profile-imageFrame">
       <img

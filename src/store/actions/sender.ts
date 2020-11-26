@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
-import { getUserList } from '../services/users'
-import { User } from '../services/models'
+import { getUserList } from '../../services/users'
+import { User } from '../../services/models'
 
 export const CHANGE_CONTENTS = 'CHANGE_CONTENTS'
 export const CHANGE_TO = 'CHANGE_TO'

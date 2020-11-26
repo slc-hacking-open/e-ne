@@ -2,9 +2,9 @@ import { connect } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 
 import Post from '../components/post'
-import { PostAction, empathy } from '../actions/post'
+import { PostAction, empathy } from '../store/actions/post'
 
-import { AppState } from '../reducer'
+import { AppState } from '../store/store'
 
 interface DispatchProps {
   empathy: (userId: string, postId: string) => void

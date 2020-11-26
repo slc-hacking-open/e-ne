@@ -8,10 +8,10 @@ import {
   changeCoin,
   clear,
   getUsers,
-} from '../actions/sender'
-import { sendEne } from '../actions/posts'
+} from '../store/actions/sender'
+import { sendEne } from '../store/actions/posts'
 import Sender from '../components/sender'
-import { AppState } from '../reducer'
+import { AppState } from '../store/store'
 
 interface StateProps {
   contents: string

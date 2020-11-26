@@ -3,8 +3,8 @@ import { ThunkDispatch } from 'redux-thunk'
 
 import Posts from '../components/posts'
 import { PostProps } from '../components/post'
-import { getPosts } from '../actions/posts'
-import { AppState } from '../reducer'
+import { getPosts } from '../store/actions/posts'
+import { AppState } from '../store/store'
 
 interface StateProps {
   pageNumber: number

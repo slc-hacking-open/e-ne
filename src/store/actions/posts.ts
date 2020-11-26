@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
-import { Timeline, Post } from '../services/models'
-import { postPost, getTimeline } from '../services/posts'
+import { Timeline, Post } from '../../services/models'
+import { postPost, getTimeline } from '../../services/posts'
 
 // タイムライン取得
 export const FETCHING_POSTS = 'FETCHING_POSTS'

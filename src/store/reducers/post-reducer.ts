@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 import { PostAction, SUCCEED_EMPATHY } from '../actions/post'
-import { PostProps } from '../components/post'
+import { PostProps } from '../../components/post'
 
 export interface PostState {
   noStateNow: number

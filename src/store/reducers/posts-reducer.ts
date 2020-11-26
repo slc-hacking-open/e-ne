@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 
-import { Post } from '../services/models'
+import { Post } from '../../services/models'
 import {
   PostsAction,
   SUCCEED_POSTS,

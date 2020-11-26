@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
+import { AppState } from '../store/store'
 import Message from '../components/message'
-import { AppState } from '../reducer'
 
 interface StateProps {
   error: boolean

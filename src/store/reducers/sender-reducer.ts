@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { User } from '../services/models'
+import { User } from '../../services/models'
 import {
   SenderAction,
   CHANGE_CONTENTS,

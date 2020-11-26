@@ -7,7 +7,7 @@ import {
   PROFILE_SUCCEED,
   ProfileAction,
 } from '../actions/profile'
-import { User } from '../services/models'
+import { User } from '../../services/models'
 
 export interface ProfileState {
   user: User

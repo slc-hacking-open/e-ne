@@ -1,37 +1,18 @@
 import React, { FC, useEffect } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch } from 'redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import DispProfile, { ProfileProps } from '../components/profile'
-import { User } from '../services/models'
-import { AppState } from '../reducer'
-import { getProfile } from '../actions/profile'
-
-interface StateProps {
-  user: User
-  isLoading?: boolean
-}
+import { AppState } from '../store/store'
+import { getProfile } from '../store/actions/profile'
 
 interface DispatchProps {
   getProfileStart: (userid: string) => void
 }
 
-type EnhancedProfileProps = ProfileProps & StateProps & DispatchProps
+type EnhancedProfileProps = ProfileProps & DispatchProps
 
-const mapStateToProps = (state: AppState): StateProps => ({
-  user: state.profile.user,
-  isLoading: state.profile.isLoading,
-})
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
-  bindActionCreators(
-    {
-      getProfileStart: (userid: string) => getProfile(userid),
-    },
-    dispatch
-  )
-
-const ProfileContainer: FC<EnhancedProfileProps> = ({
+export const Profile: FC<EnhancedProfileProps> = ({
   user,
   isLoading,
   getProfileStart,
@@ -40,10 +21,20 @@ const ProfileContainer: FC<EnhancedProfileProps> = ({
 
   useEffect(() => {
     getProfileStart(userid)
-    // eslint-disable-next-line
   }, [])
 
   return <DispProfile user={user} isLoading={isLoading} />
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer)
+const ProfileContainer: FC = () => {
+  const profile = useSelector((state: AppState) => state.profile)
+  const dispatch = useDispatch()
+
+  return Profile({
+    user: profile.user,
+    isLoading: profile.isLoading,
+    getProfileStart: bindActionCreators(getProfile, dispatch),
+  })
+}
+
+export default ProfileContainer
