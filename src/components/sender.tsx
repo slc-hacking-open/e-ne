@@ -30,7 +30,6 @@ const Sender: FC<SenderProps> = ({
 }) => {
   useEffect(() => {
     getUserList()
-    // eslint-disable-next-line
   }, [])
 
   // 宛先セレクトボックスの作成
@@ -81,7 +80,7 @@ const Sender: FC<SenderProps> = ({
       <button
         className="sender-button"
         type="button"
-        onClick={(e) => {
+        onClick={() => {
           if (contents !== '' && to !== '') {
             sendEne('111111', to, contents)
             clear()

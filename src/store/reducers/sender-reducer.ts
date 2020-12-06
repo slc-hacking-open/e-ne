@@ -1,13 +1,14 @@
 import { Reducer } from 'redux'
 import { User } from '../../services/models'
 import {
+  USERLIST_FAILURE,
+  USERLIST_START,
+  USERLIST_SUCCEED,
   SenderAction,
   CHANGE_CONTENTS,
   CHANGE_TO,
   CHANGE_COIN,
   CLEAR,
-  GET_USERLIST,
-  SUCCEED_USERLIST,
 } from '../actions/sender'
 
 export interface SenderState {
@@ -51,15 +52,20 @@ const SenderReducer: Reducer<SenderState, SenderAction> = (
         to: '',
         coin: '',
       }
-    case GET_USERLIST:
+    case USERLIST_START:
       return {
         ...state,
         users: [],
       }
-    case SUCCEED_USERLIST:
+    case USERLIST_SUCCEED:
       return {
         ...state,
         users: action.payload,
+      }
+    case USERLIST_FAILURE:
+      return {
+        ...state,
+        users: [],
       }
     default: {
       return state

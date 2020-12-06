@@ -6,62 +6,109 @@ export const CHANGE_CONTENTS = 'CHANGE_CONTENTS'
 export const CHANGE_TO = 'CHANGE_TO'
 export const CHANGE_COIN = 'CHANGE_COIN'
 export const CLEAR = 'CLEAR'
-export const GET_USERLIST = 'GET_USERLIST'
-export const SUCCEED_USERLIST = 'SUCCEED_USERLIST'
+export const USERLIST_START = 'USERLIST_START'
+export const USERLIST_SUCCEED = 'USERLIST_SUCCEED'
+export const USERLIST_FAILURE = 'USERLIST_FAILURE'
 
-export const changeContents = (contents: string) => ({
-  type: CHANGE_CONTENTS as typeof CHANGE_CONTENTS,
+type ChangeContents = {
+  type: typeof CHANGE_CONTENTS
   payload: {
-    contents,
-  },
-})
+    contents: string
+  }
+}
 
-export const changeTo = (to: string) => ({
-  type: CHANGE_TO as typeof CHANGE_TO,
+type ChangeTo = {
+  type: typeof CHANGE_TO
   payload: {
-    to,
-  },
-})
+    to: string
+  }
+}
 
-export const changeCoin = (coin: string) => ({
-  type: CHANGE_COIN as typeof CHANGE_COIN,
+type ChangeCoin = {
+  type: typeof CHANGE_COIN
   payload: {
-    coin,
-  },
-})
+    coin: string
+  }
+}
 
-export const clear = () => ({
-  type: CLEAR as typeof CLEAR,
-})
+type Clear = {
+  type: typeof CLEAR
+}
 
-export const UserList = {
-  start: () => ({
-    type: GET_USERLIST as typeof GET_USERLIST,
+type UserListStart = {
+  type: typeof USERLIST_START
+}
+
+type UserListSucceed = {
+  type: typeof USERLIST_SUCCEED
+  payload: User[]
+}
+
+type UserListFail = {
+  type: typeof USERLIST_FAILURE
+  payload: { message: string }
+  error: true
+}
+
+export const Sender = {
+  changeContents: (contents: string): ChangeContents => ({
+    type: CHANGE_CONTENTS as typeof CHANGE_CONTENTS,
+    payload: {
+      contents,
+    },
   }),
-
-  succeed: (result: User[]) => ({
-    type: SUCCEED_USERLIST as typeof SUCCEED_USERLIST,
-    payload: result,
+  changeTo: (to: string): ChangeTo => ({
+    type: CHANGE_TO as typeof CHANGE_TO,
+    payload: {
+      to,
+    },
+  }),
+  changeCoin: (coin: string): ChangeCoin => ({
+    type: CHANGE_COIN as typeof CHANGE_COIN,
+    payload: {
+      coin,
+    },
+  }),
+  clear: (): Clear => ({
+    type: CLEAR as typeof CLEAR,
   }),
 }
 
+export const UserList = {
+  start: (): UserListStart => ({
+    type: USERLIST_START,
+  }),
+
+  succeed: (result: User[]): UserListSucceed => ({
+    type: USERLIST_SUCCEED,
+    payload: result,
+  }),
+
+  fail: (message: string): UserListFail => ({
+    type: USERLIST_FAILURE,
+    payload: { message },
+    error: true,
+  }),
+}
+
+export type SenderAction =
+  | ChangeContents
+  | ChangeTo
+  | ChangeCoin
+  | Clear
+  | UserListStart
+  | UserListSucceed
+  | UserListFail
+
 export const getUsers = () => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch): Promise<void> => {
     try {
       dispatch(UserList.start())
       const users = await getUserList()
       const result: User[] = users
       dispatch(UserList.succeed(result))
     } catch (error) {
-      console.log('Server Error.')
+      dispatch(UserList.fail('Server Error.'))
     }
   }
 }
-
-export type SenderAction =
-  | ReturnType<typeof changeContents>
-  | ReturnType<typeof changeTo>
-  | ReturnType<typeof changeCoin>
-  | ReturnType<typeof clear>
-  | ReturnType<typeof UserList.start>
-  | ReturnType<typeof UserList.succeed>

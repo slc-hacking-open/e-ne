@@ -1,5 +1,4 @@
-import { AnyAction, Dispatch } from 'redux'
-import { ThunkDispatch } from 'redux-thunk'
+import { Dispatch } from 'redux'
 import { User } from '../../services/models'
 import { getUserProfile } from '../../services/users'
 
@@ -55,7 +54,7 @@ export const getProfile = (
 ): ((dispatch: Dispatch) => Promise<void>) => {
   const param: GetProfileParam = { userid }
 
-  return async (dispatch: ThunkDispatch<ProfileAction, void, AnyAction>) => {
+  return async (dispatch: Dispatch) => {
     try {
       dispatch(Profile.start(param))
       const user = await getUserProfile(userid)

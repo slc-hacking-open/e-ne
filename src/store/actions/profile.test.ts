@@ -12,7 +12,7 @@ import {
 import * as getUserProfile from '../../services/users'
 import { User } from '../../services/models'
 
-const testUserData = {
+const testUserData: User = {
   userid: 'user01',
   department: 'ソリューション部',
   name: '生保花子',
@@ -66,7 +66,7 @@ describe('非同期アクション（プロフィール取得）のテスト', (
     const store = mockStore()
     const spy = jest
       .spyOn(getUserProfile, 'getUserProfile')
-      .mockReturnValueOnce(Promise.resolve(result.user) as Promise<User>)
+      .mockReturnValueOnce(Promise.resolve(result.user))
 
     return store.dispatch(getProfile(param.userid)).then(() => {
       expect(spy).toHaveBeenCalledTimes(1)

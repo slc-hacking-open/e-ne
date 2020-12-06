@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
 import DispProfile, { ProfileProps } from '../components/profile'
 import { AppState } from '../store/store'
 import { getProfile } from '../store/actions/profile'
