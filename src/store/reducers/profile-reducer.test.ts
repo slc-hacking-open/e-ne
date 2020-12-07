@@ -1,7 +1,7 @@
 import thunkProfileReducer, { initialState } from './profile-reducer'
 import { ProfileAction } from '../actions/profile'
 
-describe('プロフィールのレデューサーのテスト', () => {
+describe('profileのレデューサーのテスト', () => {
   const testUserData = {
     userid: 'user01',
     department: 'ソリューション部',

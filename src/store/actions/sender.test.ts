@@ -18,7 +18,7 @@ import {
 import { User } from '../../services/models'
 import * as getUserList from '../../services/users'
 
-describe('送信のアクションのテスト', () => {
+describe('senderのアクションのテスト', () => {
   it('内容変更時のアクション', () => {
     const contents = 'contents'
     const expectedAction = {

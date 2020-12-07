@@ -19,7 +19,7 @@ const testUserData: User = {
   profile: '趣味は園芸',
   imageurl: 'url',
 }
-describe('プロフィールのアクションのテスト', () => {
+describe('profileのアクションのテスト', () => {
   const param = { userid: 'user01' }
   it('プロフィール取得開始のアクション', () => {
     const expectedAction = {

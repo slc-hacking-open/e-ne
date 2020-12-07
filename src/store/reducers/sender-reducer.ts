@@ -25,7 +25,7 @@ export const initialState: SenderState = {
   users: [],
 }
 
-const SenderReducer: Reducer<SenderState, SenderAction> = (
+const senderReducer: Reducer<SenderState, SenderAction> = (
   state: SenderState = initialState,
   action: SenderAction
 ): SenderState => {
@@ -73,4 +73,4 @@ const SenderReducer: Reducer<SenderState, SenderAction> = (
   }
 }
 
-export default SenderReducer
+export default senderReducer

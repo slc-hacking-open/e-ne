@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { PostAction, SUCCEED_EMPATHY } from '../actions/post'
+import { PostAction, EMPATHY_SUCCEED } from '../actions/post'
 import { PostProps } from '../../components/post'
 
 export interface PostState {
@@ -7,7 +7,7 @@ export interface PostState {
   posts: Array<PostProps>
 }
 
-const initialState: PostState = {
+export const initialState: PostState = {
   noStateNow: 0,
   posts: [],
 }
@@ -17,7 +17,7 @@ const postReducer: Reducer<PostState, PostAction> = (
   action: PostAction
 ): PostState => {
   switch (action.type) {
-    case SUCCEED_EMPATHY:
+    case EMPATHY_SUCCEED:
       return {
         ...state,
       }

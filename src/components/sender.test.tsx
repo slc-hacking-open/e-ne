@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Sender from './sender'
 
-describe('送信コンポーネントのテスト', () => {
+describe('senderコンポーネントのテスト', () => {
   test('コンポーネント表示時にユーザーリスト取得のコールバック関数が実行されること', async () => {
     const getUserList = jest.fn()
     render(<Sender getUserList={getUserList} />)

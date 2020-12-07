@@ -1,7 +1,7 @@
 import { SenderAction } from '../actions/sender'
-import SenderReducer, { initialState } from './sender-reducer'
+import senderReducer, { initialState } from './sender-reducer'
 
-describe('送信のレデューサーのテスト', () => {
+describe('senderのレデューサーのテスト', () => {
   const testData = {
     contents: 'testContents',
     to: 'testTo',
@@ -24,12 +24,12 @@ describe('送信のレデューサーのテスト', () => {
     ],
   }
   it('初期状態のテスト', () => {
-    expect(SenderReducer(undefined, {} as SenderAction)).toEqual(initialState)
+    expect(senderReducer(undefined, {} as SenderAction)).toEqual(initialState)
   })
   it('送信内容変更時に変更内容が設定されること', () => {
     const contents = 'contents'
     expect(
-      SenderReducer(testData, {
+      senderReducer(testData, {
         type: 'CHANGE_CONTENTS',
         payload: { contents },
       })
@@ -43,7 +43,7 @@ describe('送信のレデューサーのテスト', () => {
   it('宛先変更時に宛先が設定されること', () => {
     const to = 'to'
     expect(
-      SenderReducer(testData, {
+      senderReducer(testData, {
         type: 'CHANGE_TO',
         payload: { to },
       })
@@ -57,7 +57,7 @@ describe('送信のレデューサーのテスト', () => {
   it('コイン変更時にコインが設定されること', () => {
     const coin = '500'
     expect(
-      SenderReducer(testData, {
+      senderReducer(testData, {
         type: 'CHANGE_COIN',
         payload: { coin },
       })
@@ -71,7 +71,7 @@ describe('送信のレデューサーのテスト', () => {
 
   it('クリア時にユーザーリスト以外の属性がクリアされること', () => {
     expect(
-      SenderReducer(testData, {
+      senderReducer(testData, {
         type: 'CLEAR',
       })
     ).toEqual({
@@ -83,7 +83,7 @@ describe('送信のレデューサーのテスト', () => {
   })
   it('ユーザーリスト取得開始時にユーザーリストがクリアされること', () => {
     expect(
-      SenderReducer(testData, {
+      senderReducer(testData, {
         type: 'USERLIST_START',
       })
     ).toEqual({
@@ -104,7 +104,7 @@ describe('送信のレデューサーのテスト', () => {
       },
     ]
     expect(
-      SenderReducer(testData, {
+      senderReducer(testData, {
         type: 'USERLIST_SUCCEED',
         payload: result,
       })
@@ -117,7 +117,7 @@ describe('送信のレデューサーのテスト', () => {
   })
   it('ユーザーリスト取得失敗時にユーザーリストがクリアされること', () => {
     expect(
-      SenderReducer(testData, {
+      senderReducer(testData, {
         type: 'USERLIST_FAILURE',
         payload: { message: 'serverError' },
         error: true,
