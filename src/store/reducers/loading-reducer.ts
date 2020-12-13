@@ -1,9 +1,9 @@
 import { Reducer } from 'redux'
 import {
   PostsAction,
-  FETCHING_POSTS,
-  SUCCEED_POSTS,
-  FAILED_POSTS,
+  POSTS_START,
+  POSTS_SUCCEED,
+  POSTS_FAILED,
 } from '../actions/posts'
 
 export interface LoadingState {
@@ -19,13 +19,13 @@ const LoadingReducer: Reducer<LoadingState, PostsAction> = (
   action: PostsAction
 ): LoadingState => {
   switch (action.type) {
-    case FETCHING_POSTS:
+    case POSTS_START:
       return {
         ...state,
         loadingCount: state.loadingCount + 1,
       }
-    case SUCCEED_POSTS:
-    case FAILED_POSTS:
+    case POSTS_SUCCEED:
+    case POSTS_FAILED:
       return {
         ...state,
         loadingCount:

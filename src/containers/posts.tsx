@@ -1,40 +1,31 @@
-import { connect } from 'react-redux'
-import { ThunkDispatch } from 'redux-thunk'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { FC } from 'react'
 import Posts from '../components/posts'
-import { PostProps } from '../components/post'
 import { getPosts } from '../store/actions/posts'
 import { AppState } from '../store/store'
 
-interface StateProps {
-  pageNumber: number
-  pageSize: number
-  posts: PostProps[]
+const PostsContainer: FC = () => {
+  const posts = useSelector((state: AppState) => ({
+    ...state.posts,
+    posts: state.posts.posts.map((post) => {
+      // ISO 8601形式の日付を`年月日`に変換する
+      const d = new Date(post.datetime)
+
+      return {
+        ...post,
+        datetime: `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`,
+        hasEmpathized: post.hasEmpathized,
+      }
+    }),
+  }))
+  const dispatch = useDispatch()
+
+  return Posts({
+    pageNumber: posts.pageNumber,
+    pageSize: posts.pageSize,
+    posts: posts.posts,
+    getPosts: (department, userId) => dispatch(getPosts(department, userId)),
+  })
 }
 
-interface DispatchProps {
-  getPosts: (department: string, userId: string) => void
-}
-
-const mapStateToProps = (state: AppState): StateProps => ({
-  ...state.posts,
-  posts: state.posts.posts.map((post) => {
-    // ISO 8601形式の日付を`年月日`に変換する
-    const d = new Date(post.datetime)
-
-    return {
-      ...post,
-      datetime: `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`,
-      hasEmpathized: post.hasEmpathized,
-    }
-  }),
-})
-
-const mapDispatchToProps = (
-  // eslint-disable-next-line
-  dispatch: ThunkDispatch<any, any, any>
-): DispatchProps => ({
-  getPosts: (department, userId) => dispatch(getPosts(department, userId)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Posts)
+export default PostsContainer

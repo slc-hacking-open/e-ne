@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { PostsAction, FAILED_POSTS } from '../actions/posts'
+import { PostsAction, POSTS_FAILED } from '../actions/posts'
 
 export interface MessageState {
   error: boolean
@@ -16,7 +16,7 @@ const MessageReducer: Reducer<MessageState, PostsAction> = (
   action: PostsAction
 ): MessageState => {
   switch (action.type) {
-    case FAILED_POSTS:
+    case POSTS_FAILED:
       return {
         ...state,
         error: action.error,
