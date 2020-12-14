@@ -8,6 +8,7 @@ describe('senderコンポーネントのテスト', () => {
     const getUserList = jest.fn()
     render(<Sender getUserList={getUserList} />)
     expect(getUserList).toHaveBeenCalledTimes(1)
+    expect(getUserList).toHaveBeenCalledWith()
   })
   test('内容変更時に内容変更のコールバック関数が実行されること', async () => {
     const onChangeContents = jest.fn()
