@@ -1,26 +1,26 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect } from 'react'
 
-import Post from "../containers/post";
-import { PostProps } from "./post";
+import Post from '../containers/post'
+import { PostProps } from './post'
 
 export interface PostsProps {
-  pageNumber?: number;
-  pageSize?: number;
-  posts?: PostProps[];
-  getPosts?: (department: string, userId: string) => void;
+  pageNumber?: number
+  pageSize?: number
+  posts?: PostProps[]
+  getPosts?: (department: string, userId: string) => void
 }
 
 const Posts: FC<PostsProps> = ({
   pageNumber = 0,
   pageSize = 0,
   posts = [],
-  getPosts = () => {}
+  getPosts = () => {},
 }) => {
   useEffect(() => {
     // TODO: userId
-    getPosts("SLC／生保ソリューション第２部", "111111");
+    getPosts('SLC／生保ソリューション第２部', '111111')
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
   return (
     <div className="posts">
@@ -37,7 +37,7 @@ const Posts: FC<PostsProps> = ({
               empathyCount={post.empathyCount}
               hasEmpathized={post.hasEmpathized}
             />
-          );
+          )
         })}
       </div>
       <div className="posts-pagenation">
@@ -46,7 +46,7 @@ const Posts: FC<PostsProps> = ({
           */}</p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Posts;
+export default Posts

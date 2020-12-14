@@ -1,13 +1,13 @@
-import React from "react";
-import "./Reset.css";
-import "./App.css";
+import React from 'react'
+import './Reset.css'
+import './App.css'
 
-import Posts from "./containers/posts";
-import DispProfile from "./containers/profile";
-import Loading from "./containers/loading";
-import Message from "./containers/message";
-import { ReactComponent as Ene } from "./ene.svg";
-import Sender from "./containers/sender";
+import Posts from './containers/posts'
+import DispProfile from './containers/profile'
+import Loading from './containers/loading'
+import Message from './containers/message'
+import { ReactComponent as Ene } from './ene.svg'
+import Sender from './containers/sender'
 
 const App: React.FC = () => {
   return (
@@ -28,7 +28,7 @@ const App: React.FC = () => {
       </div>
       <Loading />
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

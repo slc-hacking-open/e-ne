@@ -1,16 +1,16 @@
-import { connect } from "react-redux";
+import { connect } from 'react-redux'
 
-import Message from "../components/message";
-import { AppState } from "../reducer";
+import { AppState } from '../store/store'
+import Message from '../components/message'
 
 interface StateProps {
-  error: boolean;
-  message: string;
+  error: boolean
+  message: string
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
   error: state.message.error,
-  message: state.message.message
-});
+  message: state.message.message,
+})
 
-export default connect(mapStateToProps)(Message);
+export default connect(mapStateToProps)(Message)

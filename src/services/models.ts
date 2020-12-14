@@ -1,58 +1,58 @@
 export interface User {
   // ユーザID
-  userid: string;
+  userid: string
   // 所属部署
-  department: string;
+  department: string
   // ユーザ名
-  name: string;
+  name: string
   // プロフィール
-  profile: string;
+  profile: string
   // プロフィール画像URL
-  imageurl: string;
+  imageurl: string
 }
 
 export interface Post {
   // 所属部署
-  department: string;
+  department: string
   // いいねID
-  id: string;
+  id: string
   // 送信者
-  sender: User;
+  sender: User
   // 受信者
-  receiver: User;
+  receiver: User
   // いいね内容
-  contents: string;
+  contents: string
   // 投稿日時（ISO8061）
-  datetime: string;
+  datetime: string
   // 共感された数
-  empathyCount: number;
+  empathyCount: number
   // ログインユーザーが共感してるか
-  hasEmpathized: boolean;
+  hasEmpathized: boolean
 }
 
 export interface Timeline {
   // 表示中のページ番号
-  pageNumber: number;
+  pageNumber: number
   // 最大のページ番号
-  pageSize: number;
+  pageSize: number
   // 投稿リスト
-  posts: Post[];
+  posts: Post[]
 }
 
 // APIが返してくるデータ
 export interface APIPost {
-  id: { N: string };
+  id: { N: string }
   sender: {
-    name: { S: string };
-    imageurl: { S: string };
-  };
+    name: { S: string }
+    imageurl: { S: string }
+  }
   reciever: {
-    name: { S: string };
-    imageurl: { S: string };
-  };
-  department: { S: string };
-  datetime: { S: string };
-  contents: { S: string };
-  empathyCount: { N: number };
-  hasEmpathized: boolean;
+    name: { S: string }
+    imageurl: { S: string }
+  }
+  department: { S: string }
+  datetime: { S: string }
+  contents: { S: string }
+  empathyCount: { N: number }
+  hasEmpathized: boolean
 }

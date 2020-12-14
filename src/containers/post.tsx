@@ -1,21 +1,14 @@
-import { connect } from "react-redux";
-import { ThunkDispatch } from "redux-thunk";
+import { FC } from 'react'
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-import Post from "../components/post";
-import { PostAction, empathy } from "../actions/post";
+import Post, { PostProps } from '../components/post'
+import { empathy } from '../store/actions/post'
 
-import { AppState } from "../reducer";
+const PostContainer: FC<PostProps> = (props) => {
+  const dispatch = useDispatch()
 
-interface DispatchProps {
-  empathy: (userId: string, postId: string) => void;
+  return Post({ empathy: bindActionCreators(empathy, dispatch), ...props })
 }
 
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = (
-  dispatch: ThunkDispatch<AppState, undefined, PostAction>
-): DispatchProps => ({
-  empathy: (userId, postId) => dispatch(empathy(userId, postId))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default PostContainer
