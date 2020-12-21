@@ -86,7 +86,7 @@ describe('非同期アクション（プロフィール取得）のテスト', (
       .spyOn(getUserProfile, 'getUserProfile')
       .mockReturnValueOnce(Promise.reject(new Error()))
 
-    return store.dispatch(getProfile(param.userid)).catch(() => {
+    return store.dispatch(getProfile(param.userid)).then(() => {
       expect(spy).toHaveBeenCalledTimes(1)
       expect(spy).toHaveBeenCalledWith(param.userid)
       expect(store.getActions()).toEqual(expectedActions)

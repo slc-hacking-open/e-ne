@@ -135,7 +135,7 @@ describe('非同期アクション（ユーザーリスト取得）のテスト'
     const message = 'Server Error.'
     const expectedActions = [
       { type: USERLIST_START },
-      { type: USERLIST_SUCCEED, payload: { message }, error: true },
+      { type: USERLIST_FAILURE, payload: { message }, error: true },
     ]
 
     const store = mockStore()
@@ -143,7 +143,7 @@ describe('非同期アクション（ユーザーリスト取得）のテスト'
       .spyOn(getUserList, 'getUserList')
       .mockReturnValueOnce(Promise.reject(new Error()))
 
-    return store.dispatch(getUsers()).catch(() => {
+    return store.dispatch(getUsers()).then(() => {
       expect(spy).toHaveBeenCalledTimes(1)
       expect(spy).toHaveBeenCalledWith()
       expect(store.getActions()).toEqual(expectedActions)
