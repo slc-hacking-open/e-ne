@@ -24,7 +24,7 @@ describe('profileのレデューサーのテスト', () => {
         name: '',
         profile: '',
         userid: '',
-        department: 'a',
+        department: '',
       },
       isLoading: true,
     })
