@@ -1,5 +1,6 @@
-import thunkProfileReducer, { initialState } from './profile-reducer'
-import { ProfileAction } from '../actions/profile'
+import { AnyAction } from 'redux'
+import profileSlice, { initialState } from './slice'
+import { getProfile } from './asyncActions'
 
 describe('profileのレデューサーのテスト', () => {
   const testUserData = {
@@ -10,15 +11,12 @@ describe('profileのレデューサーのテスト', () => {
     imageurl: 'url',
   }
   it('初期状態のテスト', () => {
-    expect(thunkProfileReducer(undefined, {} as ProfileAction)).toEqual(
-      initialState
-    )
+    expect(profileSlice(undefined, {} as AnyAction)).toEqual(initialState)
   })
   it('プロフィール取得開始時にユーザーはすべてブランクが設定され，ロード有無は有の状態となること', () => {
     expect(
-      thunkProfileReducer(initialState, {
-        type: 'PROFILE_START',
-        payload: { userid: 'user01' },
+      profileSlice(initialState, {
+        type: getProfile.pending.type,
       })
     ).toEqual({
       user: {
@@ -32,14 +30,13 @@ describe('profileのレデューサーのテスト', () => {
     })
   })
   it('プロフィール取得成功時にユーザーには取得結果のユーザー情報が設定され、ロード有無は無の状態となること', () => {
-    const param = { userid: 'user01' }
     const result = {
       user: testUserData,
     }
     expect(
-      thunkProfileReducer(initialState, {
-        type: 'PROFILE_SUCCEED',
-        payload: { param, result },
+      profileSlice(initialState, {
+        type: getProfile.fulfilled.type,
+        payload: result,
       })
     ).toEqual({
       user: result.user,
@@ -47,13 +44,10 @@ describe('profileのレデューサーのテスト', () => {
     })
   })
   it('プロフィール取得失敗にユーザーは元の状態のままで、ロード有無は無の状態となること', () => {
-    const param = { userid: 'user01' }
     const state = { user: testUserData, isLoading: true }
     expect(
-      thunkProfileReducer(state, {
-        type: 'PROFILE_FAILURE',
-        payload: { param, message: 'error' },
-        error: true,
+      profileSlice(state, {
+        type: getProfile.rejected.type,
       })
     ).toEqual({
       user: state.user,

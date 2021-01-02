@@ -1,14 +1,16 @@
 import { FC } from 'react'
 import { useDispatch } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
 import Post, { PostProps } from '../components/post'
-import { empathy } from '../store/actions/post'
+import { empathy } from '../post/asycActions'
 
 const PostContainer: FC<PostProps> = (props) => {
   const dispatch = useDispatch()
 
-  return Post({ empathy: bindActionCreators(empathy, dispatch), ...props })
+  return Post({
+    empathy: (userId: string, postId: string) =>
+      dispatch(empathy({ userId, postId })),
+    ...props,
+  })
 }
 
 export default PostContainer

@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { FC } from 'react'
 import Posts from '../components/posts'
-import { getPosts } from '../store/actions/posts'
-import { AppState } from '../store/store'
+import { getPosts } from '../posts/asyncActions'
+import { RootState } from '../rootReducer'
 
 const PostsContainer: FC = () => {
-  const posts = useSelector((state: AppState) => ({
+  const posts = useSelector((state: RootState) => ({
     ...state.posts,
     posts: state.posts.posts.map((post) => {
       // ISO 8601形式の日付を`年月日`に変換する
@@ -24,7 +24,8 @@ const PostsContainer: FC = () => {
     pageNumber: posts.pageNumber,
     pageSize: posts.pageSize,
     posts: posts.posts,
-    getPosts: (department, userId) => dispatch(getPosts(department, userId)),
+    getPosts: (department: string, userid: string) =>
+      dispatch(getPosts({ department, userid })),
   })
 }
 

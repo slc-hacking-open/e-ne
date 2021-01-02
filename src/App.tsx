@@ -2,12 +2,12 @@ import React from 'react'
 import './Reset.css'
 import './App.css'
 
-import Posts from './containers/posts'
 import DispProfile from './containers/profile'
-import Loading from './containers/loading'
 import Message from './containers/message'
-import { ReactComponent as Ene } from './ene.svg'
+import Posts from './containers/posts'
 import Sender from './containers/sender'
+import Loading from './containers/loading'
+import { ReactComponent as Ene } from './ene.svg'
 
 const App: React.FC = () => {
   return (

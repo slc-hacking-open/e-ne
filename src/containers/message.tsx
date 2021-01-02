@@ -1,16 +1,15 @@
 import { connect } from 'react-redux'
-
-import { AppState } from '../store/store'
 import Message from '../components/message'
+import { RootState } from '../rootReducer'
 
 interface StateProps {
   error: boolean
   message: string
 }
 
-const mapStateToProps = (state: AppState): StateProps => ({
-  error: state.message.error,
-  message: state.message.message,
+const mapStateToProps = (state: RootState): StateProps => ({
+  error: state.posts.error,
+  message: state.posts.message,
 })
 
 export default connect(mapStateToProps)(Message)
