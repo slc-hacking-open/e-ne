@@ -1,10 +1,11 @@
-import postReducer, { initialState } from './post-reducer'
-import { PostAction } from '../actions/post'
-import { User } from '../../services/models'
+import { AnyAction } from 'redux'
+import { User } from '../services/models'
+import postSlice, { initialState } from './slice'
+import { empathy } from './asycActions'
 
 describe('postのレデューサーのテスト', () => {
   it('初期状態のテスト', () => {
-    expect(postReducer(undefined, {} as PostAction)).toEqual(initialState)
+    expect(postSlice(undefined, {} as AnyAction)).toEqual(initialState)
   })
   it('共感数更新時にstateがそのまま設定されること', () => {
     const post = {
@@ -23,9 +24,8 @@ describe('postのレデューサーのテスト', () => {
       ],
     }
     expect(
-      postReducer(post, {
-        type: 'EMPATHY_SUCCEED',
-        payload: { result: true },
+      postSlice(post, {
+        type: empathy.fulfilled.type,
       })
     ).toEqual({ noStateNow: post.noStateNow, posts: post.posts })
   })

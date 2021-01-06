@@ -56,6 +56,7 @@ module.exports = {
     'newline-before-return': 'error',
     'no-console': 'warn',
     'require-yield': 'error',
+    'no-param-reassign': ['error', { props: false }],
 
     // @typescript-eslint
     '@typescript-eslint/explicit-function-return-type': 'off',

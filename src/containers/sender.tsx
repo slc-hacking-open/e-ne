@@ -1,25 +1,25 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { FC } from 'react'
-import { AppState } from '../store/store'
 import Sender from '../components/sender'
-import { Sender as SenderActions, getUsers } from '../store/actions/sender'
-import { sendEne } from '../store/actions/posts'
+import { changeCoin, changeContents, changeTo, clear } from '../sender/slice'
+import { sendEne } from '../posts/asyncActions'
+import { getUsers } from '../sender/asyncActions'
+import { RootState } from '../rootReducer'
 
 const SenderContainer: FC = () => {
-  const sender = useSelector((state: AppState) => state.sender)
+  const sender = useSelector((state: RootState) => state.sender)
   const dispatch = useDispatch()
 
   return Sender({
     contents: sender.contents,
     to: sender.to,
     coin: sender.coin,
-    changeContents: (contents: string) =>
-      dispatch(SenderActions.changeContents(contents)),
-    changeTo: (to: string) => dispatch(SenderActions.changeTo(to)),
-    changeCoin: (coin: string) => dispatch(SenderActions.changeCoin(coin)),
-    clear: () => dispatch(SenderActions.clear()),
+    changeContents: (contents: string) => dispatch(changeContents(contents)),
+    changeTo: (to: string) => dispatch(changeTo(to)),
+    changeCoin: (coin: string) => dispatch(changeCoin(coin)),
+    clear: () => dispatch(clear()),
     sendEne: (senderId: string, receiverId: string, contents: string) =>
-      dispatch(sendEne(senderId, receiverId, contents)),
+      dispatch(sendEne({ senderId, receiverId, contents })),
     getUserList: () => dispatch(getUsers()),
     users: sender.users,
   })

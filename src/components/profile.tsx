@@ -8,7 +8,7 @@ export interface ProfileProps {
   isLoading?: boolean
 }
 
-const DispProfile: FC<ProfileProps> = ({ user }) => (
+const Profile: FC<ProfileProps> = ({ user }) => (
   <div className="profile">
     <div className="profile-imageFrame">
       <img
@@ -23,4 +23,4 @@ const DispProfile: FC<ProfileProps> = ({ user }) => (
   </div>
 )
 
-export default DispProfile
+export default Profile
