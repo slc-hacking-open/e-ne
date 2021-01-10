@@ -1,4 +1,5 @@
 import React from 'react'
+import { withAuthenticator } from '@aws-amplify/ui-react'
 import './Reset.css'
 import './App.css'
 
@@ -31,4 +32,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default withAuthenticator(App)
