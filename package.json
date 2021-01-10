@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-amplify/ui-react": "^0.2.34",
     "@reduxjs/toolkit": "^1.5.0",
     "axios": "^0.21.1",
+    "aws-amplify": "^3.3.14",
+    "aws-amplify-react": "^4.2.18",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-redux": "^7.2.2",
