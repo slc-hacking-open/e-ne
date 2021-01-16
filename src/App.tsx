@@ -1,5 +1,9 @@
 import React from 'react'
-import { withAuthenticator } from '@aws-amplify/ui-react'
+import {
+  AmplifyAuthenticator,
+  AmplifySignOut,
+  AmplifySignUp,
+} from '@aws-amplify/ui-react'
 import './Reset.css'
 import './App.css'
 
@@ -13,23 +17,35 @@ import { ReactComponent as Ene } from './ene.svg'
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Message />
-      <header className="header">
-        <Ene />
-        <h1>e-ne</h1>
-      </header>
-      <div className="main">
-        <div className="main-contents">
-          <Posts />
+      <AmplifyAuthenticator>
+        <AmplifySignUp
+          slot="sign-up"
+          formFields={[
+            { type: 'username', required: true },
+            { type: 'email', required: true },
+            { type: 'password', required: true },
+          ]}
+        />
+        <Message />
+        <header className="header">
+          <Ene />
+          <h1>e-ne</h1>
+        </header>
+        <div className="signout">
+          <AmplifySignOut />
         </div>
-        <div className="main-sidemenu">
-          <DispProfile />
-          <Sender />
+        <div className="main">
+          <div className="main-contents">
+            <Posts />
+          </div>
+          <div className="main-sidemenu">
+            <DispProfile />
+            <Sender />
+          </div>
         </div>
-      </div>
-      <Loading />
+        <Loading />
+      </AmplifyAuthenticator>
     </div>
   )
 }
-
-export default withAuthenticator(App)
+export default App

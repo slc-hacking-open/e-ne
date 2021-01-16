@@ -18,6 +18,11 @@ li {
   box-sizing: border-box;
 }
 
+.signout {
+  display: flex;
+  width: 5vw;
+}
+
 .header {
   align-items: center;
   background-color: #8bd3dd;

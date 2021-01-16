@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Auth } from 'aws-amplify'
 import { BASE_URL_POSTS, TIMEOUT } from './config'
 import { Timeline, Post } from './models'
 import { apiPosts2Timeline, apiPost2Post } from './adapters'
@@ -18,6 +19,11 @@ export const getTimeline = async (
     params: {
       department,
       userid,
+    },
+    headers: {
+      Authorization: `Bearer ${(await Auth.currentSession())
+        .getIdToken()
+        .getJwtToken()}`,
     },
   })
 
@@ -52,7 +58,14 @@ export const postPost = async (
       "reciever": "${receiverId}",
       "contents": "${contents}"
     }
-  }`
+  }`,
+    {
+      headers: {
+        Authorization: `Bearer ${(await Auth.currentSession())
+          .getIdToken()
+          .getJwtToken()}`,
+      },
+    }
   )
 
   switch (response.status) {
@@ -85,7 +98,14 @@ export const pushEmpathy = async (
       "userid":"${eneuserid}",
       "empathy":"1"
     }
-  }`
+  }`,
+    {
+      headers: {
+        Authorization: `Bearer ${(await Auth.currentSession())
+          .getIdToken()
+          .getJwtToken()}`,
+      },
+    }
   )
 
   if (response.status !== 200) {

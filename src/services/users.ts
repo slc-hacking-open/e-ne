@@ -1,3 +1,4 @@
+import { Auth, API } from 'aws-amplify'
 import axios from 'axios'
 import { BASE_URL_USER, TIMEOUT } from './config'
 import { User } from './models'
@@ -9,7 +10,13 @@ const usersConfig = {
 
 export const getUserProfile = async (userId: string): Promise<User> => {
   const instance = axios.create(usersConfig)
-  const response = await instance.get(`?userid=${userId}`)
+  const response = await instance.get(`?userid=${userId}`, {
+    headers: {
+      Authorization: `Bearer ${(await Auth.currentSession())
+        .getIdToken()
+        .getJwtToken()}`,
+    },
+  })
 
   switch (response.status) {
     case 200:
@@ -28,7 +35,13 @@ export const getUserProfile = async (userId: string): Promise<User> => {
 
 export const getUserList = async (): Promise<User[]> => {
   const instance = axios.create(usersConfig)
-  const response = await instance.get(``)
+  const response = await instance.get(``, {
+    headers: {
+      Authorization: `Bearer ${(await Auth.currentSession())
+        .getIdToken()
+        .getJwtToken()}`,
+    },
+  })
 
   switch (response.status) {
     case 200:
