@@ -1,4 +1,4 @@
-import { Auth, API } from 'aws-amplify'
+import { Auth } from 'aws-amplify'
 import axios from 'axios'
 import { BASE_URL_USER, TIMEOUT } from './config'
 import { User } from './models'
