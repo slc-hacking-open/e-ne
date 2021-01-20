@@ -17,8 +17,6 @@ Amplify.configure({
     userPoolId: 'ap-northeast-1_WknqfDlDy',
     // アプリクライアントのID
     userPoolWebClientId: '13nlcp3ai1j7383ap1qqtr3uo5',
-    // IDプールのID
-    identityPoolId: 'ap-northeast-1:7d67cedd-d0fd-4176-a663-db5c5ff4a9df',
   },
   API: {
     endpoints: [
@@ -55,6 +53,7 @@ const dict = {
     'Password *': 'パスワード（必須）',
     'Enter your username': 'ユーザー名を入力 ',
     'Enter your password': 'パスワードを入力 ',
+    'Enter your new password': '新しいパスワードを入力 ',
     'No account?': 'アカウントを持っていない場合 ',
     'Forgot your password?': 'パスワードを忘れた場合',
     'Reset password': 'パスワードをリセット ',
@@ -66,6 +65,7 @@ const dict = {
     'Forgot Password': 'パスワードを忘れた ',
     'Change Password': 'パスワードを変える ',
     'New Password': '新しいパスワード',
+    'New password': '新しいパスワード',
     Email: 'メールアドレス',
     'Email Address *': 'メールアドレス（必須）',
     'Enter your email address': 'メールアドレスを入力',
@@ -81,6 +81,8 @@ const dict = {
     Skip: 'スキップ',
     Verify: '確認',
     'Verify Contact': '連絡先を確認',
+    'Verification code': '検証コード',
+    'Enter code': 'コードを入力',
     Code: 'コード',
     'Confirmation Code': '確認コード',
     'Lost your code? ': 'コードを失くしましたか？',
