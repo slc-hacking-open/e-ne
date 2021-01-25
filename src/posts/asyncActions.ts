@@ -3,13 +3,12 @@ import { getTimeline, postPost } from '../services/posts'
 import { Timeline, Post } from '../services/models'
 
 interface GetPostsParam {
-  department: string
   userid: string
 }
 export const getPosts = createAsyncThunk<Timeline, GetPostsParam>(
   'posts/getPosts',
   async (pram) => {
-    const result = await getTimeline(pram.department, pram.userid)
+    const result = await getTimeline(pram.userid)
 
     return result
   }

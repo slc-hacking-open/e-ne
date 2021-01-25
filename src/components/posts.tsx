@@ -7,7 +7,7 @@ export interface PostsProps {
   pageNumber?: number
   pageSize?: number
   posts?: PostProps[]
-  getPosts?: (department: string, userId: string) => void
+  getPosts?: (userId: string) => void
 }
 
 const Posts: FC<PostsProps> = ({
@@ -18,7 +18,7 @@ const Posts: FC<PostsProps> = ({
 }) => {
   useEffect(() => {
     // TODO: userId
-    getPosts('SLC／生保ソリューション第２部', '111111')
+    getPosts('111111')
     // eslint-disable-next-line
   }, [])
 

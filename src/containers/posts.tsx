@@ -8,8 +8,13 @@ const PostsContainer: FC = () => {
   const posts = useSelector((state: RootState) => ({
     ...state.posts,
     posts: state.posts.posts.map((post) => {
-      // ISO 8601形式の日付を`年月日`に変換する
-      const d = new Date(post.datetime)
+      // 日付を`年月日`に変換する
+      const year = post.datetime.substr(0, 4)
+      const month = post.datetime.substr(4, 2)
+      const date = post.datetime.substr(6, 2)
+      const format = `${year}/${month}/${date}`
+
+      const d = new Date(format)
 
       return {
         ...post,
@@ -24,8 +29,7 @@ const PostsContainer: FC = () => {
     pageNumber: posts.pageNumber,
     pageSize: posts.pageSize,
     posts: posts.posts,
-    getPosts: (department: string, userid: string) =>
-      dispatch(getPosts({ department, userid })),
+    getPosts: (userid: string) => dispatch(getPosts({ userid })),
   })
 }
 

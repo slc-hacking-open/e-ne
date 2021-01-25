@@ -28,7 +28,7 @@ export const getUserProfile = async (userId: string): Promise<User> => {
       throw new Error('サーバーエラーです')
   }
 
-  const user: User = response.data.data
+  const user: User = response.data.data[0]
 
   return user
 }

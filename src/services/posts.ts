@@ -10,14 +10,10 @@ const postsConfig = {
 }
 
 // タイムライン取得
-export const getTimeline = async (
-  department: string,
-  userid: string
-): Promise<Timeline> => {
+export const getTimeline = async (userid: string): Promise<Timeline> => {
   const instance = axios.create(postsConfig)
   const response = await instance.get(``, {
     params: {
-      department,
       userid,
     },
     headers: {
@@ -89,14 +85,12 @@ export const pushEmpathy = async (
   eneuserid: string
 ): Promise<boolean> => {
   const instance = axios.create(postsConfig)
-  const response = await instance.post(
+  const response = await instance.put(
     ``,
     `{
     "data":{
-      "department":"SLC／生保ソリューション第２部",
       "id":"${eneid}",
-      "userid":"${eneuserid}",
-      "empathy":"1"
+      "userid":"${eneuserid}"
     }
   }`,
     {

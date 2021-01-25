@@ -1,6 +1,6 @@
 export const BASE_URL = 'https://virtserver.swaggerhub.com/shu000/e-ne/1.0.0'
 export const BASE_URL_USER =
-  'https://4bi76rbetj.execute-api.ap-northeast-1.amazonaws.com/Prod/enedbfunc'
+  'https://aijqfr1cte.execute-api.ap-northeast-1.amazonaws.com/Prod/enedbfuncRds'
 export const BASE_URL_POSTS =
-  'https://4dka93an1g.execute-api.ap-northeast-1.amazonaws.com/Prod/enedbfuncTimeline'
+  'https://hisnuo5r51.execute-api.ap-northeast-1.amazonaws.com/Prod/enedbfuncRdsTimeline'
 export const TIMEOUT = 7000

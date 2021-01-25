@@ -12,8 +12,6 @@ export interface User {
 }
 
 export interface Post {
-  // 所属部署
-  department: string
   // いいねID
   id: string
   // 送信者
@@ -41,18 +39,12 @@ export interface Timeline {
 
 // APIが返してくるデータ
 export interface APIPost {
-  id: { N: string }
-  sender: {
-    name: { S: string }
-    imageurl: { S: string }
-  }
-  reciever: {
-    name: { S: string }
-    imageurl: { S: string }
-  }
-  department: { S: string }
-  datetime: { S: string }
-  contents: { S: string }
-  empathyCount: { N: number }
+  id: string
+  sender: User[]
+  reciever: User[]
+  department: string
+  datetime: string
+  contents: string
+  empathyCount: number
   hasEmpathized: boolean
 }
