@@ -55,5 +55,6 @@ workflows:
           post-steps:
             - store_artifacts:
                 path: e2e/snapshots
+                path: e2e/videos
           start: 'yarn start' # start server before running tests
           wait-on: 'http://localhost:3000'
