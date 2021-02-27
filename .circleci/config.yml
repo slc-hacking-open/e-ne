@@ -51,10 +51,10 @@ workflows:
       - build
       - test
       - cypress/install:
-          build: 'yarn build' # run a custom app build step
+          build: 'npm build' # run a custom app build step
       - cypress/run:
           requires:
             - cypress/install
           record: true # record results on Cypress Dashboard
           group: 'all tests' # name this group "all tests" on the dashboard
-          start: 'yarn start' # start server before running tests
+          start: 'npm start' # start server before running tests
