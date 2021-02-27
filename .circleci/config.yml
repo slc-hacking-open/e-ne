@@ -43,10 +43,6 @@ jobs:
       - run:
           name: unit test
           command: yarn test
-      - slack/notify:
-          channel: C01J25XKYDS
-          event: fail
-          template: basic_fail_1
   cypress:
     executor: node
     steps:
@@ -55,12 +51,13 @@ jobs:
       - run:
           name: install dependencies
           command: yarn install
-      - run:
-          name: list directory
-          command: ls
-      - run:
-          name: change directory
-          command: cd e2e
+      - startapp:
+          name: start app
+          command: yarn start
+      - cypress/run:
+          requires:
+            - startapp
+          record: true
 
 workflows:
   version: 2
