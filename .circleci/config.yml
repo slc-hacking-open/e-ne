@@ -52,6 +52,8 @@ workflows:
       - test
       - cypress/run:
           yarn: true
-          store_artifacts: true
+          post-steps:
+            - store_artifacts:
+                path: e2e/snapshots
           start: 'yarn start' # start server before running tests
           wait-on: 'http://localhost:3000'
