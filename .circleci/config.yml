@@ -53,3 +53,4 @@ workflows:
       - cypress/run:
           yarn: true
           start: 'yarn start' # start server before running tests
+          wait-on: 'http://localhost:3000'
