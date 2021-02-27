@@ -1,15 +1,71 @@
 version: 2.1
 orbs:
+  slack: circleci/slack@4.2.0
   cypress: cypress-io/cypress@1
-workflows:
+executors:
+  node:
+    docker:
+      - image: circleci/node:14.15.0
+commands:
+  restore_modules:
+    steps:
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+  save_modules:
+    steps:
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+
+jobs:
   build:
-    jobs:
-      - cypress/install:
-          build: 'yarn install' # run a custom app build step
-      - cypress/run:
+    executor: node
+    steps:
+      - checkout
+      - restore_modules
+      - run:
+          name: install dependencies
+          command: yarn install
+      - slack/notify:
+          channel: C01J25XKYDS
+          event: fail
+          template: basic_fail_1
+      - save_modules
+  test:
+    executor: node
+    steps:
+      - checkout
+      - restore_modules
+      - run:
+          name: install dependencies
+          command: yarn install
+      - run:
+          name: unit test
+          command: yarn test
+      - slack/notify:
+          channel: C01J25XKYDS
+          event: fail
+          template: basic_fail_1
+  cypress:
+    executor: node
+    steps:
+      - checkout
+      - restore_modules
+      - run:
+          name: install dependencies
+          command: yarn install
+      - run:
+          name: list directory
           command: ls
+      - run:
+          name: change directory
           command: cd e2e
-          requires:
-            - cypress/install
-          record: true # record results on Cypress Dashboard
-          start: 'yarn start' # start server before running tests
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
+      - cypress
