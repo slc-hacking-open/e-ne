@@ -43,17 +43,6 @@ jobs:
       - run:
           name: unit test
           command: yarn test
-  cypress:
-    executor: node
-    steps:
-      - checkout
-      - restore_modules
-      - run:
-          name: install dependencies
-          command: yarn install
-      - run:
-          name: start app
-          command: yarn start
 
 workflows:
   version: 2
@@ -61,5 +50,11 @@ workflows:
     jobs:
       - build
       - test
-      - cypress
-      - cypress/run
+      - cypress/install:
+          build: 'yarn build' # run a custom app build step
+      - cypress/run:
+          requires:
+            - cypress/install
+          record: true # record results on Cypress Dashboard
+          group: 'all tests' # name this group "all tests" on the dashboard
+          start: 'yarn start' # start server before running tests
