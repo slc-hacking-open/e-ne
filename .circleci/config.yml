@@ -51,12 +51,10 @@ jobs:
       - run:
           name: install dependencies
           command: yarn install
-      - startapp:
+      - run:
           name: start app
           command: yarn start
       - cypress/run:
-          requires:
-            - startapp
           record: true
 
 workflows:
