@@ -50,12 +50,7 @@ workflows:
     jobs:
       - build
       - test
-      - cypress/install:
-          yarn: true
-          build: 'yarn build' # run a custom app build step
       - cypress/run:
-          requires:
-            - cypress/install
           yarn: true
           record: true # record results on Cypress Dashboard
           group: 'all tests' # name this group "all tests" on the dashboard
