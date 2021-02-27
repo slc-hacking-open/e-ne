@@ -57,7 +57,6 @@ workflows:
           requires:
             - cypress/install
           yarn: true
-          working_directory: e2e
           record: true # record results on Cypress Dashboard
           group: 'all tests' # name this group "all tests" on the dashboard
           start: 'yarn start' # start server before running tests

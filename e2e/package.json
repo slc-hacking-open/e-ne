@@ -1,11 +1,4 @@
 {
-  "scripts": {
-    "start": "react-scripts -r @cypress/instrument-cra start",
-    "cy:open": "cypress open --env failOnSnapshotDiff=false",
-    "cy:run": "cypress run --headless --env failOnSnapshotDiff=false",
-    "cy:snap": "cypress run --headless",
-    "cy:snap:update": "cypress run --headless --env updateSnapshots=true"
-  },
   "dependencies": {
     "typescript": "^4.2.2"
   },
