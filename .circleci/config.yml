@@ -1,16 +1,14 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@1
-executors:
-  e2e:
-    working-directory: ~/e2e
 workflows:
   build:
     jobs:
       - cypress/install:
           build: 'yarn install' # run a custom app build step
       - cypress/run:
-          executor: e2e
+          command: ls
+          command: cd e2e
           requires:
             - cypress/install
           record: true # record results on Cypress Dashboard
