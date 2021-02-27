@@ -19,7 +19,7 @@ export interface SenderProps {
   users?: User[]
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   resize: {
     fontSize: 10,
   },

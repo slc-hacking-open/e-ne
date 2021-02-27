@@ -10,12 +10,7 @@ export interface PostsProps {
   getPosts?: (department: string, userId: string) => void
 }
 
-const Posts: FC<PostsProps> = ({
-  pageNumber = 0,
-  pageSize = 0,
-  posts = [],
-  getPosts = () => {},
-}) => {
+const Posts: FC<PostsProps> = ({ posts = [], getPosts = () => {} }) => {
   useEffect(() => {
     // TODO: userId
     getPosts('SLC／生保ソリューション第２部', '111111')
