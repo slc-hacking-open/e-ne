@@ -3,7 +3,7 @@ orbs:
   cypress: cypress-io/cypress@1
 executors:
   e2e:
-    working-directory: e2e
+    working-directory: ~/e2e
 workflows:
   build:
     jobs:
