@@ -58,3 +58,7 @@ workflows:
           command: 'yarn cy:run'
           start: 'yarn start' # start server before running tests
           wait-on: 'http://localhost:3000'
+      - slack/notify:
+          channel: C01J25XKYDS
+          event: fail
+          template: basic_fail_1
