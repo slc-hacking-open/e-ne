@@ -1,5 +1,8 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { FC, useEffect } from 'react'
 import './sender.css'
+import { makeStyles, TextField } from '@material-ui/core'
+import { Autocomplete } from '@material-ui/lab'
 import { ReactComponent as Heart } from './heart.svg'
 import { User } from '../services/models'
 
@@ -15,6 +18,15 @@ export interface SenderProps {
   getUserList?: () => void
   users?: User[]
 }
+
+const useStyles = makeStyles(() => ({
+  resize: {
+    fontSize: 10,
+  },
+  '& input::placeholder': {
+    fontSize: '10px',
+  },
+}))
 
 const Sender: FC<SenderProps> = ({
   contents = '',
@@ -33,32 +45,47 @@ const Sender: FC<SenderProps> = ({
   }, [])
 
   // 宛先セレクトボックスの作成
-  const op = [
-    <option key="" value="">
-      宛先
-    </option>,
-  ]
+  const classes = useStyles()
   const userlist = users.filter((u) => u.userid !== '111111')
-  const options = op.concat(
-    userlist.map((user) => (
-      <option key={user.userid} value={user.userid}>
-        {user.name}
-      </option>
-    ))
-  )
+  const options = userlist.map((option) => {
+    const department = option.department.toUpperCase()
+    const name = option.name.toUpperCase()
+
+    return {
+      ...option,
+      department: /[0-9]/.test(department) ? '0-9' : department,
+      name: /[0-9]/.test(name) ? '0-9' : name,
+    }
+  })
 
   return (
     <div className="sender">
-      <select
-        className="sender-to"
-        name="to"
-        value={to}
-        onChange={(e) => {
-          changeTo(e.target.value)
+      <Autocomplete
+        id="sender-auto-complete"
+        options={options
+          .sort((a, b) => -b.name.localeCompare(a.name))
+          .sort((a, b) => -b.department.localeCompare(a.department))}
+        groupBy={(option) => option.department}
+        getOptionLabel={(option) => option.name}
+        getOptionSelected={(option, value) => option.name === value.name}
+        style={{ width: 200, marginBottom: '0.5rem' }}
+        onChange={(event, value) => {
+          changeTo(value?.userid ? value.userid : '')
         }}
-      >
-        {options}
-      </select>
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="宛先"
+            variant="outlined"
+            onChange={(e) => {
+              changeTo(e.target.value)
+            }}
+            InputLabelProps={{ style: { fontSize: 10 } }}
+            FormHelperTextProps={{ style: { fontSize: 10 } }}
+          />
+        )}
+        classes={{ input: classes.resize }}
+      />
       <input
         className="sender-coin"
         name="coin"
@@ -79,6 +106,7 @@ const Sender: FC<SenderProps> = ({
       />
       <button
         className="sender-button"
+        data-testid="sender-button"
         type="button"
         onClick={() => {
           if (contents !== '' && to !== '') {
