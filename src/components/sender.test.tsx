@@ -42,9 +42,10 @@ describe('senderコンポーネントのテスト', () => {
     render(
       <Sender users={users} changeTo={onChangeTo} getUserList={getUserList} />
     )
-    await userEvent.selectOptions(screen.getByRole('combobox'), '生保太郎')
-    expect(onChangeTo).toHaveBeenCalledWith('user02')
-    expect(onChangeTo).toHaveBeenCalledTimes(1)
+    await userEvent.type(screen.getByLabelText('宛先'), '生保')
+    expect(onChangeTo).toHaveBeenNthCalledWith(1, '生')
+    expect(onChangeTo).toHaveBeenNthCalledWith(2, '生保')
+    expect(onChangeTo).toHaveBeenCalledTimes(2)
   })
   test('コイン変更時にコイン変更のコールバック関数が実行されること', async () => {
     const onChangeCoin = jest.fn()
@@ -60,7 +61,7 @@ describe('senderコンポーネントのテスト', () => {
     const sendEne = jest.fn()
     const clear = jest.fn()
     render(<Sender to="user01" coin="100" sendEne={sendEne} clear={clear} />)
-    await userEvent.click(screen.getByRole('button'))
+    await userEvent.click(screen.getByTestId('sender-button'))
     expect(sendEne).toHaveBeenCalledTimes(0)
     expect(clear).toHaveBeenCalledTimes(0)
   })
@@ -70,7 +71,7 @@ describe('senderコンポーネントのテスト', () => {
     render(
       <Sender contents="contents" coin="100" sendEne={sendEne} clear={clear} />
     )
-    await userEvent.click(screen.getByRole('button'))
+    await userEvent.click(screen.getByTestId('sender-button'))
     expect(sendEne).toHaveBeenCalledTimes(0)
     expect(clear).toHaveBeenCalledTimes(0)
   })
@@ -81,7 +82,7 @@ describe('senderコンポーネントのテスト', () => {
     render(
       <Sender contents="contents" to="user01" sendEne={sendEne} clear={clear} />
     )
-    await userEvent.click(screen.getByRole('button'))
+    await userEvent.click(screen.getByTestId('sender-button'))
     expect(sendEne).toHaveBeenCalledWith('111111', 'user01', 'contents')
     expect(sendEne).toHaveBeenCalledTimes(1)
     expect(clear).toHaveBeenCalledTimes(1)

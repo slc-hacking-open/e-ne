@@ -10,12 +10,7 @@ export interface PostsProps {
   getPosts?: (userId: string) => void
 }
 
-const Posts: FC<PostsProps> = ({
-  pageNumber = 0,
-  pageSize = 0,
-  posts = [],
-  getPosts = () => {},
-}) => {
+const Posts: FC<PostsProps> = ({ posts = [], getPosts = () => {} }) => {
   useEffect(() => {
     // TODO: userId
     getPosts('111111')

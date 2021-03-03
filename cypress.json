@@ -1,0 +1,11 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "fileServerFolder": "e2e",
+  "fixturesFolder": "e2e/fixtures",
+  "integrationFolder": "e2e/integration",
+  "screenshotsFolder": "e2e/screenshots",
+  "videosFolder": "e2e/videos",
+  "supportFile": "e2e/support/index.ts",
+  "pluginsFile": "e2e/plugins/index.ts",
+  "testFiles": "**/*.spec.ts"
+}

@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   slack: circleci/slack@4.2.0
+  cypress: cypress-io/cypress@1
 executors:
   node:
     docker:
@@ -46,9 +47,18 @@ jobs:
           channel: C01J25XKYDS
           event: fail
           template: basic_fail_1
+
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build
       - test
+      - cypress/run:
+          yarn: true
+          post-steps:
+            - store_artifacts:
+                path: e2e/videos
+          command: 'yarn cy:run'
+          start: 'yarn start' # start server before running tests
+          wait-on: 'http://localhost:3000'
