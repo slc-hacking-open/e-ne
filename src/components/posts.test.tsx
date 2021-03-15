@@ -7,9 +7,6 @@ describe('postsコンポーネントのテスト', () => {
     const getPosts = jest.fn()
     render(<Posts getPosts={getPosts} />)
     expect(getPosts).toHaveBeenCalledTimes(1)
-    expect(getPosts).toHaveBeenCalledWith(
-      'SLC／生保ソリューション第２部',
-      '111111'
-    )
+    expect(getPosts).toHaveBeenCalledWith('111111')
   })
 })

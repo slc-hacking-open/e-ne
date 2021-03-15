@@ -6,25 +6,24 @@ export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
     pageSize: 1,
     posts: apiPosts.map((apiPost) => {
       return {
-        department: apiPost.department.S,
-        id: apiPost.id.N,
+        id: apiPost.id,
         sender: {
           userid: '',
           department: '',
-          name: apiPost.sender.name.S,
+          name: apiPost.sender[0].name,
           profile: '',
-          imageurl: apiPost.sender.imageurl.S,
+          imageurl: apiPost.sender[0].imageurl,
         },
         receiver: {
           userid: '',
           department: '',
-          name: apiPost.reciever.name.S,
+          name: apiPost.reciever[0].name,
           profile: '',
-          imageurl: apiPost.reciever.imageurl.S,
+          imageurl: apiPost.reciever[0].imageurl,
         },
-        contents: apiPost.contents.S,
-        datetime: apiPost.datetime.S,
-        empathyCount: apiPost.empathyCount.N,
+        contents: apiPost.contents,
+        datetime: apiPost.datetime,
+        empathyCount: apiPost.empathyCount,
         hasEmpathized: apiPost.hasEmpathized,
       }
     }),
@@ -33,25 +32,24 @@ export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
 
 export const apiPost2Post = (apiPost: APIPost): Post => {
   return {
-    department: apiPost.department.S,
-    id: apiPost.id.N,
+    id: apiPost.id,
     sender: {
       userid: '',
       department: '',
-      name: apiPost.sender.name.S,
+      name: apiPost.sender[0].name,
       profile: '',
-      imageurl: apiPost.sender.imageurl.S,
+      imageurl: apiPost.sender[0].imageurl,
     },
     receiver: {
       userid: '',
       department: '',
-      name: apiPost.reciever.name.S,
+      name: apiPost.reciever[0].name,
       profile: '',
-      imageurl: apiPost.reciever.imageurl.S,
+      imageurl: apiPost.reciever[0].imageurl,
     },
-    contents: apiPost.contents.S,
-    datetime: apiPost.datetime.S,
-    empathyCount: apiPost.empathyCount.N,
+    contents: apiPost.contents,
+    datetime: apiPost.datetime,
+    empathyCount: apiPost.empathyCount,
     hasEmpathized: apiPost.hasEmpathized,
   }
 }

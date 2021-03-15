@@ -8,7 +8,7 @@ describe('Authenticator:', function () {
 
   describe('Sign In:', () => {
     it('allows a user to signin', () => {
-      cy.intercept('GET', 'enedbfuncTimeline').as('getTimeline')
+      cy.intercept('GET', 'enecards').as('getTimeline')
       // Step 2: Take an action (Sign in)
       cy.get(selectors.signInSlot)
         .find(selectors.signInUsernameInput, { includeShadowDom: true })
