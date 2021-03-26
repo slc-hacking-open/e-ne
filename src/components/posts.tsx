@@ -2,18 +2,23 @@ import React, { FC, useEffect } from 'react'
 
 import Post from '../containers/post'
 import { PostProps } from './post'
+import { User } from '../services/models'
 
 export interface PostsProps {
   pageNumber?: number
   pageSize?: number
   posts?: PostProps[]
   getPosts?: (userId: string) => void
+  ownUser?: User
 }
 
-const Posts: FC<PostsProps> = ({ posts = [], getPosts = () => {} }) => {
+const Posts: FC<PostsProps> = ({
+  posts = [],
+  getPosts = () => {},
+  ownUser = undefined,
+}) => {
   useEffect(() => {
-    // TODO: userId
-    getPosts('111111')
+    getPosts(ownUser?.userid ? ownUser?.userid : '')
     // eslint-disable-next-line
   }, [])
 

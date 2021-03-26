@@ -28,6 +28,7 @@ describe('senderコンポーネントのテスト', () => {
         name: '生保花子',
         profile: '趣味は園芸',
         imageurl: 'url',
+        email: 'aaa@bbb',
       },
       {
         userid: 'user02',
@@ -35,6 +36,7 @@ describe('senderコンポーネントのテスト', () => {
         name: '生保太郎',
         profile: '趣味はプラモデル',
         imageurl: 'url2',
+        email: 'ccc@ddd',
       },
     ]
     const getUserList = jest.fn()
@@ -83,7 +85,7 @@ describe('senderコンポーネントのテスト', () => {
       <Sender contents="contents" to="user01" sendEne={sendEne} clear={clear} />
     )
     await userEvent.click(screen.getByTestId('sender-button'))
-    expect(sendEne).toHaveBeenCalledWith('111111', 'user01', 'contents')
+    expect(sendEne).toHaveBeenCalledWith('', 'user01', 'contents')
     expect(sendEne).toHaveBeenCalledTimes(1)
     expect(clear).toHaveBeenCalledTimes(1)
   })

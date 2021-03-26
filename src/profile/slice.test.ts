@@ -9,6 +9,7 @@ describe('profileのレデューサーのテスト', () => {
     name: '生保花子',
     profile: '趣味は園芸',
     imageurl: 'url',
+    email: 'aaa@bbb',
   }
   it('初期状態のテスト', () => {
     expect(profileSlice(undefined, {} as AnyAction)).toEqual(initialState)
@@ -25,6 +26,7 @@ describe('profileのレデューサーのテスト', () => {
         profile: '',
         userid: '',
         department: '',
+        email: '',
       },
       isLoading: true,
     })

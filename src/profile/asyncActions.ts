@@ -3,7 +3,7 @@ import { User } from '../services/models'
 import { getUserProfile } from '../services/users'
 
 interface GetProfileParam {
-  userid: string
+  email: string
 }
 
 interface GetProfileResult {
@@ -13,7 +13,7 @@ interface GetProfileResult {
 export const getProfile = createAsyncThunk<GetProfileResult, GetProfileParam>(
   'profile/getProfile',
   async (pram) => {
-    const user = await getUserProfile(pram.userid)
+    const user = await getUserProfile(pram.email)
 
     return { user }
   }

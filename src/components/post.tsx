@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react'
 import './post.css'
 import { ReactComponent as Heart } from './heart.svg'
+import { User } from '../services/models'
 
 export interface PostProps {
   id?: string
@@ -23,6 +24,7 @@ export interface PostProps {
   empathyCount?: number
   empathy?: (userId: string, postId: string) => void
   hasEmpathized?: boolean
+  ownUser?: User
 }
 
 const Post: FC<PostProps> = ({
@@ -34,6 +36,7 @@ const Post: FC<PostProps> = ({
   empathyCount = 0,
   empathy = () => {},
   hasEmpathized = false,
+  ownUser = undefined,
 }) => {
   // 共感数はサーバーど非同期
   // 画面上はローカルステートの数字を表示
@@ -72,7 +75,7 @@ const Post: FC<PostProps> = ({
             className="post-empathyButton"
             type="button"
             onClick={() => {
-              empathy(id, '111111')
+              empathy(id, ownUser?.userid ? ownUser.userid : '')
               if (localEmpathized) {
                 setlocalEmpathyCount(Number(localEmpathyCount) - 1)
                 setlocalEmpathized(false)

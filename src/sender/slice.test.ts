@@ -20,6 +20,7 @@ describe('senderのレデューサーのテスト', () => {
         name: '生保花子',
         profile: '趣味は園芸',
         imageurl: 'url',
+        email: 'aaa@bbb',
       },
       {
         userid: 'user02',
@@ -27,6 +28,7 @@ describe('senderのレデューサーのテスト', () => {
         name: '生保太郎',
         profile: '趣味はプラモデル',
         imageurl: 'url2',
+        email: 'ccc@ddd',
       },
     ],
   }

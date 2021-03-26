@@ -8,7 +8,14 @@ export interface ProfileState {
 }
 
 export const initialState: ProfileState = {
-  user: { imageurl: '', name: '', profile: '', userid: '', department: '' },
+  user: {
+    imageurl: '',
+    name: '',
+    profile: '',
+    userid: '',
+    department: '',
+    email: '',
+  },
   isLoading: false,
 }
 

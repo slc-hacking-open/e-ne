@@ -13,6 +13,7 @@ export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
           name: apiPost.sender[0].name,
           profile: '',
           imageurl: apiPost.sender[0].imageurl,
+          email: apiPost.sender[0].email,
         },
         receiver: {
           userid: '',
@@ -20,6 +21,7 @@ export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
           name: apiPost.reciever[0].name,
           profile: '',
           imageurl: apiPost.reciever[0].imageurl,
+          email: apiPost.reciever[0].email,
         },
         contents: apiPost.contents,
         datetime: apiPost.datetime,
@@ -39,6 +41,7 @@ export const apiPost2Post = (apiPost: APIPost): Post => {
       name: apiPost.sender[0].name,
       profile: '',
       imageurl: apiPost.sender[0].imageurl,
+      email: apiPost.sender[0].email,
     },
     receiver: {
       userid: '',
@@ -46,6 +49,7 @@ export const apiPost2Post = (apiPost: APIPost): Post => {
       name: apiPost.reciever[0].name,
       profile: '',
       imageurl: apiPost.reciever[0].imageurl,
+      email: apiPost.reciever[0].email,
     },
     contents: apiPost.contents,
     datetime: apiPost.datetime,

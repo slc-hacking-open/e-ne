@@ -17,6 +17,7 @@ export interface SenderProps {
   sendEne?: (senderId: string, receiverId: string, contents: string) => void
   getUserList?: () => void
   users?: User[]
+  ownUser?: User
 }
 
 const useStyles = makeStyles(() => ({
@@ -39,6 +40,7 @@ const Sender: FC<SenderProps> = ({
   sendEne = () => {},
   getUserList = () => {},
   users = [],
+  ownUser = undefined,
 }) => {
   useEffect(() => {
     getUserList()
@@ -46,7 +48,7 @@ const Sender: FC<SenderProps> = ({
 
   // 宛先セレクトボックスの作成
   const classes = useStyles()
-  const userlist = users.filter((u) => u.userid !== '111111')
+  const userlist = users.filter((u) => u.userid !== ownUser?.userid)
   const options = userlist.map((option) => {
     const department = option.department.toUpperCase()
     const name = option.name.toUpperCase()
@@ -110,7 +112,7 @@ const Sender: FC<SenderProps> = ({
         type="button"
         onClick={() => {
           if (contents !== '' && to !== '') {
-            sendEne('111111', to, contents)
+            sendEne(ownUser ? ownUser.userid : '', to, contents)
             clear()
           }
         }}

@@ -23,6 +23,7 @@ const PostsContainer: FC = () => {
       }
     }),
   }))
+  const profile = useSelector((state: RootState) => state.profile)
   const dispatch = useDispatch()
 
   return Posts({
@@ -30,6 +31,7 @@ const PostsContainer: FC = () => {
     pageSize: posts.pageSize,
     posts: posts.posts,
     getPosts: (userid: string) => dispatch(getPosts({ userid })),
+    ownUser: profile.user,
   })
 }
 

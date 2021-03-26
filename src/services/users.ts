@@ -8,9 +8,9 @@ const usersConfig = {
   timeout: TIMEOUT,
 }
 
-export const getUserProfile = async (userId: string): Promise<User> => {
+export const getUserProfile = async (mail: string): Promise<User> => {
   const instance = axios.create(usersConfig)
-  const response = await instance.get(`?userid=${userId}`, {
+  const response = await instance.get(`?email=${mail}`, {
     headers: {
       Authorization: `Bearer ${(await Auth.currentSession())
         .getIdToken()

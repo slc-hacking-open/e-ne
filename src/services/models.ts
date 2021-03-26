@@ -9,6 +9,8 @@ export interface User {
   profile: string
   // プロフィール画像URL
   imageurl: string
+  // メールアドレス
+  email: string
 }
 
 export interface Post {
