@@ -50,7 +50,7 @@ export const postPost = async (
     `{
     "data": {
       "department": "SLC／生保ソリューション第２部",
-      "sender": "111111",
+      "sender": "${senderId}",
       "reciever": "${receiverId}",
       "contents": "${contents}"
     }
