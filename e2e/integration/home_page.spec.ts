@@ -9,7 +9,7 @@ describe('Authenticator:', function () {
   describe('Sign In:', () => {
     it('allows a user to signin', () => {
       cy.intercept('GET', 'enecards').as('getTimeline')
-      // Step 2: Take an action (Sign in)
+      // Step 2: Take an action (Sign in)1
       cy.get(selectors.signInSlot)
         .find(selectors.signInUsernameInput, { includeShadowDom: true })
         .type('Cypress')
