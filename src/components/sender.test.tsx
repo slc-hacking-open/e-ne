@@ -83,7 +83,7 @@ describe('senderコンポーネントのテスト', () => {
       <Sender contents="contents" to="user01" sendEne={sendEne} clear={clear} />
     )
     await userEvent.click(screen.getByTestId('sender-button'))
-    expect(sendEne).toHaveBeenCalledWith('111111', 'user01', 'contents')
+    expect(sendEne).toHaveBeenCalledWith('0', 'user01', 'contents')
     expect(sendEne).toHaveBeenCalledTimes(1)
     expect(clear).toHaveBeenCalledTimes(1)
   })

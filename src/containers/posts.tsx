@@ -1,10 +1,22 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
+import { Auth } from 'aws-amplify'
 import Posts from '../components/posts'
 import { getPosts } from '../posts/asyncActions'
 import { RootState } from '../rootReducer'
 
 const PostsContainer: FC = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then((user) => Auth.userAttributes(user))
+      .then((attributes) => {
+        const userid = attributes.find(
+          (attribute) => attribute.Name === 'custom:eneid'
+        )?.Value
+        dispatch(getPosts({ userid: userid || '' }))
+      })
+  }, [])
   const posts = useSelector((state: RootState) => ({
     ...state.posts,
     posts: state.posts.posts.map((post) => {
@@ -23,13 +35,11 @@ const PostsContainer: FC = () => {
       }
     }),
   }))
-  const dispatch = useDispatch()
 
   return Posts({
     pageNumber: posts.pageNumber,
     pageSize: posts.pageSize,
     posts: posts.posts,
-    getPosts: (userid: string) => dispatch(getPosts({ userid })),
   })
 }
 

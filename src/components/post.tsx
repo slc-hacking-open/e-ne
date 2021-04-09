@@ -23,6 +23,7 @@ export interface PostProps {
   empathyCount?: number
   empathy?: (userId: string, postId: string) => void
   hasEmpathized?: boolean
+  empathizerid?: string
 }
 
 const Post: FC<PostProps> = ({
@@ -34,6 +35,7 @@ const Post: FC<PostProps> = ({
   empathyCount = 0,
   empathy = () => {},
   hasEmpathized = false,
+  empathizerid = '0',
 }) => {
   // 共感数はサーバーど非同期
   // 画面上はローカルステートの数字を表示
@@ -72,7 +74,7 @@ const Post: FC<PostProps> = ({
             className="post-empathyButton"
             type="button"
             onClick={() => {
-              empathy(id, '111111')
+              empathy(id, empathizerid)
               if (localEmpathized) {
                 setlocalEmpathyCount(Number(localEmpathyCount) - 1)
                 setlocalEmpathized(false)
