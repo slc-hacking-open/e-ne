@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { FC } from 'react'
+import { FC, useState, useEffect } from 'react'
+import { Auth } from 'aws-amplify'
 import Sender from '../components/sender'
 import { changeCoin, changeContents, changeTo, clear } from '../sender/slice'
 import { sendEne } from '../posts/asyncActions'
@@ -9,6 +10,18 @@ import { RootState } from '../rootReducer'
 const SenderContainer: FC = () => {
   const sender = useSelector((state: RootState) => state.sender)
   const dispatch = useDispatch()
+  const [userid, setUserid] = useState<string>('')
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then((user) => Auth.userAttributes(user))
+      .then((attributes) => {
+        const id = attributes.find(
+          (attribute) => attribute.Name === 'custom:eneid'
+        )?.Value
+        setUserid(id || '')
+      })
+  }, [])
 
   return Sender({
     contents: sender.contents,
@@ -22,6 +35,7 @@ const SenderContainer: FC = () => {
       dispatch(sendEne({ senderId, receiverId, contents })),
     getUserList: () => dispatch(getUsers()),
     users: sender.users,
+    userid,
   })
 }
 
