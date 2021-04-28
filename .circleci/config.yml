@@ -27,6 +27,9 @@ jobs:
       - run:
           name: install dependencies
           command: yarn install
+      - run:
+          name: build
+          command: yarn build
       - slack/notify:
           channel: C01J25XKYDS
           event: fail
