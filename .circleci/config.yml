@@ -6,7 +6,6 @@ executors:
   node:
     docker:
       - image: circleci/node:14.15.0
-    working_directory: /tmp
 commands:
   restore_modules:
     steps:
@@ -33,9 +32,9 @@ jobs:
           name: build
           command: yarn build
       - persist_to_workspace:
-          root: workspace 
+          root: /tmp/ 
           paths:
-            - echo-output
+            - output
 #      - slack/notify:
 #          channel: C01J25XKYDS
 #          event: fail
@@ -52,23 +51,23 @@ jobs:
       - run:
           name: unit test
           command: yarn test
-      - slack/notify:
-          channel: C01J25XKYDS
-          event: fail
-          template: basic_fail_1
+#      - slack/notify:
+#          channel: C01J25XKYDS
+#          event: fail
+#          template: basic_fail_1
   deploy:
     executor:
     docker:
       - image: circleci/python:3.6.5
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp/
       - run:
           name: install awscli
           command: sudo pip install awscli
       - run:
           name: deploy S3
-          command: aws s3 sync ./echo-output/ s3://ene-contents --delete
+          command: aws s3 sync ./output/ s3://ene-contents --delete
 
 workflows:
   version: 2
