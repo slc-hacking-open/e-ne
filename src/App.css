@@ -1,5 +1,5 @@
 body {
-  background-color: #fef6e4;
+  background-color: #fff;
 }
 
 body,
@@ -25,7 +25,7 @@ li {
 
 .header {
   align-items: center;
-  background-color: #8bd3dd;
+  background-color: #ff9a2e;
   color: #fff;
   display: flex;
   font-size: 1.3rem;
@@ -51,7 +51,7 @@ li {
 }
 
 .main-contents {
-  background-color: #f3d2c1;
+  background-color: #f5f5f5;
   max-width: 640px;
   min-height: 100vh;
   padding: 16px;

@@ -3,7 +3,7 @@ import React, { FC, useEffect } from 'react'
 import './sender.css'
 import { makeStyles, TextField } from '@material-ui/core'
 import { Autocomplete } from '@material-ui/lab'
-import { ReactComponent as Heart } from './heart.svg'
+import { ReactComponent as Ene } from '../ene.svg'
 import { User } from '../services/models'
 
 export interface SenderProps {
@@ -117,7 +117,8 @@ const Sender: FC<SenderProps> = ({
           }
         }}
       >
-        <Heart width="20px" height="20px" />
+        いいね
+        <Ene />
       </button>
     </div>
   )

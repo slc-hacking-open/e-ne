@@ -1,5 +1,5 @@
 .post {
-  background-color: #fef6e4;
+  background-color: #ffffff;
   border-radius: 3px;
   margin-bottom: 1rem;
   padding: 16px 16px 0 16px;
@@ -22,26 +22,49 @@
 }
 
 .post-thumbnail {
-  flex-grow: 0;
-  width: 32px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
 }
 
 .post-thumbnail-img {
-  height: 32px;
-  width: 32px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 0.1px solid #a9a9a9;
+  vertical-align: middle;
+  margin-right: 1rem;
+  display: inline-block;
 }
 
 .post-thumbnail-name {
-  font-size: 0.5rem;
+  font-size: 0.8rem;
   overflow: hidden;
   white-space: nowrap;
-  width: 50px;
+  display: inline-block;
+}
+
+.mailsend {
+  display: flex;
+  align-items: center;
+}
+
+.mailsend > svg {
+  height: 20px;
+  width: 20px;
+  margin-right: 1rem;
+}
+
+.mailsend > svg > g {
+  fill: #ff9a2e;
+  stroke: #ff9a2e;
 }
 
 .post-contents {
   flex-grow: 1;
   font-size: 0.9rem;
-  padding: 0 1rem;
+  padding: 1.5rem;
 }
 
 .post-empathy {
