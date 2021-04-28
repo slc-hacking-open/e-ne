@@ -6,6 +6,7 @@ executors:
   node:
     docker:
       - image: circleci/node:14.15.0
+    working_directory: /tmp
 commands:
   restore_modules:
     steps:
@@ -35,10 +36,10 @@ jobs:
           root: workspace 
           paths:
             - echo-output
-      - slack/notify:
-          channel: C01J25XKYDS
-          event: fail
-          template: basic_fail_1
+#      - slack/notify:
+#          channel: C01J25XKYDS
+#          event: fail
+#          template: basic_fail_1
       - save_modules
   test:
     executor: node
