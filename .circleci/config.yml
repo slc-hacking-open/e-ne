@@ -51,12 +51,19 @@ jobs:
           event: fail
           template: basic_fail_1
   deploy:
-    docker:
-      - image: circleci/python:3.7-stretch
+    executor: node
     steps:
+      - checkout
+      - restore_modules
+      - run:
+          name: install dependencies
+          command: yarn install
+      - run:
+          name: build
+          command: yarn build
       - run:
           name: install awscli
-          command: sudo pip install awscli
+          command: sudo npm install aws-cli-js
       - run:
           name: deploy S3
           command: aws s3 sync ./build s3://ene-contents --delete
