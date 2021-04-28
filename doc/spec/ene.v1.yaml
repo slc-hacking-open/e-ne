@@ -405,12 +405,12 @@ components:
       type: object
       description: 共感ユーザリクエスト
       properties:
-        empathyUserId:
+        empathizerid:
           type: integer
           minimum: 0
           description: 共感したユーザーのID
       required:
-        - empathyUserId
+        - empathizerid
 tags:
   - name: card
   - name: transfer
