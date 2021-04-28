@@ -24,6 +24,7 @@ jobs:
     steps:
       - checkout
       - restore_modules
+      - run: mkdir -p workspace
       - run:
           name: install dependencies
           command: yarn install
