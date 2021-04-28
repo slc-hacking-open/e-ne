@@ -31,9 +31,9 @@ jobs:
           name: build
           command: yarn build
       - persist_to_workspace:
-          root: /build/ 
+          root: ~/project  
           paths:
-            - .
+            - .build
 #      - slack/notify:
 #          channel: C01J25XKYDS
 #          event: fail
@@ -60,7 +60,7 @@ jobs:
       - image: circleci/python:3.6.5
     steps:
       - attach_workspace:
-          at: /build/
+          at: ~/project
       - run:
           name: install awscli
           command: sudo pip install awscli
