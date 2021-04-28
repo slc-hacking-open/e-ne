@@ -24,7 +24,6 @@ jobs:
     steps:
       - checkout
       - restore_modules
-      - run: mkdir -p workspace
       - run:
           name: install dependencies
           command: yarn install
@@ -32,9 +31,9 @@ jobs:
           name: build
           command: yarn build
       - persist_to_workspace:
-          root: /tmp/ 
+          root: /build/ 
           paths:
-            - output
+            - .
 #      - slack/notify:
 #          channel: C01J25XKYDS
 #          event: fail
@@ -61,13 +60,13 @@ jobs:
       - image: circleci/python:3.6.5
     steps:
       - attach_workspace:
-          at: /tmp/
+          at: /build/
       - run:
           name: install awscli
           command: sudo pip install awscli
       - run:
           name: deploy S3
-          command: aws s3 sync ./output/ s3://ene-contents --delete
+          command: aws s3 sync ./build s3://ene-contents --delete
 
 workflows:
   version: 2
