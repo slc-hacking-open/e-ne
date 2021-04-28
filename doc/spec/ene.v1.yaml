@@ -1,0 +1,417 @@
+openapi: 3.0.0
+info:
+  title: ene
+  version: '1.0'
+  description: いいねカードシステムのAPI
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/users/{userid}':
+    parameters:
+      - schema:
+          type: integer
+          minimum: 0
+        name: userid
+        in: path
+        required: true
+        description: いいねユーザーID
+    get:
+      summary: ユーザ取得
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      operationId: get-users-userid
+      description: いいねユーザーを取得する
+    put:
+      summary: ユーザー更新
+      operationId: put-users-userid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+      description: いいねユーザーを更新する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserReq'
+      tags:
+        - user
+  /users:
+    get:
+      summary: ユーザーリスト取得
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      operationId: get-users
+      description: いいねユーザーのリストを取得する
+      tags:
+        - user
+  /cards:
+    get:
+      summary: カードリスト取得
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Card'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      operationId: get-cards
+      description: いいねカードのリストを取得する
+      tags:
+        - card
+    post:
+      summary: カード登録
+      operationId: post-cards
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict
+      description: いいねカードを登録する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardReq'
+      tags:
+        - card
+  '/cards/{cardid}':
+    parameters:
+      - schema:
+          type: integer
+          minimum: 0
+        name: cardid
+        in: path
+        required: true
+        description: いいねカードID
+    get:
+      summary: カード取得
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      operationId: get-cards-cardid
+      description: いいねカードを取得する
+      tags:
+        - card
+    delete:
+      summary: カード削除
+      operationId: delete-cards-cardid
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+      description: いいねカードを削除する
+      tags:
+        - card
+  '/cards/{cardid}/empathy-users/add':
+    parameters:
+      - schema:
+          type: integer
+          minimum: 0
+        name: cardid
+        in: path
+        required: true
+    post:
+      summary: 共感ユーザ追加
+      operationId: post-cards-cardid-empathy-users-add
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict
+      tags:
+        - card
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmpathyUserReq'
+        description: ''
+      description: いいねカードに共感したユーザーを追加する
+  '/cards/{cardid}/empathy-users/remove':
+    parameters:
+      - schema:
+          type: integer
+          minimum: 0
+        name: cardid
+        in: path
+        required: true
+    post:
+      summary: 共感ユーザー削除
+      operationId: post-cards-cardid-empathy-users-remove
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict
+      tags:
+        - card
+      description: いいねカードに共感したユーザーを追加する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmpathyUserReq'
+  /transfer-enecoin:
+    post:
+      summary: いいねコイン送信
+      operationId: post-transfer-enecoin
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict
+      description: いいねコインを送信する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferEneCoinReq'
+      tags:
+        - transfer
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: いいねユーザー
+      x-examples: {}
+      properties:
+        userId:
+          type: integer
+          description: いいねユーザーID
+          minimum: 0
+        name:
+          type: string
+          description: ユーザ名
+        imageUrl:
+          type: string
+          format: uri
+          description: プロフィール画像ファイルのURL
+        department:
+          type: string
+          description: 所属部署
+        profile:
+          type: string
+          description: 自己紹介文
+        eneCoin:
+          type: integer
+          minimum: 0
+          maximum: 3000
+          description: いいねコイン
+        glicoCoin:
+          type: integer
+          minimum: 0
+          maximum: 3000
+          description: グリココイン
+    Card:
+      title: Card
+      type: object
+      x-examples: {}
+      description: いいねカード
+      properties:
+        id:
+          type: integer
+          description: いいねカードID
+          minimum: 0
+        contents:
+          type: string
+          description: メッセージ
+        amount:
+          type: integer
+          minimum: 0
+          description: 送信者から受信者へ送られるいいねコイン数
+        sender:
+          $ref: '#/components/schemas/User'
+        reciever:
+          $ref: '#/components/schemas/User'
+        empathyUserIds:
+          type: array
+          description: 共感したユーザーのIDリスト
+          items:
+            type: integer
+        datetime:
+          type: string
+          format: date-time
+          description: 作成日時
+    CardReq:
+      title: CardReq
+      description: カードリクエスト
+      type: object
+      properties:
+        contents:
+          type: string
+          description: メッセージ
+        amount:
+          type: integer
+          minimum: 0
+          description: 送信者から受信者へ送られるいいねコイン数
+        senderId:
+          type: integer
+          description: 送信者のユーザーID
+          minimum: 0
+        recieverId:
+          type: integer
+          description: 受信者のユーザーID
+          minimum: 0
+      required:
+        - contents
+        - amount
+        - senderId
+        - recieverId
+    UserReq:
+      title: UserReq
+      description: ユーザーリクエスト
+      type: object
+      properties:
+        name:
+          type: string
+          description: ユーザー名
+        imageUrl:
+          type: string
+          format: uri
+          description: プロフィール画像ファイルのURL
+        department:
+          type: string
+          description: 所属部署
+        profile:
+          type: string
+          description: 自己紹介文
+      required:
+        - name
+        - imageUrl
+        - department
+        - profile
+    TransferEneCoinReq:
+      title: TransferEneCoinReq
+      type: object
+      description: コイン送信リクエスト
+      properties:
+        senderid:
+          type: integer
+          minimum: 0
+          description: 送信者のユーザーID
+        recieverid:
+          type: integer
+          minimum: 0
+          description: 受信者のユーザーID
+        amount:
+          type: integer
+          maximum: 10
+          minimum: 1
+          description: コイン数
+      required:
+        - senderid
+        - recieverid
+        - amount
+    EmpathyUserReq:
+      title: EmpathyUserReq
+      type: object
+      description: 共感ユーザリクエスト
+      properties:
+        empathyUserId:
+          type: integer
+          minimum: 0
+          description: 共感したユーザーのID
+      required:
+        - empathyUserId
+tags:
+  - name: card
+  - name: transfer
+  - name: user
