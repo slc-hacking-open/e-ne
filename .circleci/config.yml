@@ -63,7 +63,7 @@ jobs:
           command: yarn build
       - run:
           name: install awssdk
-          command: sudo aws-sdk
+          command: sudo npm install aws-sdk
       - run:
           name: deploy S3
           command: aws s3 sync ./build s3://ene-contents --delete
