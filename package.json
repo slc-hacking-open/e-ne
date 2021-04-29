@@ -30,7 +30,7 @@
     "cy:run": "cypress run --headless --env failOnSnapshotDiff=false",
     "cy:snap": "cypress run --headless",
     "cy:snap:update": "cypress run --headless --env updateSnapshots=true",
-    "generate:spec-html": "redoc-cli bundle doc/spec/ene.v1.yaml --output doc/index.html"
+    "generate:spec-html": "redoc-cli bundle docs/specs/ene.v1.yaml --output docs/specs/index.html"
   },
   "eslintConfig": {
     "extends": "react-app"
