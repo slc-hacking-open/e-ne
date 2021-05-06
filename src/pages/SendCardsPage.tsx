@@ -2,7 +2,7 @@ import React from 'react'
 import Posts from '../containers/posts'
 import DispProfile from '../containers/profile'
 
-const ReceivePage: React.FC = () => {
+const SendCardsPage: React.FC = () => {
   return (
     <>
       <div className="main-contents">
@@ -15,4 +15,4 @@ const ReceivePage: React.FC = () => {
   )
 }
 
-export default ReceivePage
+export default SendCardsPage

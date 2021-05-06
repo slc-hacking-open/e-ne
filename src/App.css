@@ -18,45 +18,19 @@ li {
   box-sizing: border-box;
 }
 
-.signout {
-  display: flex;
-  width: 5vw;
-}
-
-.header {
-  align-items: center;
-  background-color: #8bd3dd;
-  color: #fff;
-  display: flex;
-  font-size: 1.3rem;
-  height: 50px;
-  width: 100vw;
-}
-
-.header > svg {
-  height: 25px;
-  margin-left: 1rem;
-  width: 25px;
-}
-
-.header > h1 {
-  font-size: 1.6rem;
-  margin-left: 0.5rem;
-}
-
 .main {
   display: flex;
   justify-content: center;
   margin-top: 25px;
 }
 
-.main-toolbar {
+.main-sidebar {
   display: flex;
   margin-right: 25px;
   width: 200px;
 }
 
-.main-toolbar .link {
+.main-sidebar .link {
   text-decoration: none;
 }
 
