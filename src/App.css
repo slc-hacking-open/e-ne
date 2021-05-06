@@ -50,13 +50,13 @@ li {
   margin-top: 25px;
 }
 
-.main-toolbar {
+.main-sidebar {
   display: flex;
   margin-right: 25px;
   width: 200px;
 }
 
-.main-toolbar .link {
+.main-sidebar .link {
   text-decoration: none;
 }
 

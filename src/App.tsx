@@ -12,15 +12,12 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@material-ui/core'
-import { ExitToApp, Home, Mail } from '@material-ui/icons'
+import { ExitToApp } from '@material-ui/icons'
 import { Auth } from 'aws-amplify'
-import DispProfile from './containers/profile'
 import Message from './containers/message'
-import Sender from './containers/sender'
 import Loading from './containers/loading'
-import { ReactComponent as Ene } from './ene.svg'
-import ReceivePage from './pages/ReceivePage'
-import HomePage from './pages/HomePage'
+import Header from './Header'
+import routes from './routes'
 
 const App: React.FC = () => {
   const [authState, setAuthState] = useState<AuthState>()
@@ -37,30 +34,19 @@ const App: React.FC = () => {
     <Router>
       <div className="App">
         <Message />
-        <header className="header">
-          <Ene />
-          <h1>e-ne</h1>
-        </header>
+        <Header />
         <div className="main">
-          <div className="main-toolbar">
+          <div className="main-sidebar">
             <List>
               <Divider />
-              <Link to="/" className="link">
-                <ListItem button>
-                  <ListItemIcon>
-                    <Home />
-                  </ListItemIcon>
-                  <ListItemText primary="ホーム" />
-                </ListItem>
-              </Link>
-              <Link to="/receive" className="link">
-                <ListItem button>
-                  <ListItemIcon>
-                    <Mail />
-                  </ListItemIcon>
-                  <ListItemText primary="受信カード" />
-                </ListItem>
-              </Link>
+              {routes.map((route) => (
+                <Link to={route.path} className="link">
+                  <ListItem button>
+                    <ListItemIcon>{route.linkIcon}</ListItemIcon>
+                    <ListItemText primary={route.name} />
+                  </ListItem>
+                </Link>
+              ))}
               <Divider />
               <Link to="/" onClick={() => Auth.signOut()} className="link">
                 <ListItem button>
@@ -74,8 +60,9 @@ const App: React.FC = () => {
             </List>
           </div>
           <Switch>
-            <Route path="/" component={HomePage} exact />
-            <Route path="/receive" component={ReceivePage} exact />
+            {routes.map((route) => (
+              <Route path={route.path} component={route.component} exact />
+            ))}
           </Switch>
         </div>
         <Loading />
