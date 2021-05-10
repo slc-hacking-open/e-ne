@@ -45,6 +45,5 @@ export interface APIPost {
   department: string
   datetime: string
   contents: string
-  empathyCount: number
-  hasEmpathized: boolean
+  empathyUserIds: string[]
 }

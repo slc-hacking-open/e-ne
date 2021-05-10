@@ -1,6 +1,9 @@
 import { Timeline, APIPost, Post } from './models'
 
-export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
+export const apiPosts2Timeline = (
+  apiPosts: APIPost[],
+  userid: string
+): Timeline => {
   return {
     pageNumber: 1,
     pageSize: 1,
@@ -23,14 +26,14 @@ export const apiPosts2Timeline = (apiPosts: APIPost[]): Timeline => {
         },
         contents: apiPost.contents,
         datetime: apiPost.datetime,
-        empathyCount: apiPost.empathyCount,
-        hasEmpathized: apiPost.hasEmpathized,
+        empathyCount: apiPost.empathyUserIds.length,
+        hasEmpathized: apiPost.empathyUserIds.includes(userid),
       }
     }),
   }
 }
 
-export const apiPost2Post = (apiPost: APIPost): Post => {
+export const apiPost2Post = (apiPost: APIPost, userid: string): Post => {
   return {
     id: apiPost.id,
     sender: {
@@ -49,7 +52,7 @@ export const apiPost2Post = (apiPost: APIPost): Post => {
     },
     contents: apiPost.contents,
     datetime: apiPost.datetime,
-    empathyCount: apiPost.empathyCount,
-    hasEmpathized: apiPost.hasEmpathized,
+    empathyCount: apiPost.empathyUserIds.length,
+    hasEmpathized: apiPost.empathyUserIds.includes(userid),
   }
 }
