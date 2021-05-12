@@ -40,8 +40,8 @@ export interface Timeline {
 // APIが返してくるデータ
 export interface APIPost {
   id: string
-  sender: User[]
-  reciever: User[]
+  sender: User
+  reciever: User
   department: string
   datetime: string
   contents: string
