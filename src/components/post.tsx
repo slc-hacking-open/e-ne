@@ -54,7 +54,7 @@ const Post: FC<PostProps> = ({
           />
           <p className="post-thumbnail-name">{sender.name}</p>
         </div>
-        <div className="mailsend">
+        <div className="thumb">
           <Ene />
         </div>
         <div className="post-thumbnail">

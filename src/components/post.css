@@ -45,18 +45,18 @@
   display: inline-block;
 }
 
-.mailsend {
+.thumb {
   display: flex;
   align-items: center;
 }
 
-.mailsend > svg {
+.thumb > svg {
   height: 20px;
   width: 20px;
   margin-right: 1rem;
 }
 
-.mailsend > svg > g {
+.thumb > svg > g {
   fill: #ff9a2e;
   stroke: #ff9a2e;
 }
