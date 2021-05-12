@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react'
 import './post.css'
 import { ReactComponent as Heart } from './heart.svg'
+import { ReactComponent as Ene } from './thumb.svg'
 
 export interface PostProps {
   id?: string
@@ -53,8 +54,8 @@ const Post: FC<PostProps> = ({
           />
           <p className="post-thumbnail-name">{sender.name}</p>
         </div>
-        <div className="post-contents">
-          <p className="post-contents-p">{contents}</p>
+        <div className="thumb">
+          <Ene />
         </div>
         <div className="post-thumbnail">
           <img
@@ -64,6 +65,9 @@ const Post: FC<PostProps> = ({
           />
           <p className="post-thumbnail-name">{receiver.name}</p>
         </div>
+      </div>
+      <div className="post-contents">
+        <p className="post-contents-p">{contents}</p>
       </div>
       <div className="post-footer">
         <div className="post-time">

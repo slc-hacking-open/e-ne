@@ -13,9 +13,6 @@ const postsConfig = {
 export const getTimeline = async (userid: string): Promise<Timeline> => {
   const instance = axios.create(postsConfig)
   const response = await instance.get(``, {
-    params: {
-      userid,
-    },
     headers: {
       Authorization: `Bearer ${(await Auth.currentSession())
         .getIdToken()
@@ -33,7 +30,7 @@ export const getTimeline = async (userid: string): Promise<Timeline> => {
       throw new Error('サーバーエラーです')
   }
 
-  const timeline: Timeline = apiPosts2Timeline(response.data.data)
+  const timeline: Timeline = apiPosts2Timeline(response.data.data, userid)
 
   return timeline
 }
@@ -49,8 +46,8 @@ export const postPost = async (
     ``,
     `{
     "data": {
-      "sender": "${senderId}",
-      "reciever": "${receiverId}",
+      "senderid": "${senderId}",
+      "recieverid": "${receiverId}",
       "contents": "${contents}"
     }
   }`,
@@ -73,23 +70,22 @@ export const postPost = async (
       throw new Error('サーバーエラーです')
   }
 
-  const newPost: Post = apiPost2Post(response.data.data)
+  const newPost: Post = apiPost2Post(response.data.data, senderId)
 
   return newPost
 }
 
 // 共感ボタン押下時
 export const pushEmpathy = async (
-  eneid: string,
-  eneuserid: string
+  cardid: string,
+  empathizerid: string
 ): Promise<boolean> => {
   const instance = axios.create(postsConfig)
-  const response = await instance.put(
-    ``,
+  const response = await instance.post(
+    `/${cardid}`,
     `{
     "data":{
-      "id":"${eneid}",
-      "userid":"${eneuserid}"
+      "empathizerid":"${empathizerid}"
     }
   }`,
     {

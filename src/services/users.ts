@@ -10,7 +10,7 @@ const usersConfig = {
 
 export const getUserProfile = async (userId: string): Promise<User> => {
   const instance = axios.create(usersConfig)
-  const response = await instance.get(`?userid=${userId}`, {
+  const response = await instance.get(`/${userId}`, {
     headers: {
       Authorization: `Bearer ${(await Auth.currentSession())
         .getIdToken()
