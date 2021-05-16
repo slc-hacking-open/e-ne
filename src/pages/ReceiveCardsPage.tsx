@@ -6,7 +6,7 @@ const ReceiveCardsPage: React.FC = () => {
   return (
     <>
       <div className="main-contents">
-        <Posts />
+        <Posts filter="receiver" />
       </div>
       <div className="main-sidemenu">
         <DispProfile />

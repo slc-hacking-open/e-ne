@@ -9,7 +9,6 @@ describe('postsのレデューサーのテスト', () => {
     pageSize: 5,
     posts: [
       {
-        department: 'ソリューション部',
         id: 'ene01',
         sender: {} as User,
         receiver: {} as User,

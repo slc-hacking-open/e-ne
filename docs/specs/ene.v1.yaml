@@ -319,7 +319,7 @@ components:
           description: 送信者から受信者へ送られるいいねコイン数
         sender:
           $ref: '#/components/schemas/User'
-        reciever:
+        receiver:
           $ref: '#/components/schemas/User'
         empathyUserIds:
           type: array
@@ -346,7 +346,7 @@ components:
           type: integer
           description: 送信者のユーザーID
           minimum: 0
-        recieverId:
+        receiverId:
           type: integer
           description: 受信者のユーザーID
           minimum: 0
@@ -354,7 +354,7 @@ components:
         - contents
         - amount
         - senderId
-        - recieverId
+        - receiverId
     UserReq:
       title: UserReq
       description: ユーザーリクエスト
@@ -387,7 +387,7 @@ components:
           type: integer
           minimum: 0
           description: 送信者のユーザーID
-        recieverid:
+        receiverid:
           type: integer
           minimum: 0
           description: 受信者のユーザーID
@@ -398,7 +398,7 @@ components:
           description: コイン数
       required:
         - senderid
-        - recieverid
+        - receiverid
         - amount
     EmpathyUserReq:
       title: EmpathyUserReq

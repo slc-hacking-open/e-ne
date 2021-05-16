@@ -41,7 +41,7 @@ export interface Timeline {
 export interface APIPost {
   id: string
   sender: User
-  reciever: User
+  receiver: User
   department: string
   datetime: string
   contents: string

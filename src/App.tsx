@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react'
 import { AmplifyAuthenticator, AmplifySignIn } from '@aws-amplify/ui-react'
 import './Reset.css'
@@ -39,8 +40,8 @@ const App: React.FC = () => {
           <div className="main-sidebar">
             <List>
               <Divider />
-              {routes.map((route) => (
-                <Link to={route.path} className="link">
+              {routes.map((route, index) => (
+                <Link to={route.path} className="link" key={index}>
                   <ListItem button>
                     <ListItemIcon>{route.linkIcon}</ListItemIcon>
                     <ListItemText primary={route.name} />
@@ -60,8 +61,13 @@ const App: React.FC = () => {
             </List>
           </div>
           <Switch>
-            {routes.map((route) => (
-              <Route path={route.path} component={route.component} exact />
+            {routes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                component={route.component}
+                exact
+              />
             ))}
           </Switch>
         </div>

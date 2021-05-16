@@ -6,7 +6,7 @@ const SendCardsPage: React.FC = () => {
   return (
     <>
       <div className="main-contents">
-        <Posts />
+        <Posts filter="sender" />
       </div>
       <div className="main-sidemenu">
         <DispProfile />
