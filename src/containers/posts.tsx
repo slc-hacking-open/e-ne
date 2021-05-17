@@ -5,7 +5,11 @@ import Posts from '../components/posts'
 import { getPosts } from '../posts/asyncActions'
 import { RootState } from '../rootReducer'
 
-const PostsContainer: FC = () => {
+type PostsContainerProps = {
+  filter?: 'sender' | 'receiver'
+}
+
+const PostsContainer: FC<PostsContainerProps> = ({ filter }) => {
   const dispatch = useDispatch()
   useEffect(() => {
     Auth.currentAuthenticatedUser()
@@ -14,7 +18,13 @@ const PostsContainer: FC = () => {
         const userid = attributes.find(
           (attribute) => attribute.Name === 'custom:eneid'
         )?.Value
-        dispatch(getPosts({ userid: userid || '' }))
+        dispatch(
+          getPosts({
+            userid: userid || '',
+            senderId: filter === 'sender' ? userid : '',
+            receiverId: filter === 'receiver' ? userid : '',
+          })
+        )
       })
   }, [])
   const posts = useSelector((state: RootState) => ({

@@ -4,11 +4,17 @@ import { Timeline, Post } from '../services/models'
 
 interface GetPostsParam {
   userid: string
+  senderId?: string
+  receiverId?: string
 }
 export const getPosts = createAsyncThunk<Timeline, GetPostsParam>(
   'posts/getPosts',
   async (pram) => {
-    const result = await getTimeline(pram.userid)
+    const result = await getTimeline(
+      pram.userid,
+      pram.senderId || '',
+      pram.receiverId || ''
+    )
 
     return result
   }

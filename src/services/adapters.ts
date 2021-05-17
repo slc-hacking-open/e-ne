@@ -20,9 +20,9 @@ export const apiPosts2Timeline = (
         receiver: {
           userid: '',
           department: '',
-          name: apiPost.reciever.name,
+          name: apiPost.receiver.name,
           profile: '',
-          imageurl: apiPost.reciever.imageurl,
+          imageurl: apiPost.receiver.imageurl,
         },
         contents: apiPost.contents,
         datetime: apiPost.datetime,
@@ -46,9 +46,9 @@ export const apiPost2Post = (apiPost: APIPost, userid: string): Post => {
     receiver: {
       userid: '',
       department: '',
-      name: apiPost.reciever.name,
+      name: apiPost.receiver.name,
       profile: '',
-      imageurl: apiPost.reciever.imageurl,
+      imageurl: apiPost.receiver.imageurl,
     },
     contents: apiPost.contents,
     datetime: apiPost.datetime,

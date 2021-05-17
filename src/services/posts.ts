@@ -10,13 +10,21 @@ const postsConfig = {
 }
 
 // タイムライン取得
-export const getTimeline = async (userid: string): Promise<Timeline> => {
+export const getTimeline = async (
+  userid: string,
+  senderId?: string,
+  receiverId?: string
+): Promise<Timeline> => {
   const instance = axios.create(postsConfig)
   const response = await instance.get(``, {
     headers: {
       Authorization: `Bearer ${(await Auth.currentSession())
         .getIdToken()
         .getJwtToken()}`,
+    },
+    params: {
+      senderId,
+      receiverId,
     },
   })
 
@@ -47,7 +55,7 @@ export const postPost = async (
     `{
     "data": {
       "senderid": "${senderId}",
-      "recieverid": "${receiverId}",
+      "receiverid": "${receiverId}",
       "contents": "${contents}"
     }
   }`,

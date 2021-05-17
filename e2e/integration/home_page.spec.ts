@@ -21,9 +21,7 @@ describe('Authenticator:', function () {
         .contains('サインイン')
         .click()
       // Step 3: Make an assertion (Check for sign-out text)
-      cy.get(selectors.signOutButton, { includeShadowDom: true }).contains(
-        'サインアウト'
-      )
+      cy.get('div.main-sidebar').contains('サインアウト')
       cy.wait('@getTimeline')
       cy.matchImageSnapshot('login')
     })
@@ -35,6 +33,4 @@ export const selectors = {
   signInUsernameInput: '[data-test="sign-in-username-input"]',
   signInPasswordInput: '[data-test="sign-in-password-input"]',
   signInSignInButton: '[data-test="sign-in-sign-in-button"]',
-  signOutSlot: '[slot="sign-out"]',
-  signOutButton: '[data-test="sign-out-button"]',
 }
