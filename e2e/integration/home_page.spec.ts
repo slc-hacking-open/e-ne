@@ -21,7 +21,7 @@ describe('Authenticator:', function () {
         .contains('サインイン')
         .click()
       // Step 3: Make an assertion (Check for sign-out text)
-      cy.get('div.main-sidebar').contains('ログアウト')
+      cy.get('div.main-sidebar').contains('サインアウト')
       cy.wait('@getTimeline')
       cy.matchImageSnapshot('login')
     })

@@ -54,7 +54,7 @@ const App: React.FC = () => {
                   <ListItemIcon>
                     <ExitToApp />
                   </ListItemIcon>
-                  <ListItemText primary="ログアウト" />
+                  <ListItemText primary="サインアウト" />
                 </ListItem>
               </Link>
               <Divider />
