@@ -26,8 +26,11 @@ export const apiPosts2Timeline = (
         },
         contents: apiPost.contents,
         datetime: apiPost.datetime,
-        empathyCount: apiPost.empathyUserIds.length,
-        hasEmpathized: apiPost.empathyUserIds.includes(userid),
+        empathyUsers: apiPost.empathyUsers,
+        empathyCount: apiPost.empathyUsers.length,
+        hasEmpathized: !!apiPost.empathyUsers.find(
+          (user) => user.userid === userid
+        ),
       }
     }),
   }
@@ -52,7 +55,10 @@ export const apiPost2Post = (apiPost: APIPost, userid: string): Post => {
     },
     contents: apiPost.contents,
     datetime: apiPost.datetime,
-    empathyCount: apiPost.empathyUserIds.length,
-    hasEmpathized: apiPost.empathyUserIds.includes(userid),
+    empathyUsers: apiPost.empathyUsers,
+    empathyCount: apiPost.empathyUsers.length,
+    hasEmpathized: !!apiPost.empathyUsers.find(
+      (user) => user.userid === userid
+    ),
   }
 }

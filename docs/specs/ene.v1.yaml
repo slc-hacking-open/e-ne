@@ -212,6 +212,7 @@ paths:
               $ref: '#/components/schemas/EmpathyUserReq'
         description: ''
       description: いいねカードに共感したユーザーを追加する
+      parameters: []
   '/cards/{cardid}/empathy-users/remove':
     parameters:
       - schema:
@@ -321,11 +322,11 @@ components:
           $ref: '#/components/schemas/User'
         receiver:
           $ref: '#/components/schemas/User'
-        empathyUserIds:
-          type: array
+        empathyUsers:
           description: 共感したユーザーのIDリスト
+          type: array
           items:
-            type: integer
+            $ref: '#/components/schemas/User'
         datetime:
           type: string
           format: date-time
