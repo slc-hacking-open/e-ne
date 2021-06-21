@@ -32,6 +32,11 @@ function SimpleDialog(props: SimpleDialogProps) {
       aria-labelledby="simple-dialog-title"
       open={open}
       scroll="paper"
+      PaperProps={{
+        style: {
+          maxHeight: '400px',
+        },
+      }}
     >
       <DialogTitle id="simple-dialog-title">共感した人</DialogTitle>
       <List>
