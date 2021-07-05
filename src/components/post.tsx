@@ -1,7 +1,57 @@
 import React, { FC, useState } from 'react'
 import './post.css'
+import {
+  Avatar,
+  Dialog,
+  DialogTitle,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+} from '@material-ui/core'
 import { ReactComponent as Heart } from './heart.svg'
 import { ReactComponent as Ene } from './thumb.svg'
+import { User } from '../services/models'
+
+type SimpleDialogProps = {
+  onClose: () => void
+  open: boolean
+  empathyUsers: User[]
+}
+
+function SimpleDialog(props: SimpleDialogProps) {
+  const { onClose, open, empathyUsers } = props
+
+  const handleClose = () => {
+    onClose()
+  }
+
+  return (
+    <Dialog
+      onClose={handleClose}
+      aria-labelledby="simple-dialog-title"
+      open={open}
+      scroll="paper"
+      PaperProps={{
+        style: {
+          maxHeight: '400px',
+        },
+      }}
+    >
+      <DialogTitle id="simple-dialog-title">共感した人</DialogTitle>
+      <List>
+        {empathyUsers.map((user) => (
+          <ListItem key={user.userid}>
+            <ListItemAvatar>
+              <Avatar src={user.imageurl} />
+            </ListItemAvatar>
+            <ListItemText primary={user.name} />
+          </ListItem>
+        ))}
+      </List>
+    </Dialog>
+  )
+}
 
 export interface PostProps {
   id?: string
@@ -23,6 +73,7 @@ export interface PostProps {
   datetime?: string
   empathyCount?: number
   empathy?: (userId: string, postId: string) => void
+  empathyUsers?: User[]
   hasEmpathized?: boolean
   empathizerid?: string
 }
@@ -33,8 +84,10 @@ const Post: FC<PostProps> = ({
   receiver = { name: '' },
   contents = '',
   datetime = '',
+  empathyUsers = [],
   empathyCount = 0,
   empathy = () => {},
+
   hasEmpathized = false,
   empathizerid = '0',
 }) => {
@@ -42,6 +95,15 @@ const Post: FC<PostProps> = ({
   // 画面上はローカルステートの数字を表示
   const [localEmpathyCount, setlocalEmpathyCount] = useState(empathyCount)
   const [localEmpathized, setlocalEmpathized] = useState(hasEmpathized)
+  const [open, setOpen] = useState(false)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   return (
     <div className="post">
@@ -99,7 +161,18 @@ const Post: FC<PostProps> = ({
               })()}
             />
           </button>
-          <p className="post-empathyCount">{Number(localEmpathyCount)}</p>
+          <button
+            type="button"
+            onClick={handleClickOpen}
+            className="post-empathyCount"
+          >
+            {Number(localEmpathyCount)}
+          </button>
+          <SimpleDialog
+            empathyUsers={empathyUsers}
+            open={open}
+            onClose={handleClose}
+          />
         </div>
       </div>
     </div>

@@ -22,6 +22,7 @@ const Posts: FC<PostsProps> = ({ posts = [] }) => {
               receiver={post.receiver}
               contents={post.contents}
               datetime={post.datetime}
+              empathyUsers={post.empathyUsers}
               empathyCount={post.empathyCount}
               hasEmpathized={post.hasEmpathized}
             />

@@ -22,6 +22,8 @@ export interface Post {
   contents: string
   // 投稿日時（ISO8061）
   datetime: string
+  // 共感ユーザーのリスト
+  empathyUsers: User[]
   // 共感された数
   empathyCount: number
   // ログインユーザーが共感してるか
@@ -45,5 +47,5 @@ export interface APIPost {
   department: string
   datetime: string
   contents: string
-  empathyUserIds: string[]
+  empathyUsers: User[]
 }
