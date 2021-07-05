@@ -46,6 +46,10 @@ const postsSlice = createSlice({
     builder.addCase(sendEne.fulfilled, (state, action: PayloadAction<Post>) => {
       state.posts = [action.payload, ...state.posts]
     })
+    builder.addCase(sendEne.rejected, (state, action) => {
+      state.error = true
+      state.message = action.error.message ? action.error.message : ''
+    })
   },
 })
 

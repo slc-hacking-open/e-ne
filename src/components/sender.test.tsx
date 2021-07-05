@@ -87,4 +87,42 @@ describe('senderコンポーネントのテスト', () => {
     expect(sendEne).toHaveBeenCalledTimes(1)
     expect(clear).toHaveBeenCalledTimes(1)
   })
+
+  test('内容が140字以上でいいねボタンを押下したとき、いいねのコールバック関数とクリアのコールバック関数が実行されないこと', async () => {
+    const sendEne = jest.fn()
+    const clear = jest.fn()
+    render(
+      <Sender
+        contents="あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやいゆえよらりるれろわをんんんあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやいゆえよらりるれろわをんんんあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやいゆえよら"
+        to="user01"
+        sendEne={sendEne}
+        clear={clear}
+      />
+    )
+    await userEvent.click(screen.getByTestId('sender-contents'))
+    await userEvent.click(screen.getByTestId('sender-button'))
+    expect(sendEne).toHaveBeenCalledTimes(0)
+    expect(clear).toHaveBeenCalledTimes(0)
+  })
+
+  test('内容が140字でいいねボタンを押下したとき、いいねのコールバック関数とクリアのコールバック関数が実行されること', async () => {
+    const sendEne = jest.fn()
+    const clear = jest.fn()
+    render(
+      <Sender
+        contents="あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやいゆえよらりるれろわをんんんあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやいゆえよらりるれろわをんんんあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやいゆえよ"
+        to="user01"
+        sendEne={sendEne}
+        clear={clear}
+      />
+    )
+    await userEvent.click(screen.getByTestId('sender-button'))
+    expect(sendEne).toHaveBeenCalledWith(
+      '0',
+      'user01',
+      'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやいゆえよらりるれろわをんんんあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやいゆえよらりるれろわをんんんあいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやいゆえよ'
+    )
+    expect(sendEne).toHaveBeenCalledTimes(1)
+    expect(clear).toHaveBeenCalledTimes(1)
+  })
 })
