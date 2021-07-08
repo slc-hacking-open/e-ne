@@ -1,15 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { pushEmpathy } from '../services/posts'
+import { addEmpathy, removeEmpathy } from '../services/posts'
 
 interface pushEmpathyParam {
   postId: string
   userId: string
 }
 
-export const empathy = createAsyncThunk<boolean, pushEmpathyParam>(
-  'post/empathy',
+export const empathyAdd = createAsyncThunk<boolean, pushEmpathyParam>(
+  'post/empathyAdd',
   async (pram) => {
-    const result = await pushEmpathy(pram.postId, pram.userId)
+    const result = await addEmpathy(pram.postId, pram.userId)
+
+    return result
+  }
+)
+
+export const empathyRemove = createAsyncThunk<boolean, pushEmpathyParam>(
+  'post/empathyRemove',
+  async (pram) => {
+    const result = await removeEmpathy(pram.postId, pram.userId)
 
     return result
   }

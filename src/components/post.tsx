@@ -72,7 +72,8 @@ export interface PostProps {
   to?: string
   datetime?: string
   empathyCount?: number
-  empathy?: (userId: string, postId: string) => void
+  empathyAdd?: (userId: string, postId: string) => void
+  empathyRemove?: (userId: string, postId: string) => void
   empathyUsers?: User[]
   hasEmpathized?: boolean
   empathizerid?: string
@@ -86,8 +87,8 @@ const Post: FC<PostProps> = ({
   datetime = '',
   empathyUsers = [],
   empathyCount = 0,
-  empathy = () => {},
-
+  empathyAdd = () => {},
+  empathyRemove = () => {},
   hasEmpathized = false,
   empathizerid = '0',
 }) => {
@@ -140,11 +141,12 @@ const Post: FC<PostProps> = ({
             className="post-empathyButton"
             type="button"
             onClick={() => {
-              empathy(id, empathizerid)
               if (localEmpathized) {
+                empathyRemove(id, empathizerid)
                 setlocalEmpathyCount(Number(localEmpathyCount) - 1)
                 setlocalEmpathized(false)
               } else {
+                empathyAdd(id, empathizerid)
                 setlocalEmpathyCount(Number(localEmpathyCount) + 1)
                 setlocalEmpathized(true)
               }

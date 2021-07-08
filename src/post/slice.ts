@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { PostProps } from '../components/post'
-import { empathy } from './asycActions'
+import { empathyAdd, empathyRemove } from './asycActions'
 
 export interface PostState {
   noStateNow: number
@@ -21,7 +21,8 @@ const postSlice = createSlice({
     // note: 共感ボタン押した時にローディングやエラーメッセージ出すのは
     // UX悪い気がするので、一旦succeedアクションしか作ってない
     // TODO: yoshikoshi 共感ボタン押下時のエラー処理方式の検討
-    builder.addCase(empathy.fulfilled, () => {})
+    builder.addCase(empathyAdd.fulfilled, () => {})
+    builder.addCase(empathyRemove.fulfilled, () => {})
   },
 })
 
