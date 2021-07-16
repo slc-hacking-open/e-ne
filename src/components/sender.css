@@ -58,3 +58,7 @@
 .sender-button .st0 {
   fill: #001858;
 }
+
+.error {
+  color: red;
+}

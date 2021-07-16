@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import './sender.css'
 import { makeStyles, TextField } from '@material-ui/core'
 import { Autocomplete } from '@material-ui/lab'
@@ -60,8 +60,33 @@ const Sender: FC<SenderProps> = ({
     }
   })
 
+  // 宛先の入力チェック
+  const [localTo, setLocalTo] = useState('')
+  const [toError, setToError] = useState('')
+  const handleBlurTo = () => {
+    if (!localTo) {
+      setToError('宛先を入力してください')
+    } else {
+      setToError('')
+    }
+  }
+
+  // 内容の入力チェック
+  const [localContents, setLocalContents] = useState('')
+  const [contentsError, setContentsError] = useState('')
+  const handleBlurContents = () => {
+    if (!localContents) {
+      setContentsError('内容を入力してください')
+    } else if (localContents.length > 140) {
+      setContentsError('内容は140字以内で入力してください')
+    } else {
+      setContentsError('')
+    }
+  }
+
   return (
     <div className="sender">
+      {toError && <div className="error">{toError}</div>}
       <Autocomplete
         id="sender-auto-complete"
         options={options
@@ -72,6 +97,7 @@ const Sender: FC<SenderProps> = ({
         getOptionSelected={(option, value) => option.name === value.name}
         style={{ width: 200, marginBottom: '0.5rem' }}
         onChange={(event, value) => {
+          setLocalTo(value?.userid ? value.userid : '')
           changeTo(value?.userid ? value.userid : '')
         }}
         renderInput={(params) => (
@@ -80,8 +106,10 @@ const Sender: FC<SenderProps> = ({
             label="宛先"
             variant="outlined"
             onChange={(e) => {
+              setLocalTo(e.target.value)
               changeTo(e.target.value)
             }}
+            onBlur={handleBlurTo}
             InputLabelProps={{ style: { fontSize: 10 } }}
             FormHelperTextProps={{ style: { fontSize: 10 } }}
           />
@@ -97,21 +125,26 @@ const Sender: FC<SenderProps> = ({
           changeCoin(e.target.value)
         }}
       />
+      {contentsError && <div className="error">{contentsError}</div>}
       <textarea
         className="sender-contents"
+        data-testid="sender-contents"
         name="contents"
         value={contents}
         placeholder="内容"
         onChange={(e) => {
+          setLocalContents(e.target.value)
           changeContents(e.target.value)
         }}
+        onBlur={handleBlurContents}
       />
       <button
         className="sender-button"
         data-testid="sender-button"
         type="button"
+        disabled={contents === '' || to === ''}
         onClick={() => {
-          if (contents !== '' && to !== '') {
+          if (toError === '' && contentsError === '') {
             sendEne(userid, to, contents)
             clear()
           }
