@@ -92,10 +92,6 @@ const Post: FC<PostProps> = ({
   hasEmpathized = false,
   empathizerid = '0',
 }) => {
-  // 共感数はサーバーど非同期
-  // 画面上はローカルステートの数字を表示
-  const [localEmpathyCount, setlocalEmpathyCount] = useState(empathyCount)
-  const [localEmpathized, setlocalEmpathized] = useState(hasEmpathized)
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {
@@ -139,22 +135,19 @@ const Post: FC<PostProps> = ({
         <div className="post-empathy">
           <button
             className="post-empathyButton"
+            data-testid="post-empathyButton"
             type="button"
             onClick={() => {
-              if (localEmpathized) {
+              if (hasEmpathized) {
                 empathyRemove(id, empathizerid)
-                setlocalEmpathyCount(Number(localEmpathyCount) - 1)
-                setlocalEmpathized(false)
               } else {
                 empathyAdd(id, empathizerid)
-                setlocalEmpathyCount(Number(localEmpathyCount) + 1)
-                setlocalEmpathized(true)
               }
             }}
           >
             <Heart
               className={(() => {
-                if (localEmpathized) {
+                if (hasEmpathized) {
                   return 'post-icon post-icon-clicked'
                   // eslint-disable-next-line
                 } else {
@@ -168,7 +161,7 @@ const Post: FC<PostProps> = ({
             onClick={handleClickOpen}
             className="post-empathyCount"
           >
-            {Number(localEmpathyCount)}
+            {empathyCount}
           </button>
           <SimpleDialog
             empathyUsers={empathyUsers}
