@@ -95,7 +95,7 @@ const Sender: FC<SenderProps> = ({
         groupBy={(option) => option.department}
         getOptionLabel={(option) => option.name}
         getOptionSelected={(option, value) => option.name === value.name}
-        style={{ width: 200, marginBottom: '0.5rem' }}
+        style={{ width: '100%', marginBottom: '0.5rem' }}
         onChange={(event, value) => {
           setLocalTo(value?.userid ? value.userid : '')
           changeTo(value?.userid ? value.userid : '')
