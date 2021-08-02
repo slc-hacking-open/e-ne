@@ -67,6 +67,17 @@
   padding: 1.5rem;
 }
 
+.post-coin {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.post-coin > svg {
+  height: 16px;
+  width: 16px;
+}
+
 .post-empathy {
   align-items: center;
   display: flex;

@@ -20,6 +20,10 @@ const Profile: FC<ProfileProps> = ({ user }) => (
     <p className="profile-name">{user.name}</p>
     <p className="profile-department">{user.department}</p>
     <p className="profile-profile">{user.profile}</p>
+    <div className="coin">
+      <p className="profile-enecoin">いいねコイン： {user.enecoin} 枚</p>
+      <p className="profile-glicocoin">グリココイン： {user.glicocoin} 枚</p>
+    </div>
   </div>
 )
 

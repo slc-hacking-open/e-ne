@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core'
 import { ReactComponent as Heart } from './heart.svg'
 import { ReactComponent as Ene } from './thumb.svg'
+import { ReactComponent as Coin } from './coin.svg'
 import { User } from '../services/models'
 
 type SimpleDialogProps = {
@@ -134,6 +135,10 @@ const Post: FC<PostProps> = ({
       <div className="post-footer">
         <div className="post-time">
           <p>{datetime}</p>
+        </div>
+        <div className="post-coin">
+          <Coin />
+          50枚
         </div>
         <div className="post-empathy">
           <button
