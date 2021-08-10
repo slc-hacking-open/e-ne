@@ -25,6 +25,7 @@ const Posts: FC<PostsProps> = ({ posts = [] }) => {
               empathyUsers={post.empathyUsers}
               empathyCount={post.empathyCount}
               hasEmpathized={post.hasEmpathized}
+              amount={post.amount}
             />
           )
         })}

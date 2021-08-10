@@ -77,6 +77,7 @@ export interface PostProps {
   empathyUsers?: User[]
   hasEmpathized?: boolean
   empathizerid?: string
+  amount?: number
 }
 
 const Post: FC<PostProps> = ({
@@ -88,9 +89,9 @@ const Post: FC<PostProps> = ({
   empathyUsers = [],
   empathyCount = 0,
   empathy = () => {},
-
   hasEmpathized = false,
   empathizerid = '0',
+  amount = '0',
 }) => {
   // 共感数はサーバーど非同期
   // 画面上はローカルステートの数字を表示
@@ -138,7 +139,7 @@ const Post: FC<PostProps> = ({
         </div>
         <div className="post-coin">
           <Coin />
-          50枚
+          {amount}
         </div>
         <div className="post-empathy">
           <button

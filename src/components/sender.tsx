@@ -14,7 +14,12 @@ export interface SenderProps {
   changeTo?: (to: string) => void
   changeCoin?: (coin: string) => void
   clear?: () => void
-  sendEne?: (senderId: string, receiverId: string, contents: string) => void
+  sendEne?: (
+    senderId: string,
+    receiverId: string,
+    contents: string,
+    coin: string
+  ) => void
   getUserList?: () => void
   users?: User[]
   userid?: string
@@ -112,7 +117,7 @@ const Sender: FC<SenderProps> = ({
         type="button"
         onClick={() => {
           if (contents !== '' && to !== '') {
-            sendEne(userid, to, contents)
+            sendEne(userid, to, contents, coin)
             clear()
           }
         }}

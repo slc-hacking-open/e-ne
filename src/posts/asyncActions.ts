@@ -24,11 +24,17 @@ interface PostEneParam {
   senderId: string
   receiverId: string
   contents: string
+  coin: string
 }
 export const sendEne = createAsyncThunk<Post, PostEneParam>(
   'posts/sendEne',
   async (pram) => {
-    const result = await postPost(pram.senderId, pram.receiverId, pram.contents)
+    const result = await postPost(
+      pram.senderId,
+      pram.receiverId,
+      pram.contents,
+      pram.coin
+    )
 
     return result
   }

@@ -47,7 +47,8 @@ export const getTimeline = async (
 export const postPost = async (
   senderId: string,
   receiverId: string,
-  contents: string
+  contents: string,
+  amount: string
 ): Promise<Post> => {
   const instance = axios.create(postsConfig)
   const response = await instance.post(
@@ -56,7 +57,8 @@ export const postPost = async (
     "data": {
       "senderid": "${senderId}",
       "receiverid": "${receiverId}",
-      "contents": "${contents}"
+      "contents": "${contents}",
+      "amount": "${amount}"
     }
   }`,
     {

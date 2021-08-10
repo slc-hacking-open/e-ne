@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { User } from '../services/models'
 import { getProfile } from './asyncActions'
 
@@ -23,7 +23,11 @@ export const initialState: ProfileState = {
 const profileSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {},
+  reducers: {
+    reduceEneCoin: (state, action: PayloadAction<string>) => {
+      state.user.enecoin -= Number(action.payload)
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getProfile.pending, (state) => {
       state.user = initialState.user
@@ -40,3 +44,5 @@ const profileSlice = createSlice({
 })
 
 export default profileSlice.reducer
+
+export const { reduceEneCoin } = profileSlice.actions
