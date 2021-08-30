@@ -1,8 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { FC, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import './sender.css'
 import { makeStyles, TextField } from '@material-ui/core'
 import { Autocomplete } from '@material-ui/lab'
+import { RootState } from '../rootReducer'
 import { ReactComponent as Ene } from '../ene.svg'
 import { User } from '../services/models'
 
@@ -28,9 +30,22 @@ export interface SenderProps {
 const useStyles = makeStyles(() => ({
   resize: {
     fontSize: 10,
+    backgroundColor: '#faebd7',
   },
   '& input::placeholder': {
     fontSize: '10px',
+  },
+  root: {
+    marginBottom: '0.5rem',
+    width: '100%',
+    fontSize: 10,
+    '& input::placeholder': {
+      fontSize: '10px',
+    },
+    '& textarea::placeholder': {
+      fontSize: '10px',
+    },
+    backgroundColor: '#faebd7',
   },
 }))
 
@@ -73,6 +88,20 @@ const Sender: FC<SenderProps> = ({
       setToError('宛先を入力してください')
     } else {
       setToError('')
+    }
+  }
+
+  // コインの入力チェック
+  const [localCoin, setLocalCoin] = useState(0)
+  const [coinError, setCoinError] = useState('')
+  const enecoin = useSelector((state: RootState) => state.profile.user.enecoin)
+  const handleBlurCoin = () => {
+    if (localCoin > enecoin) {
+      setCoinError('送信コインは所持コイン以下の枚数を指定してください')
+    } else if (localCoin < 1 || localCoin > 10) {
+      setCoinError('送信コインは１～１０の範囲を指定してください')
+    } else {
+      setCoinError('')
     }
   }
 
@@ -121,18 +150,26 @@ const Sender: FC<SenderProps> = ({
         )}
         classes={{ input: classes.resize }}
       />
-      <input
-        className="sender-coin"
+      {coinError && <div className="error">{coinError}</div>}
+      <TextField
+        variant="outlined"
+        type="number"
+        className={classes.root}
         name="coin"
         value={coin}
         placeholder="コイン"
         onChange={(e) => {
+          setLocalCoin(Number(e.target.value))
           changeCoin(e.target.value)
         }}
+        onBlur={handleBlurCoin}
       />
       {contentsError && <div className="error">{contentsError}</div>}
-      <textarea
-        className="sender-contents"
+      <TextField
+        multiline
+        rows={4}
+        variant="outlined"
+        className={classes.root}
         data-testid="sender-contents"
         name="contents"
         value={contents}
@@ -147,9 +184,9 @@ const Sender: FC<SenderProps> = ({
         className="sender-button"
         data-testid="sender-button"
         type="button"
-        disabled={contents === '' || to === ''}
+        disabled={contents === '' || to === '' || coin === ''}
         onClick={() => {
-          if (toError === '' && contentsError === '') {
+          if (toError === '' && contentsError === '' && coinError === '') {
             sendEne(userid, to, contents, coin)
             clear()
           }
