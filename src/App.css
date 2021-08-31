@@ -62,12 +62,46 @@ li {
 @media screen and (max-width: 900px) {
   .main {
     align-items: center;
-    flex-direction: column-reverse;
+    display: flex;
+    flex-direction: column;
   }
 
   .main-sidemenu {
     margin: 0 0 1rem 0;
     max-width: 640px;
     width: 100%;
+    order: 2;
+  }
+
+  .main-sidebar {
+    margin: 0 0 1rem 0;
+    max-width: 640px;
+    width: 100%;
+    order: 1;
+  }
+
+  .main-sidebar > ul {
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-sidebar > ul > a {
+    width: 100%;
+  }
+
+  .main-sidebar > ul > a > div {
+    padding: 0em;
+  }
+
+  .main-sidebar > ul > a > div > div > span {
+    font-size: 110%;
+  }
+
+  .main-contents {
+    order: 3;
   }
 }

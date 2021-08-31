@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react'
 import './post.css'
 import {
   Avatar,
+  Button,
   Dialog,
   DialogTitle,
   List,
@@ -156,13 +157,20 @@ const Post: FC<PostProps> = ({
               })()}
             />
           </button>
-          <button
+          <Button
             type="button"
             onClick={handleClickOpen}
             className="post-empathyCount"
+            size="small"
+            style={{
+              maxWidth: '15px',
+              maxHeight: '15px',
+              minWidth: '15px',
+              minHeight: '15px',
+            }}
           >
             {empathyCount}
-          </button>
+          </Button>
           <SimpleDialog
             empathyUsers={empathyUsers}
             open={open}
