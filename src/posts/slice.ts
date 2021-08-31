@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Post, Timeline } from '../services/models'
-import { getPosts, sendEne } from './asyncActions'
+import { getPosts, sendEne, empathyAdd, empathyRemove } from './asyncActions'
 
 export interface PostsState {
   pageNumber: number
@@ -50,6 +50,34 @@ const postsSlice = createSlice({
       state.error = true
       state.message = action.error.message ? action.error.message : ''
     })
+    // 共感
+    // note: 共感ボタン押した時にローディングやエラーメッセージ出すのは
+    // UX悪い気がするので、一旦succeedアクションしか作ってない
+    // TODO: yoshikoshi 共感ボタン押下時のエラー処理方式の検討
+    builder.addCase(
+      empathyAdd.fulfilled,
+      (state, action: PayloadAction<Post>) => {
+        state.posts.forEach((post) => {
+          if (post.id === action.payload.id) {
+            post.empathyUsers = action.payload.empathyUsers
+            post.hasEmpathized = action.payload.hasEmpathized
+            post.empathyCount = action.payload.empathyCount
+          }
+        })
+      }
+    )
+    builder.addCase(
+      empathyRemove.fulfilled,
+      (state, action: PayloadAction<Post>) => {
+        state.posts.forEach((post) => {
+          if (post.id === action.payload.id) {
+            post.empathyUsers = action.payload.empathyUsers
+            post.hasEmpathized = action.payload.hasEmpathized
+            post.empathyCount = action.payload.empathyCount
+          }
+        })
+      }
+    )
   },
 })
 

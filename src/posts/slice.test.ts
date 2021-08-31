@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux'
 import { User } from '../services/models'
 import postsSlice, { initialState, PostsState } from './slice'
-import { getPosts, sendEne } from './asyncActions'
+import { getPosts, sendEne, empathyAdd, empathyRemove } from './asyncActions'
 
 describe('postsのレデューサーのテスト', () => {
   const postsTestData: PostsState = {
@@ -12,10 +12,21 @@ describe('postsのレデューサーのテスト', () => {
         id: 'ene01',
         sender: {} as User,
         receiver: {} as User,
-        contents: 'contest',
+        contents: 'content',
         datetime: '',
         empathyCount: 1,
         hasEmpathized: true,
+        empathyUsers: [],
+      },
+      {
+        id: 'ene02',
+        sender: {} as User,
+        receiver: {} as User,
+        contents: 'content',
+        datetime: '',
+        empathyCount: 1,
+        hasEmpathized: true,
+        empathyUsers: [],
       },
     ],
     error: false,
@@ -23,14 +34,43 @@ describe('postsのレデューサーのテスト', () => {
     message: '',
   }
   const postTestData = {
-    department: 'ソリューション部１',
     id: 'ene01',
     sender: {} as User,
     receiver: {} as User,
-    contents: 'contest2',
+    contents: 'content2',
     datetime: '',
     empathyCount: 0,
     hasEmpathized: false,
+    empathyUsers: [{} as User],
+  }
+  const empathyExceptData = {
+    pageNumber: 1,
+    pageSize: 5,
+    posts: [
+      {
+        id: 'ene01',
+        sender: {} as User,
+        receiver: {} as User,
+        contents: 'content',
+        datetime: '',
+        empathyCount: 0,
+        hasEmpathized: false,
+        empathyUsers: [{} as User],
+      },
+      {
+        id: 'ene02',
+        sender: {} as User,
+        receiver: {} as User,
+        contents: 'content',
+        datetime: '',
+        empathyCount: 1,
+        hasEmpathized: true,
+        empathyUsers: [],
+      },
+    ],
+    error: false,
+    loadingCount: 1,
+    message: '',
   }
   it('初期状態のテスト', () => {
     expect(postsSlice(undefined, {} as AnyAction)).toEqual(initialState)
@@ -80,5 +120,21 @@ describe('postsのレデューサーのテスト', () => {
       ...postsTestData,
       posts: [postTestData, ...postsTestData.posts],
     })
+  })
+  it('共感追加時に共感したいいねカード内容が更新されること', () => {
+    expect(
+      postsSlice(postsTestData, {
+        type: empathyAdd.fulfilled.type,
+        payload: postTestData,
+      })
+    ).toEqual(empathyExceptData)
+  })
+  it('共感削除時に共感したいいねカード内容が更新されること', () => {
+    expect(
+      postsSlice(postsTestData, {
+        type: empathyRemove.fulfilled.type,
+        payload: postTestData,
+      })
+    ).toEqual(empathyExceptData)
   })
 })

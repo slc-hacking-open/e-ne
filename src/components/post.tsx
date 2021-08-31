@@ -72,7 +72,8 @@ export interface PostProps {
   to?: string
   datetime?: string
   empathyCount?: number
-  empathy?: (userId: string, postId: string) => void
+  empathyAdd?: (userId: string, postId: string) => void
+  empathyRemove?: (userId: string, postId: string) => void
   empathyUsers?: User[]
   hasEmpathized?: boolean
   empathizerid?: string
@@ -86,15 +87,11 @@ const Post: FC<PostProps> = ({
   datetime = '',
   empathyUsers = [],
   empathyCount = 0,
-  empathy = () => {},
-
+  empathyAdd = () => {},
+  empathyRemove = () => {},
   hasEmpathized = false,
   empathizerid = '0',
 }) => {
-  // 共感数はサーバーど非同期
-  // 画面上はローカルステートの数字を表示
-  const [localEmpathyCount, setlocalEmpathyCount] = useState(empathyCount)
-  const [localEmpathized, setlocalEmpathized] = useState(hasEmpathized)
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {
@@ -138,21 +135,19 @@ const Post: FC<PostProps> = ({
         <div className="post-empathy">
           <button
             className="post-empathyButton"
+            data-testid="post-empathyButton"
             type="button"
             onClick={() => {
-              empathy(id, empathizerid)
-              if (localEmpathized) {
-                setlocalEmpathyCount(Number(localEmpathyCount) - 1)
-                setlocalEmpathized(false)
+              if (hasEmpathized) {
+                empathyRemove(id, empathizerid)
               } else {
-                setlocalEmpathyCount(Number(localEmpathyCount) + 1)
-                setlocalEmpathized(true)
+                empathyAdd(id, empathizerid)
               }
             }}
           >
             <Heart
               className={(() => {
-                if (localEmpathized) {
+                if (hasEmpathized) {
                   return 'post-icon post-icon-clicked'
                   // eslint-disable-next-line
                 } else {
@@ -166,7 +161,7 @@ const Post: FC<PostProps> = ({
             onClick={handleClickOpen}
             className="post-empathyCount"
           >
-            {Number(localEmpathyCount)}
+            {empathyCount}
           </button>
           <SimpleDialog
             empathyUsers={empathyUsers}
