@@ -243,29 +243,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EmpathyUserReq'
-  /transfer-enecoin:
-    post:
-      summary: いいねコイン送信
-      operationId: post-transfer-enecoin
-      responses:
-        '204':
-          description: No Content
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '409':
-          description: Conflict
-      description: いいねコインを送信する
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TransferEneCoinReq'
-      tags:
-        - transfer
 components:
   schemas:
     User:
@@ -379,28 +356,6 @@ components:
         - imageUrl
         - department
         - profile
-    TransferEneCoinReq:
-      title: TransferEneCoinReq
-      type: object
-      description: コイン送信リクエスト
-      properties:
-        senderid:
-          type: integer
-          minimum: 0
-          description: 送信者のユーザーID
-        receiverid:
-          type: integer
-          minimum: 0
-          description: 受信者のユーザーID
-        amount:
-          type: integer
-          maximum: 10
-          minimum: 1
-          description: コイン数
-      required:
-        - senderid
-        - receiverid
-        - amount
     EmpathyUserReq:
       title: EmpathyUserReq
       type: object
@@ -414,5 +369,4 @@ components:
         - empathizerid
 tags:
   - name: card
-  - name: transfer
   - name: user

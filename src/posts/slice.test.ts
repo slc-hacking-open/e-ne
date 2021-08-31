@@ -1,7 +1,12 @@
 import { AnyAction } from 'redux'
 import { User } from '../services/models'
-import postsSlice, { initialState, PostsState } from './slice'
-import { getPosts, sendEne } from './asyncActions'
+import postsSlice, {
+  initialState,
+  PostsState,
+  setPageNumber,
+  setDisplayedCards,
+} from './slice'
+import { getPosts, sendEne, empathyAdd, empathyRemove } from './asyncActions'
 
 describe('postsのレデューサーのテスト', () => {
   const postsTestData: PostsState = {
@@ -12,10 +17,43 @@ describe('postsのレデューサーのテスト', () => {
         id: 'ene01',
         sender: {} as User,
         receiver: {} as User,
-        contents: 'contest',
+        contents: 'content',
         datetime: '',
         empathyCount: 1,
         hasEmpathized: true,
+        empathyUsers: [],
+      },
+      {
+        id: 'ene02',
+        sender: {} as User,
+        receiver: {} as User,
+        contents: 'content',
+        datetime: '',
+        empathyCount: 1,
+        hasEmpathized: true,
+        empathyUsers: [],
+      },
+    ],
+    displayedCards: [
+      {
+        id: 'ene01',
+        sender: {} as User,
+        receiver: {} as User,
+        contents: 'content',
+        datetime: '',
+        empathyCount: 1,
+        hasEmpathized: true,
+        empathyUsers: [],
+      },
+      {
+        id: 'ene02',
+        sender: {} as User,
+        receiver: {} as User,
+        contents: 'content',
+        datetime: '',
+        empathyCount: 1,
+        hasEmpathized: true,
+        empathyUsers: [],
       },
     ],
     error: false,
@@ -23,14 +61,65 @@ describe('postsのレデューサーのテスト', () => {
     message: '',
   }
   const postTestData = {
-    department: 'ソリューション部１',
     id: 'ene01',
     sender: {} as User,
     receiver: {} as User,
-    contents: 'contest2',
+    contents: 'content2',
     datetime: '',
     empathyCount: 0,
     hasEmpathized: false,
+    empathyUsers: [{} as User],
+  }
+  const empathyExceptData = {
+    pageNumber: 1,
+    pageSize: 5,
+    posts: [
+      {
+        id: 'ene01',
+        sender: {} as User,
+        receiver: {} as User,
+        contents: 'content',
+        datetime: '',
+        empathyCount: 0,
+        hasEmpathized: false,
+        empathyUsers: [{} as User],
+      },
+      {
+        id: 'ene02',
+        sender: {} as User,
+        receiver: {} as User,
+        contents: 'content',
+        datetime: '',
+        empathyCount: 1,
+        hasEmpathized: true,
+        empathyUsers: [],
+      },
+    ],
+    displayedCards: [
+      {
+        id: 'ene01',
+        sender: {} as User,
+        receiver: {} as User,
+        contents: 'content',
+        datetime: '',
+        empathyCount: 0,
+        hasEmpathized: false,
+        empathyUsers: [{} as User],
+      },
+      {
+        id: 'ene02',
+        sender: {} as User,
+        receiver: {} as User,
+        contents: 'content',
+        datetime: '',
+        empathyCount: 1,
+        hasEmpathized: true,
+        empathyUsers: [],
+      },
+    ],
+    error: false,
+    loadingCount: 1,
+    message: '',
   }
   it('初期状態のテスト', () => {
     expect(postsSlice(undefined, {} as AnyAction)).toEqual(initialState)
@@ -54,6 +143,7 @@ describe('postsのレデューサーのテスト', () => {
     ).toEqual({
       ...postsTestData,
       loadingCount: initialState.loadingCount - 1,
+      pageSize: 1,
     })
   })
   it('タイムライン取得失敗時にエラー情報が設定され、ロードカウントが-1されること', () => {
@@ -79,6 +169,45 @@ describe('postsのレデューサーのテスト', () => {
     ).toEqual({
       ...postsTestData,
       posts: [postTestData, ...postsTestData.posts],
+      displayedCards: [postTestData, ...postsTestData.posts],
+    })
+  })
+  it('共感追加時に共感したいいねカード内容が更新されること', () => {
+    expect(
+      postsSlice(postsTestData, {
+        type: empathyAdd.fulfilled.type,
+        payload: postTestData,
+      })
+    ).toEqual(empathyExceptData)
+  })
+  it('共感削除時に共感したいいねカード内容が更新されること', () => {
+    expect(
+      postsSlice(postsTestData, {
+        type: empathyRemove.fulfilled.type,
+        payload: postTestData,
+      })
+    ).toEqual(empathyExceptData)
+  })
+  it('ページ番号変更時に変更内容が設定されること', () => {
+    const pageNumber = 2
+    expect(postsSlice(postsTestData, setPageNumber(pageNumber))).toEqual({
+      ...postsTestData,
+      pageNumber: 2,
+    })
+  })
+  it('ページング押下時、画面表示するいいねが設定されること', () => {
+    const pagingTestData: PostsState = {
+      pageNumber: 1,
+      pageSize: 1,
+      posts: new Array(15),
+      displayedCards: [],
+      error: false,
+      loadingCount: 1,
+      message: '',
+    }
+    expect(postsSlice(pagingTestData, setDisplayedCards())).toEqual({
+      ...pagingTestData,
+      displayedCards: new Array(10),
     })
   })
 })

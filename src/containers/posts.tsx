@@ -4,6 +4,7 @@ import { Auth } from 'aws-amplify'
 import Posts from '../components/posts'
 import { getPosts } from '../posts/asyncActions'
 import { RootState } from '../rootReducer'
+import { setDisplayedCards, setPageNumber } from '../posts/slice'
 
 type PostsContainerProps = {
   filter?: 'sender' | 'receiver'
@@ -29,7 +30,7 @@ const PostsContainer: FC<PostsContainerProps> = ({ filter }) => {
   }, [])
   const posts = useSelector((state: RootState) => ({
     ...state.posts,
-    posts: state.posts.posts.map((post) => {
+    displayedCards: state.posts.displayedCards.map((post) => {
       // 日付を`年月日`に変換する
       const year = post.datetime.substr(0, 4)
       const month = post.datetime.substr(4, 2)
@@ -49,6 +50,9 @@ const PostsContainer: FC<PostsContainerProps> = ({ filter }) => {
     pageNumber: posts.pageNumber,
     pageSize: posts.pageSize,
     posts: posts.posts,
+    displayedCards: posts.displayedCards,
+    setPageNumber: (page: number) => dispatch(setPageNumber(page)),
+    setDisplayedCards: () => dispatch(setDisplayedCards()),
   })
 }
 

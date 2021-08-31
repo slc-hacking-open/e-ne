@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { Auth } from 'aws-amplify'
-import { BASE_URL_POSTS, TIMEOUT } from './config'
+import { BASE_URL_CARDS, TIMEOUT } from './config'
 import { Timeline, Post } from './models'
 import { apiPosts2Timeline, apiPost2Post } from './adapters'
 
 const postsConfig = {
-  baseURL: `${BASE_URL_POSTS}`,
+  baseURL: `${BASE_URL_CARDS}`,
   timeout: TIMEOUT,
 }
 
@@ -85,14 +85,14 @@ export const postPost = async (
   return newPost
 }
 
-// 共感ボタン押下時
-export const pushEmpathy = async (
+// 共感ボタン押下時(追加)
+export const addEmpathy = async (
   cardid: string,
   empathizerid: string
-): Promise<boolean> => {
+): Promise<Post> => {
   const instance = axios.create(postsConfig)
   const response = await instance.post(
-    `/${cardid}`,
+    `/${cardid}/empathy-users/add`,
     `{
     "data":{
       "empathizerid":"${empathizerid}"
@@ -107,15 +107,54 @@ export const pushEmpathy = async (
     }
   )
 
-  if (response.status !== 200) {
-    switch (response.status) {
-      case 400:
-      case 405:
-        throw new Error('共感に失敗しました')
-      default:
-        throw new Error('サーバーエラーです')
-    }
+  switch (response.status) {
+    case 200:
+      break
+    case 400:
+    case 404:
+      throw new Error('共感に失敗しました')
+    default:
+      throw new Error('サーバーエラーです')
   }
 
-  return response.data.data
+  const post: Post = apiPost2Post(response.data.data, empathizerid)
+
+  return post
+}
+
+// 共感ボタン押下時（削除）
+export const removeEmpathy = async (
+  cardid: string,
+  empathizerid: string
+): Promise<Post> => {
+  const instance = axios.create(postsConfig)
+  const response = await instance.post(
+    `/${cardid}/empathy-users/remove`,
+    `{
+    "data":{
+      "empathizerid":"${empathizerid}"
+    }
+  }`,
+    {
+      headers: {
+        Authorization: `Bearer ${(await Auth.currentSession())
+          .getIdToken()
+          .getJwtToken()}`,
+      },
+    }
+  )
+
+  switch (response.status) {
+    case 200:
+      break
+    case 400:
+    case 404:
+      throw new Error('共感に失敗しました')
+    default:
+      throw new Error('サーバーエラーです')
+  }
+
+  const post: Post = apiPost2Post(response.data.data, empathizerid)
+
+  return post
 }

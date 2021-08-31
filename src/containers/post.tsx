@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Auth } from 'aws-amplify'
 import Post, { PostProps } from '../components/post'
-import { empathy } from '../post/asycActions'
+import { empathyAdd, empathyRemove } from '../posts/asyncActions'
 
 const PostContainer: FC<PostProps> = (props) => {
   const dispatch = useDispatch()
@@ -21,8 +21,10 @@ const PostContainer: FC<PostProps> = (props) => {
 
   return Post({
     ...props,
-    empathy: (postId: string, userId: string) =>
-      dispatch(empathy({ postId, userId })),
+    empathyAdd: (postId: string, userId: string) =>
+      dispatch(empathyAdd({ postId, userId })),
+    empathyRemove: (postId: string, userId: string) =>
+      dispatch(empathyRemove({ postId, userId })),
     empathizerid: userid,
   })
 }
