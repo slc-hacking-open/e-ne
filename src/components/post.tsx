@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core'
 import { ReactComponent as Heart } from './heart.svg'
 import { ReactComponent as Ene } from './thumb.svg'
+import { ReactComponent as Coin } from './coin.svg'
 import { User } from '../services/models'
 
 type SimpleDialogProps = {
@@ -78,6 +79,7 @@ export interface PostProps {
   empathyUsers?: User[]
   hasEmpathized?: boolean
   empathizerid?: string
+  amount?: number
 }
 
 const Post: FC<PostProps> = ({
@@ -92,6 +94,7 @@ const Post: FC<PostProps> = ({
   empathyRemove = () => {},
   hasEmpathized = false,
   empathizerid = '0',
+  amount = '0',
 }) => {
   const [open, setOpen] = useState(false)
 
@@ -132,6 +135,10 @@ const Post: FC<PostProps> = ({
       <div className="post-footer">
         <div className="post-time">
           <p>{datetime}</p>
+        </div>
+        <div className="post-coin">
+          <Coin />
+          {amount}
         </div>
         <div className="post-empathy">
           <button

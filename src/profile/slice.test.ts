@@ -9,6 +9,8 @@ describe('profileのレデューサーのテスト', () => {
     name: '生保花子',
     profile: '趣味は園芸',
     imageurl: 'url',
+    enecoin: 100,
+    glicocoin: 200,
   }
   it('初期状態のテスト', () => {
     expect(profileSlice(undefined, {} as AnyAction)).toEqual(initialState)
@@ -25,6 +27,8 @@ describe('profileのレデューサーのテスト', () => {
         profile: '',
         userid: '',
         department: '',
+        enecoin: 0,
+        glicocoin: 0,
       },
       isLoading: true,
     })

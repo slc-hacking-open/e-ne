@@ -9,6 +9,10 @@ export interface User {
   profile: string
   // プロフィール画像URL
   imageurl: string
+  // いいねコイン所持数
+  enecoin: number
+  // グリココイン所持数
+  glicocoin: number
 }
 
 export interface Post {
@@ -28,6 +32,8 @@ export interface Post {
   empathyCount: number
   // ログインユーザーが共感してるか
   hasEmpathized: boolean
+  // 送ったコイン数
+  amount: number
 }
 
 export interface Timeline {
@@ -48,4 +54,5 @@ export interface APIPost {
   datetime: string
   contents: string
   empathyUsers: User[]
+  amount: number
 }

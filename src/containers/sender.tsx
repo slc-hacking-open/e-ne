@@ -3,6 +3,7 @@ import { FC, useState, useEffect } from 'react'
 import { Auth } from 'aws-amplify'
 import Sender from '../components/sender'
 import { changeCoin, changeContents, changeTo, clear } from '../sender/slice'
+import { reduceEneCoin } from '../profile/slice'
 import { sendEne } from '../posts/asyncActions'
 import { getUsers } from '../sender/asyncActions'
 import { RootState } from '../rootReducer'
@@ -31,8 +32,15 @@ const SenderContainer: FC = () => {
     changeTo: (to: string) => dispatch(changeTo(to)),
     changeCoin: (coin: string) => dispatch(changeCoin(coin)),
     clear: () => dispatch(clear()),
-    sendEne: (senderId: string, receiverId: string, contents: string) =>
-      dispatch(sendEne({ senderId, receiverId, contents })),
+    sendEne: (
+      senderId: string,
+      receiverId: string,
+      contents: string,
+      coin: string
+    ) => {
+      dispatch(sendEne({ senderId, receiverId, contents, coin }))
+      dispatch(reduceEneCoin(coin))
+    },
     getUserList: () => dispatch(getUsers()),
     users: sender.users,
     userid,

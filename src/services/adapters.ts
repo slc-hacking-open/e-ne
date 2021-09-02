@@ -16,6 +16,8 @@ export const apiPosts2Timeline = (
           name: apiPost.sender.name,
           profile: '',
           imageurl: apiPost.sender.imageurl,
+          enecoin: 0,
+          glicocoin: 0,
         },
         receiver: {
           userid: '',
@@ -23,6 +25,8 @@ export const apiPosts2Timeline = (
           name: apiPost.receiver.name,
           profile: '',
           imageurl: apiPost.receiver.imageurl,
+          enecoin: 0,
+          glicocoin: 0,
         },
         contents: apiPost.contents,
         datetime: apiPost.datetime,
@@ -31,6 +35,7 @@ export const apiPosts2Timeline = (
         hasEmpathized: !!apiPost.empathyUsers.find(
           (user) => user.userid === userid
         ),
+        amount: apiPost.amount,
       }
     }),
   }
@@ -45,6 +50,8 @@ export const apiPost2Post = (apiPost: APIPost, userid: string): Post => {
       name: apiPost.sender.name,
       profile: '',
       imageurl: apiPost.sender.imageurl,
+      enecoin: 0,
+      glicocoin: 0,
     },
     receiver: {
       userid: '',
@@ -52,6 +59,8 @@ export const apiPost2Post = (apiPost: APIPost, userid: string): Post => {
       name: apiPost.receiver.name,
       profile: '',
       imageurl: apiPost.receiver.imageurl,
+      enecoin: 0,
+      glicocoin: 0,
     },
     contents: apiPost.contents,
     datetime: apiPost.datetime,
@@ -60,5 +69,6 @@ export const apiPost2Post = (apiPost: APIPost, userid: string): Post => {
     hasEmpathized: !!apiPost.empathyUsers.find(
       (user) => user.userid === userid
     ),
+    amount: apiPost.amount,
   }
 }
