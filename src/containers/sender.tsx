@@ -10,6 +10,7 @@ import { RootState } from '../rootReducer'
 
 const SenderContainer: FC = () => {
   const sender = useSelector((state: RootState) => state.sender)
+  const profile = useSelector((state: RootState) => state.profile)
   const dispatch = useDispatch()
   const [userid, setUserid] = useState<string>('')
 
@@ -44,6 +45,7 @@ const SenderContainer: FC = () => {
     getUserList: () => dispatch(getUsers()),
     users: sender.users,
     userid,
+    senderEneCoin: profile.user.enecoin,
   })
 }
 

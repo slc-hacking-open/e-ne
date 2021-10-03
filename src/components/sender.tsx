@@ -1,10 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { FC, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import './sender.css'
 import { makeStyles, TextField } from '@material-ui/core'
 import { Autocomplete } from '@material-ui/lab'
-import { RootState } from '../rootReducer'
 import { ReactComponent as Ene } from '../ene.svg'
 import { User } from '../services/models'
 
@@ -25,6 +23,7 @@ export interface SenderProps {
   getUserList?: () => void
   users?: User[]
   userid?: string
+  senderEneCoin: number
 }
 
 const useStyles = makeStyles(() => ({
@@ -61,6 +60,7 @@ const Sender: FC<SenderProps> = ({
   getUserList = () => {},
   users = [],
   userid = '0',
+  senderEneCoin = 0,
 }) => {
   useEffect(() => {
     getUserList()
@@ -81,10 +81,9 @@ const Sender: FC<SenderProps> = ({
   })
 
   // 宛先の入力チェック
-  const [localTo, setLocalTo] = useState('')
   const [toError, setToError] = useState('')
   const handleBlurTo = () => {
-    if (!localTo) {
+    if (!to) {
       setToError('宛先を入力してください')
     } else {
       setToError('')
@@ -92,13 +91,11 @@ const Sender: FC<SenderProps> = ({
   }
 
   // コインの入力チェック
-  const [localCoin, setLocalCoin] = useState(0)
   const [coinError, setCoinError] = useState('')
-  const enecoin = useSelector((state: RootState) => state.profile.user.enecoin)
   const handleBlurCoin = () => {
-    if (localCoin > enecoin) {
+    if (Number(coin) > senderEneCoin) {
       setCoinError('送信コインは所持コイン以下の枚数を指定してください')
-    } else if (localCoin < 1 || localCoin > 10) {
+    } else if (Number(coin) < 1 || Number(coin) > 10) {
       setCoinError('送信コインは１～１０の範囲を指定してください')
     } else {
       setCoinError('')
@@ -106,12 +103,11 @@ const Sender: FC<SenderProps> = ({
   }
 
   // 内容の入力チェック
-  const [localContents, setLocalContents] = useState('')
   const [contentsError, setContentsError] = useState('')
   const handleBlurContents = () => {
-    if (!localContents) {
+    if (!contents) {
       setContentsError('内容を入力してください')
-    } else if (localContents.length > 140) {
+    } else if (contents.length > 140) {
       setContentsError('内容は140字以内で入力してください')
     } else {
       setContentsError('')
@@ -131,7 +127,6 @@ const Sender: FC<SenderProps> = ({
         getOptionSelected={(option, value) => option.name === value.name}
         style={{ width: '100%', marginBottom: '0.5rem' }}
         onChange={(event, value) => {
-          setLocalTo(value?.userid ? value.userid : '')
           changeTo(value?.userid ? value.userid : '')
         }}
         renderInput={(params) => (
@@ -140,10 +135,11 @@ const Sender: FC<SenderProps> = ({
             label="宛先"
             variant="outlined"
             onChange={(e) => {
-              setLocalTo(e.target.value)
               changeTo(e.target.value)
             }}
-            onBlur={handleBlurTo}
+            onBlur={() => {
+              handleBlurTo()
+            }}
             InputLabelProps={{ style: { fontSize: 10 } }}
             FormHelperTextProps={{ style: { fontSize: 10 } }}
           />
@@ -159,10 +155,11 @@ const Sender: FC<SenderProps> = ({
         value={coin}
         placeholder="コイン"
         onChange={(e) => {
-          setLocalCoin(Number(e.target.value))
           changeCoin(e.target.value)
         }}
-        onBlur={handleBlurCoin}
+        onBlur={() => {
+          handleBlurCoin()
+        }}
       />
       {contentsError && <div className="error">{contentsError}</div>}
       <TextField
@@ -175,16 +172,16 @@ const Sender: FC<SenderProps> = ({
         value={contents}
         placeholder="内容"
         onChange={(e) => {
-          setLocalContents(e.target.value)
           changeContents(e.target.value)
         }}
-        onBlur={handleBlurContents}
+        onBlur={() => {
+          handleBlurContents()
+        }}
       />
       <button
         className="sender-button"
         data-testid="sender-button"
         type="button"
-        disabled={contents === '' || to === '' || coin === ''}
         onClick={() => {
           if (toError === '' && contentsError === '' && coinError === '') {
             sendEne(userid, to, contents, coin)

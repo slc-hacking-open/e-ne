@@ -20,6 +20,8 @@ describe('senderのレデューサーのテスト', () => {
         name: '生保花子',
         profile: '趣味は園芸',
         imageurl: 'url',
+        enecoin: 0,
+        glicocoin: 0,
       },
       {
         userid: 'user02',
@@ -27,6 +29,8 @@ describe('senderのレデューサーのテスト', () => {
         name: '生保太郎',
         profile: '趣味はプラモデル',
         imageurl: 'url2',
+        enecoin: 0,
+        glicocoin: 0,
       },
     ],
   }
