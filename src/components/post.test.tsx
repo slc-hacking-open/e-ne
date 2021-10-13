@@ -8,7 +8,7 @@ describe('postコンポーネントのテスト', () => {
   const id = 'ene01'
   test('共感削除時に共感数更新のコールバック関数が実行されること', async () => {
     const empathyRemove = jest.fn()
-    render(<Post id={id} empathyRemove={empathyRemove} hasEmpathized={true} />)
+    render(<Post id={id} empathyRemove={empathyRemove} hasEmpathized />)
     await userEvent.click(screen.getByTestId('post-empathyButton'))
     expect(empathyRemove).toHaveBeenCalledWith(id, '0')
     expect(empathyRemove).toHaveBeenCalledTimes(1)
